@@ -227,19 +227,27 @@ async function storeMessage(userMsg, assistantMsg) {
 // Fallback when Supabase is not configured (local dev / demo)
 function getFallbackResponse(query) {
   const q = query.toLowerCase();
-  if (q.includes('experience') || q.includes('work'))
+  if (q.includes('role') || q.includes('current') || q.includes('job') || q.includes('position'))
+    return 'Ayush is currently a Software Engineer at Marsh McLennan in Mumbai, working on intelligent automation for the pension industry — building RPA bots, AI pipelines, and RAG systems.';
+  if (q.includes('experience') || q.includes('work') || q.includes('company'))
     return 'Ayush has 4+ years at Marsh McLennan, building intelligent automation solutions for the pension industry — from custom UiPath packages to RAG chatbots with OpenAI.';
-  if (q.includes('skill') || q.includes('tech'))
-    return 'His core skills include UiPath RPA, Python, OpenAI/RAG systems, React, Node.js, TypeScript, Three.js/GLSL, AWS, Docker, and Supabase.';
+  if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('tool'))
+    return 'His core skills include UiPath RPA, Python, OpenAI/RAG systems, React, Node.js, TypeScript, AWS, Docker, and Supabase.';
   if (q.includes('project'))
-    return 'Key projects: Indian Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 RAG architectures), plus creative Three.js work like NeonBrew and Florescence.';
-  if (q.includes('hire') || q.includes('freelanc') || q.includes('gig') || q.includes('available') || q.includes('contract') || q.includes('work with'))
-    return 'Ayush is open to freelance work and new opportunities! He\'d love to learn more about your project. Could you share your name, company, and a brief description? You can also reach him directly at ayush.tomar55@gmail.com or on LinkedIn: linkedin.com/in/ayushtomar-rpa-ai';
-  if (q.includes('contact') || q.includes('email') || q.includes('reach'))
+    return 'Key projects: Indian Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 RAG architectures), NeonBrew & Florescence (creative web), and Learning AI (ML/DL curriculum).';
+  if (q.includes('hire') || q.includes('freelanc') || q.includes('gig') || q.includes('available') || q.includes('contract') || q.includes('work with') || q.includes('opportunity'))
+    return 'Ayush is open to freelance work and new opportunities! He\'d love to learn more about your project. You can reach him at ayush.tomar55@gmail.com or on LinkedIn: linkedin.com/in/ayushtomar-rpa-ai';
+  if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('connect'))
     return 'You can reach Ayush at ayush.tomar55@gmail.com or connect on LinkedIn: linkedin.com/in/ayushtomar-rpa-ai — he usually responds within a day!';
   if (q.includes('certif'))
     return 'Ayush holds AWS Cloud Practitioner, UiPath Advanced RPA Developer, and Google Professional ML Engineer certifications.';
-  if (q.includes('education') || q.includes('degree'))
+  if (q.includes('education') || q.includes('degree') || q.includes('college'))
     return 'B.E. in Information Technology from Pillai HOC College of Engineering & Technology (GPA: 7.15/10).';
-  return 'Ayush is a Software Engineer specializing in Intelligent Automation, AI/ML, and creative web development. Ask me about his experience, projects, skills, or how to get in touch!';
+  if (q.includes('hobby') || q.includes('interest') || q.includes('fun') || q.includes('outside') || q.includes('free time'))
+    return 'Outside work, Ayush loves building things, playing cricket, exploring cafes, and is a true coffee enthusiast ☕';
+  if (q.includes('hello') || q.includes('hey') || q.includes('hi') || q.includes('sup') || q.includes('yo'))
+    return 'Hey there! 👋 I\'m Ayush\'s AI assistant. You can ask me about his experience, projects, skills, or how to get in touch!';
+  if (q.includes('thank') || q.includes('bye') || q.includes('later'))
+    return 'You\'re welcome! Feel free to come back anytime. If you want to connect with Ayush directly, drop him an email at ayush.tomar55@gmail.com 🙌';
+  return 'I can tell you about Ayush\'s work experience, skills, projects, certifications, or how to contact him. What would you like to know?';
 }
