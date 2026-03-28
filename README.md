@@ -1,6 +1,8 @@
 # Ayush Tomar — Portfolio
 
-Interactive portfolio with Three.js particles, custom GLSL shaders, scroll-driven animations (GSAP + Lenis), and an AI chatbot powered by NVIDIA NIM via Supabase Edge Functions.
+**🚀 Live Demo:** [https://ayush4u.github.io/portfolio/](https://ayush4u.github.io/portfolio/)
+
+Portfolio showcasing my work as an AI/ML Engineer and Automation Architect. Features a modern UI and a built-in AI chatbot agent powered by NVIDIA NIM and Supabase to answer queries about my experience.
 
 ## Quick Start
 
@@ -13,9 +15,7 @@ npm run dev        # http://localhost:5173
 
 | Layer | Tech |
 |-------|------|
-| Frontend | Vite + Three.js + GSAP + Lenis |
-| Background | Custom GLSL shaders (FBM noise, particles) |
-| Post-processing | Bloom + Vignette (postprocessing lib) |
+| Frontend | Vite + Vanilla JS + GSAP + Lenis |
 | Chatbot backend | Supabase Edge Function → NVIDIA NIM |
 | Database | Supabase PostgreSQL (chat history) |
 | Hosting | GitHub Pages (static, via Actions) |
