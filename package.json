@@ -1,0 +1,22 @@
+{
+  "name": "ayush-tomar-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.170.0",
+    "gsap": "^3.12.7",
+    "@studio-freight/lenis": "^1.0.42",
+    "postprocessing": "^6.36.4",
+    "@supabase/supabase-js": "^2.49.1"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "vite-plugin-glsl": "^1.3.1"
+  }
+}

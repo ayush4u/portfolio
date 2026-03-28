@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayush Tomar — AI/ML Engineer & Automation Architect</title>
+  <meta name="description" content="Portfolio of Ayush Tomar — building intelligent bots, AI agents, RAG pipelines, and automation systems." />
+  <meta name="theme-color" content="#060606" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="webgl"></canvas>
+
+  <div id="loader">
+    <div class="loader-inner">
+      <span class="loader-text">AT</span>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <div id="app">
+    <!-- NAV -->
+    <nav id="nav">
+      <a href="#hero" class="nav-logo">AT</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- ====== HERO — Full viewport, left-anchored ====== -->
+    <section id="hero" class="scene-section" data-scene-state="hero">
+      <div class="hero-content">
+        <div class="hero-label">
+          <span class="label-line"></span>
+          <span class="label-text">Software Engineer</span>
+        </div>
+        <h1 class="hero-name">
+          <span class="name-line" data-anim="charReveal">Ayush</span>
+          <span class="name-line" data-anim="charReveal">Tomar<span class="accent-dot">.</span></span>
+        </h1>
+        <p class="hero-desc">I build AI agents, intelligent bots,<br/>RAG pipelines, and automation systems.</p>
+        <div class="hero-meta">
+          <span>AI / ML</span>
+          <span class="meta-sep">/</span>
+          <span>Agents & Bots</span>
+          <span class="meta-sep">/</span>
+          <span>RAG</span>
+          <span class="meta-sep">/</span>
+          <span>RPA</span>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Scroll to explore</span>
+        <div class="scroll-hint-line"></div>
+      </div>
+    </section>
+
+    <!-- ====== ABOUT — Staggered cinematic text ====== -->
+    <section id="about" class="scene-section" data-scene-state="about">
+      <div class="about-container">
+        <div class="about-left">
+          <span class="section-label"><span class="label-line"></span>About</span>
+          <p class="about-lead" data-anim="lineReveal">Software Engineer with <strong>4+ years</strong> at <strong>Marsh McLennan</strong>, specializing in turning complex pension workflows into intelligent automated systems.</p>
+          <p class="about-body" data-anim="lineReveal">I architect RAG chatbots with OpenAI, build custom UiPath packages that cut manual work by 40%, and create immersive web experiences with Three.js and custom GLSL shaders.</p>
+        </div>
+        <div class="about-right">
+          <div class="about-stat" data-anim="statReveal">
+            <span class="stat-num" data-count="4">0</span><span class="stat-plus">+</span>
+            <span class="stat-lbl">Years</span>
+          </div>
+          <div class="about-stat" data-anim="statReveal">
+            <span class="stat-num" data-count="40">0</span><span class="stat-unit">%</span>
+            <span class="stat-lbl">Effort Reduced</span>
+          </div>
+          <div class="about-stat" data-anim="statReveal">
+            <span class="stat-num" data-count="10">0</span><span class="stat-plus">+</span>
+            <span class="stat-lbl">Projects</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== WORK — Horizontal scrolling experience strip ====== -->
+    <section id="work" class="scene-section scene-section--pinned" data-scene-state="work">
+      <div class="work-header">
+        <span class="section-label"><span class="label-line"></span>Experience</span>
+        <h2 class="work-heading">Marsh McLennan</h2>
+        <p class="work-role">Software Engineer — Intelligent Automation</p>
+      </div>
+      <div class="work-track">
+        <div class="work-card" data-year="2025">
+          <span class="work-year">2025</span>
+          <h3>RAG Chatbot & Email AI</h3>
+          <p>OpenAI LLM + MongoDB vector store chatbot. ML-powered pension email processing. 35% faster query resolution.</p>
+          <div class="work-tags"><span>Python</span><span>OpenAI</span><span>RAG</span><span>React</span></div>
+        </div>
+        <div class="work-card" data-year="2024">
+          <span class="work-year">2024</span>
+          <h3>Reply Draft Package</h3>
+          <p>Custom UiPath package for auto-generating pension email drafts. 40% reduction in manual effort across teams.</p>
+          <div class="work-tags"><span>UiPath</span><span>C#</span><span>Outlook API</span></div>
+        </div>
+        <div class="work-card" data-year="2023">
+          <span class="work-year">2023</span>
+          <h3>Email Resolution Engine</h3>
+          <p>Dynamic subject/content modification system for undeliverable pension emails. 25% delivery rate boost.</p>
+          <div class="work-tags"><span>UiPath</span><span>Email</span><span>C#</span></div>
+        </div>
+        <div class="work-card" data-year="2022">
+          <span class="work-year">2022</span>
+          <h3>WIP Dashboard</h3>
+          <p>Real-time pension tracking dashboard with automated triggers. Saved 20 hours/week in manual reporting.</p>
+          <div class="work-tags"><span>Python</span><span>SMTP</span><span>Dashboard</span></div>
+        </div>
+        <div class="work-card" data-year="2021">
+          <span class="work-year">2021</span>
+          <h3>Foundation</h3>
+          <p>Joined the pension automation team. Mastered UiPath RPA. Reduced processing errors by 15%.</p>
+          <div class="work-tags"><span>UiPath</span><span>RPA</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== PROJECTS — Full-viewport cinematic showcase ====== -->
+    <section id="projects" class="scene-section" data-scene-state="projects">
+      <span class="section-label section-label--center"><span class="label-line"></span>Selected Work</span>
+
+      <div class="project-showcase" data-project="india-monitor" data-color="#00e5ff">
+        <div class="showcase-content">
+          <span class="showcase-num">01</span>
+          <h3 class="showcase-title">India Monitor</h3>
+          <p class="showcase-desc">Real-time intelligence dashboard for India — live weather, finance, transport, flight tracking, news, and state-level data with glassmorphism UI.</p>
+          <div class="showcase-tech"><span>TypeScript</span><span>Vite</span><span>Leaflet.js</span><span>REST APIs</span></div>
+          <div class="showcase-links">
+            <a href="https://ayush4u.github.io/Indian-Monitor/" target="_blank" rel="noopener">Live Demo ↗</a>
+            <a href="https://github.com/ayush4u/Indian-Monitor" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-showcase" data-project="docubot" data-color="#ff3366">
+        <div class="showcase-content">
+          <span class="showcase-num">02</span>
+          <h3 class="showcase-title">DocuBot AI</h3>
+          <p class="showcase-desc">Enterprise-grade RAG chatbot with multi-provider LLM routing, dual database architecture (Supabase + ChromaDB), and smart chunking strategies.</p>
+          <div class="showcase-tech"><span>Node.js</span><span>React</span><span>Supabase</span><span>ChromaDB</span><span>RAG</span></div>
+          <div class="showcase-links">
+            <a href="https://github.com/ayush4u/DocuBot-AI" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-showcase" data-project="rag-types" data-color="#a855f7">
+        <div class="showcase-content">
+          <span class="showcase-num">03</span>
+          <h3 class="showcase-title">RAG Without Vectors</h3>
+          <p class="showcase-desc">10 alternative RAG architectures — BM25, SQL, Knowledge Graph, Web Search, API-based, CAG, TF-IDF, and more. Zero vector databases.</p>
+          <div class="showcase-tech"><span>Python</span><span>Flask</span><span>NetworkX</span><span>SQLite</span></div>
+          <div class="showcase-links">
+            <a href="https://github.com/ayush4u/different_types_of_rag" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-showcase" data-project="neonbrew" data-color="#f43f5e">
+        <div class="showcase-content">
+          <span class="showcase-num">04</span>
+          <h3 class="showcase-title">NeonBrew</h3>
+          <p class="showcase-desc">Immersive Three.js cyberpunk cityscape — custom GLSL shaders for neon lights, volumetric rain, reflective wet streets, and atmospheric fog.</p>
+          <div class="showcase-tech"><span>Three.js</span><span>GLSL</span><span>WebGL</span><span>Vite</span></div>
+          <div class="showcase-links">
+            <a href="https://github.com/ayush4u/neonbrew" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-showcase" data-project="florescence" data-color="#22d3ee">
+        <div class="showcase-content">
+          <span class="showcase-num">05</span>
+          <h3 class="showcase-title">Florescence</h3>
+          <p class="showcase-desc">Procedural flower generation — custom vertex/fragment shaders, organic petal geometry, animated growth sequences, and post-processing bloom.</p>
+          <div class="showcase-tech"><span>Three.js</span><span>GLSL</span><span>Procedural</span></div>
+          <div class="showcase-links">
+            <a href="https://github.com/ayush4u/florescence" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-showcase" data-project="learning-ai" data-color="#eab308">
+        <div class="showcase-content">
+          <span class="showcase-num">06</span>
+          <h3 class="showcase-title">Learning AI</h3>
+          <p class="showcase-desc">Hands-on ML/DL path — math foundations to PyTorch. Linear algebra, optimization, algorithms from scratch, and self-attention implementations.</p>
+          <div class="showcase-tech"><span>Python</span><span>PyTorch</span><span>NumPy</span></div>
+          <div class="showcase-links">
+            <a href="https://github.com/ayush4u/learning-ai" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== SKILLS — Minimal flowing layout ====== -->
+    <section id="skills" class="scene-section" data-scene-state="skills">
+      <div class="skills-container">
+        <span class="section-label"><span class="label-line"></span>Toolkit</span>
+        <div class="skills-flow">
+          <div class="skill-row" data-anim="flowIn">
+            <span class="skill-cat">AI</span>
+            <span>OpenAI</span><span>RAG</span><span>NLP</span><span>PyTorch</span><span>Scikit-learn</span><span>Hugging Face</span><span>LangChain</span><span>ChromaDB</span>
+          </div>
+          <div class="skill-row" data-anim="flowIn">
+            <span class="skill-cat">RPA</span>
+            <span>UiPath</span><span>Orchestrator</span><span>Custom Activities</span><span>Email Automation</span>
+          </div>
+          <div class="skill-row" data-anim="flowIn">
+            <span class="skill-cat">Web</span>
+            <span>React</span><span>Node.js</span><span>TypeScript</span><span>Three.js</span><span>GLSL</span><span>WebGL</span><span>Next.js</span>
+          </div>
+          <div class="skill-row" data-anim="flowIn">
+            <span class="skill-cat">Infra</span>
+            <span>AWS</span><span>Docker</span><span>GitHub Actions</span><span>Supabase</span><span>CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== CONTACT — Big dramatic type ====== -->
+    <section id="contact" class="scene-section" data-scene-state="contact">
+      <div class="contact-container">
+        <span class="section-label"><span class="label-line"></span>Contact</span>
+        <h2 class="contact-heading" data-anim="charReveal">Let's build<br/>something<br/>together<span class="accent-dot">.</span></h2>
+        <div class="contact-links">
+          <a href="mailto:ayush.tomar55@gmail.com" class="contact-link">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">ayush.tomar55@gmail.com</span>
+          </a>
+          <a href="https://linkedin.com/in/ayushtomar-rpa-ai" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">ayushtomar-rpa-ai</span>
+          </a>
+          <a href="https://github.com/ayush4u" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">ayush4u</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Ayush Tomar © 2026</span>
+      <span>Built with Three.js, GLSL & curiosity</span>
+    </footer>
+  </div>
+
+  <!-- CHATBOT -->
+  <div id="chatbot">
+    <button id="chat-toggle" aria-label="Open AI Chat">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    </button>
+    <div id="chat-panel" class="chat-closed">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-pulse"></div>
+          <span>Ask me anything</span>
+        </div>
+        <button id="chat-close" aria-label="Close chat">&#10005;</button>
+      </div>
+      <div id="chat-messages">
+        <div class="chat-msg assistant">
+          <p>Hey! I'm Ayush's AI assistant. Ask me about his experience, projects, skills, or anything else!</p>
+        </div>
+      </div>
+      <form id="chat-form">
+        <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" maxlength="500" />
+        <button type="submit" aria-label="Send">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
