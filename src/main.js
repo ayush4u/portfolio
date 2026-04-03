@@ -8,6 +8,22 @@ import Lenis from '@studio-freight/lenis';
 gsap.registerPlugin(ScrollTrigger);
 
 // ============
+// CERTIFICATIONS CONFIG
+// Set enabled: true and add items to show the section.
+// Each item: { name, issuer, date?, badge?, link? }
+// ============
+const CERTIFICATIONS = {
+  enabled: true,
+  items: [
+    { name: 'AWS Certified Cloud Practitioner', issuer: 'Amazon Web Services', badge: 'CLF-C02' },
+    { name: 'Advanced RPA Developer', issuer: 'UiPath Academy', badge: 'UiARD' },
+    { name: 'Professional Machine Learning Engineer', issuer: 'Google Cloud', badge: 'GCP-PMLE' },
+    { name: 'Claude Code in Action', issuer: 'Anthropic Education', date: 'Apr 2026', link: 'https://verify.skilljar.com/c/z45xrycpcwer' },
+    { name: 'Introduction to Model Context Protocol', issuer: 'Anthropic Education', date: 'Apr 2026', link: 'https://verify.skilljar.com/c/atxeopf3qctc' },
+  ],
+};
+
+// ============
 // LOADER
 // ============
 const loader = document.getElementById('loader');
@@ -247,6 +263,48 @@ function initSkillsAnimations() {
 }
 
 // ============
+// CERTIFICATIONS — render cards from config, then animate
+// ============
+function initCertifications() {
+  const section = document.getElementById('certifications');
+  if (!section || !CERTIFICATIONS.enabled) return;
+
+  const grid = section.querySelector('.certs-grid');
+  CERTIFICATIONS.items.forEach((cert) => {
+    const card = document.createElement('div');
+    card.className = 'cert-card';
+    card.setAttribute('data-anim', 'certReveal');
+
+    const meta = cert.link
+      ? `<a href="${encodeURI(cert.link)}" target="_blank" rel="noopener" class="cert-verify">Verify ↗</a>`
+      : cert.badge
+      ? `<span class="cert-badge">${cert.badge}</span>`
+      : '';
+    const dateHtml = cert.date ? `<span class="cert-date">${cert.date}</span>` : '';
+
+    card.innerHTML = `
+      <div class="cert-issuer">${cert.issuer}</div>
+      <h3 class="cert-name">${cert.name}</h3>
+      <div class="cert-meta">${dateHtml}${meta}</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Show section & nav link
+  section.classList.remove('section-hidden');
+  const navLink = document.querySelector('a[href="#certifications"]');
+  if (navLink) navLink.style.display = '';
+
+  // GSAP scroll-reveal
+  grid.querySelectorAll('[data-anim="certReveal"]').forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 30 }, {
+      scrollTrigger: { trigger: el, start: 'top 85%' },
+      opacity: 1, y: 0, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
+    });
+  });
+}
+
+// ============
 // CONTACT — character-level reveal
 // ============
 function initContactAnimation() {
@@ -296,6 +354,7 @@ window.addEventListener('load', () => {
     initWorkScroll();
     initProjectShowcases();
     initSkillsAnimations();
+    initCertifications();
     initContactAnimation();
     initChatbot();
     animate();

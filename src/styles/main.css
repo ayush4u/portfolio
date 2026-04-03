@@ -581,6 +581,88 @@ button { cursor: pointer; border: none; background: none; color: inherit; font: 
 .skill-row span:not(.skill-cat):hover { color: var(--text); }
 
 /* ========================================
+   CERTIFICATIONS
+   ======================================== */
+#certifications {
+  display: flex;
+  align-items: center;
+  padding: 8rem var(--pad);
+}
+#certifications.section-hidden { display: none; }
+
+.certs-container { width: 100%; max-width: 1100px; }
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.cert-card {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  background: rgba(14,14,14,0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.cert-card:hover {
+  border-color: rgba(0,229,255,0.15);
+  transform: translateY(-2px);
+}
+
+.cert-issuer {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.cert-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.cert-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cert-date {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.cert-badge {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  padding: 0.25rem 0.6rem;
+  background: rgba(0,229,255,0.06);
+  color: var(--accent);
+  border: 1px solid rgba(0,229,255,0.08);
+  letter-spacing: 0.04em;
+}
+
+.cert-verify {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+  transition: opacity 0.3s ease;
+}
+.cert-verify:hover { opacity: 0.6; }
+
+/* ========================================
    CONTACT
    ======================================== */
 #contact {
@@ -894,6 +976,12 @@ footer {
   .skill-row { gap: 0.4rem 0.8rem; }
   .skill-cat { min-width: 40px; font-size: 0.65rem; }
   .skill-row span:not(.skill-cat) { font-size: 0.85rem; }
+
+  /* CERTIFICATIONS */
+  #certifications { padding: 5rem var(--pad); }
+  .certs-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .cert-card { padding: 1.5rem; }
+  .cert-name { font-size: 0.95rem; }
 
   /* CONTACT — smaller heading */
   #contact { padding: 5rem var(--pad); min-height: auto; }
