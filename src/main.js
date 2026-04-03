@@ -20,8 +20,8 @@ const CERTIFICATIONS = {
     { name: 'Professional Machine Learning Engineer', issuer: 'Google Cloud', badge: 'GCP-PMLE' },
     { name: 'Claude Code in Action', issuer: 'Anthropic Education', date: 'Apr 2026', link: 'https://verify.skilljar.com/c/z45xrycpcwer', image: import.meta.env.BASE_URL + 'certs/claude-code-in-action.jpg' },
     { name: 'Introduction to Model Context Protocol', issuer: 'Anthropic Education', date: 'Apr 2026', link: 'https://verify.skilljar.com/c/atxeopf3qctc', image: import.meta.env.BASE_URL + 'certs/intro-mcp.jpg' },
-    { name: 'Fundamentals of LLMs — The LLM Course', issuer: 'Hugging Face', date: 'Apr 2026', image: import.meta.env.BASE_URL + 'certs/hf-llm-fundamentals.webp' },
-    { name: 'Fundamentals of MCP — The MCP Course', issuer: 'Hugging Face', date: 'Apr 2026', image: import.meta.env.BASE_URL + 'certs/hf-mcp-fundamentals.webp' },
+    { name: 'Fundamentals of LLMs — The LLM Course', issuer: 'Hugging Face', date: 'Apr 2026', link: 'https://cdn-uploads.huggingface.co/production/uploads/noauth/KU7p_CjheQU0uVtXe9_ha.webp', image: import.meta.env.BASE_URL + 'certs/hf-llm-fundamentals.webp' },
+    { name: 'Fundamentals of MCP — The MCP Course', issuer: 'Hugging Face', date: 'Apr 2026', link: 'https://cdn-uploads.huggingface.co/production/uploads/noauth/i-yX-mSolTEFnwwExv2QG.webp', image: import.meta.env.BASE_URL + 'certs/hf-mcp-fundamentals.webp' },
   ],
 };
 
