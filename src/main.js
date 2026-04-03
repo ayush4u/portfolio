@@ -8,6 +8,24 @@ import Lenis from '@studio-freight/lenis';
 gsap.registerPlugin(ScrollTrigger);
 
 // ============
+// CERTIFICATIONS CONFIG
+// Set enabled: true and add items to show the section.
+// Each item: { name, issuer, date?, badge?, link? }
+//   badge — short code pill (e.g. 'CLF-C02')
+//   link  — verification URL (shows "Verify ↗")
+// ============
+const CERTIFICATIONS = {
+  enabled: true,
+  items: [
+    { name: 'AWS Certified Cloud Practitioner',       issuer: 'Amazon Web Services',            badge: 'CLF-C02' },
+    { name: 'Advanced RPA Developer',                 issuer: 'UiPath Academy',                  badge: 'UiARD'   },
+    { name: 'Professional Machine Learning Engineer', issuer: 'Google Cloud',                    badge: 'GCP-PMLE' },
+    { name: 'Building RAG Agents with LLMs',          issuer: 'NVIDIA Deep Learning Institute',  link: 'https://verify.skilljar.com/c/z45xrycpcwer' },
+    { name: 'Generative AI Explained',                issuer: 'NVIDIA Deep Learning Institute',  link: 'https://verify.skilljar.com/c/atxeopf3qctc' },
+  ],
+};
+
+// ============
 // LOADER
 // ============
 const loader = document.getElementById('loader');
@@ -247,10 +265,44 @@ function initSkillsAnimations() {
 }
 
 // ============
-// CERTIFICATIONS — staggered card reveals
+// CERTIFICATIONS — render cards from config, then animate
 // ============
-function initCertificationsAnimations() {
-  gsap.utils.toArray('[data-anim="certReveal"]').forEach((el, i) => {
+function initCertifications() {
+  const section = document.getElementById('certifications');
+  if (!section) return;
+
+  if (!CERTIFICATIONS.enabled) return;
+
+  // Render cards into the grid
+  const grid = section.querySelector('.certs-grid');
+  CERTIFICATIONS.items.forEach((cert) => {
+    const card = document.createElement('div');
+    card.className = 'cert-card';
+    card.setAttribute('data-anim', 'certReveal');
+
+    const meta = cert.link
+      ? `<a href="${cert.link}" target="_blank" rel="noopener" class="cert-verify">Verify ↗</a>`
+      : cert.badge
+        ? `<span class="cert-badge">${cert.badge}</span>`
+        : '';
+
+    card.innerHTML = `
+      <div class="cert-issuer">${cert.issuer}</div>
+      <h3 class="cert-name">${cert.name}</h3>
+      <div class="cert-meta">${meta}</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Enable the section (removes section-hidden)
+  section.setAttribute('data-enabled', 'true');
+
+  // Show nav link
+  const navLink = document.querySelector('a[href="#certifications"]');
+  if (navLink) navLink.style.display = '';
+
+  // GSAP scroll-reveal
+  grid.querySelectorAll('[data-anim="certReveal"]').forEach((el, i) => {
     gsap.to(el, {
       scrollTrigger: {
         trigger: el,
@@ -316,7 +368,7 @@ window.addEventListener('load', () => {
     initWorkScroll();
     initProjectShowcases();
     initSkillsAnimations();
-    initCertificationsAnimations();
+    initCertifications();
     initContactAnimation();
     initChatbot();
     animate();
