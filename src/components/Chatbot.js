@@ -77,6 +77,33 @@ export function initChatbot() {
     panel.classList.add('chat-closed');
   });
 
+  // Scroll isolation — prevent chatbot scroll from leaking to page
+  messages.addEventListener('wheel', (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = messages;
+    const atTop = scrollTop === 0 && e.deltaY < 0;
+    const atBottom = scrollTop + clientHeight >= scrollHeight - 1 && e.deltaY > 0;
+    if (atTop || atBottom) {
+      e.preventDefault();
+    }
+    e.stopPropagation();
+  }, { passive: false });
+
+  // Also trap touch scroll inside chatbot
+  let touchStartY = 0;
+  messages.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  messages.addEventListener('touchmove', (e) => {
+    const deltaY = touchStartY - e.touches[0].clientY;
+    const { scrollTop, scrollHeight, clientHeight } = messages;
+    const atTop = scrollTop === 0 && deltaY < 0;
+    const atBottom = scrollTop + clientHeight >= scrollHeight - 1 && deltaY > 0;
+    if (atTop || atBottom) {
+      e.preventDefault();
+    }
+    e.stopPropagation();
+  }, { passive: false });
+
   // Conversation history for context
   const history = [{ role: 'system', content: SYSTEM_PROMPT }];
 
@@ -97,15 +124,15 @@ export function initChatbot() {
       let reply;
       if (SUPABASE_URL && SUPABASE_KEY) {
         let msgDiv = null;
-        let msgP = null;
+        let msgContent = null;
 
         reply = await sendMessageStreaming(history, (partial) => {
           if (!msgDiv) {
             typing.remove();
             msgDiv = appendMessage('assistant', '');
-            msgP = msgDiv.querySelector('p');
+            msgContent = msgDiv.querySelector('.chat-content');
           }
-          msgP.textContent = partial;
+          msgContent.innerHTML = renderMarkdown(partial);
           messages.scrollTop = messages.scrollHeight;
         });
 
@@ -136,9 +163,14 @@ export function initChatbot() {
   function appendMessage(role, text) {
     const div = document.createElement('div');
     div.className = `chat-msg ${role}`;
-    const p = document.createElement('p');
-    p.textContent = text;
-    div.appendChild(p);
+    const content = document.createElement('div');
+    content.className = 'chat-content';
+    if (role === 'assistant' && text) {
+      content.innerHTML = renderMarkdown(text);
+    } else {
+      content.textContent = text;
+    }
+    div.appendChild(content);
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
     return div;
@@ -152,6 +184,49 @@ export function initChatbot() {
     messages.scrollTop = messages.scrollHeight;
     return div;
   }
+}
+
+// Lightweight markdown renderer for chatbot responses
+function renderMarkdown(text) {
+  if (!text) return '';
+  let html = text
+    // Escape HTML to prevent XSS
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Code blocks (```...```)
+  html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Bold
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Italic
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  // Links — render as clickable
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Auto-link bare URLs (not already inside href="...")
+  html = html.replace(/(?<!href="|">)(https?:\/\/[^\s<,)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  // Numbered lists: lines starting with "1. ", "2. " etc.
+  html = html.replace(/^(\d+)\.\s+(.+)$/gm, '<li class="md-num"><span class="li-num">$1.</span> $2</li>');
+  // Bullet lists: lines starting with "- " or "* "
+  html = html.replace(/^[-*]\s+(.+)$/gm, '<li>$1</li>');
+  // Wrap consecutive <li> in <ul>/<ol>
+  html = html.replace(/((?:<li class="md-num">.*<\/li>\n?)+)/g, '<ol>$1</ol>');
+  html = html.replace(/((?:<li>(?!<span).*<\/li>\n?)+)/g, '<ul>$1</ul>');
+  // Paragraphs — double newlines
+  html = html.replace(/\n{2,}/g, '</p><p>');
+  // Single newlines into <br> (but not inside lists/pre)
+  html = html.replace(/\n/g, '<br>');
+  // Wrap in paragraph
+  html = `<p>${html}</p>`;
+  // Clean up empty paragraphs
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  // Clean up <p> wrapping block elements
+  html = html.replace(/<p>\s*(<(?:ul|ol|pre)>)/g, '$1');
+  html = html.replace(/(<\/(?:ul|ol|pre)>)\s*<\/p>/g, '$1');
+
+  return html;
 }
 
 async function sendMessageStreaming(history, onChunk) {

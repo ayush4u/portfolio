@@ -1,6 +1,7 @@
 import './styles/main.css';
 import { Experience } from './Experience.js';
 import { initChatbot } from './components/Chatbot.js';
+import { trackVisit } from './components/Tracker.js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
@@ -365,6 +366,7 @@ window.addEventListener('load', () => {
     initCertifications();
     initContactAnimation();
     initChatbot();
+    trackVisit();
     animate();
   }, 600);
 });
