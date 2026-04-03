@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 // ============
 // CERTIFICATIONS CONFIG
 // Set enabled: true and add items to show the section.
-// Each item: { name, issuer, date?, badge?, link? }
+// Each item: { name, issuer, date?, badge?, link?, image? }
 // ============
 const CERTIFICATIONS = {
   enabled: true,
@@ -20,6 +20,8 @@ const CERTIFICATIONS = {
     { name: 'Professional Machine Learning Engineer', issuer: 'Google Cloud', badge: 'GCP-PMLE' },
     { name: 'Claude Code in Action', issuer: 'Anthropic Education', date: 'Apr 2026', link: 'https://verify.skilljar.com/c/z45xrycpcwer' },
     { name: 'Introduction to Model Context Protocol', issuer: 'Anthropic Education', date: 'Apr 2026', link: 'https://verify.skilljar.com/c/atxeopf3qctc' },
+    { name: 'Fundamentals of LLMs — The LLM Course', issuer: 'Hugging Face', date: 'Apr 2026', image: 'https://cdn-uploads.huggingface.co/production/uploads/noauth/KU7p_CjheQU0uVtXe9_ha.webp' },
+    { name: 'Fundamentals of MCP — The MCP Course', issuer: 'Hugging Face', date: 'Apr 2026', image: 'https://cdn-uploads.huggingface.co/production/uploads/noauth/2zNvrkfDnuKMjedBi1gkD.webp' },
   ],
 };
 
@@ -281,11 +283,17 @@ function initCertifications() {
       ? `<span class="cert-badge">${cert.badge}</span>`
       : '';
     const dateHtml = cert.date ? `<span class="cert-date">${cert.date}</span>` : '';
+    const imageHtml = cert.image
+      ? `<div class="cert-image"><img src="${encodeURI(cert.image)}" alt="${cert.name}" loading="lazy" /></div>`
+      : '';
 
     card.innerHTML = `
-      <div class="cert-issuer">${cert.issuer}</div>
-      <h3 class="cert-name">${cert.name}</h3>
-      <div class="cert-meta">${dateHtml}${meta}</div>
+      ${imageHtml}
+      <div class="cert-body">
+        <div class="cert-issuer">${cert.issuer}</div>
+        <h3 class="cert-name">${cert.name}</h3>
+        <div class="cert-meta">${dateHtml}${meta}</div>
+      </div>
     `;
     grid.appendChild(card);
   });

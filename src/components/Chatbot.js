@@ -30,7 +30,7 @@ About Ayush:
 - Built RAG chatbot with OpenAI LLM, embeddings, MongoDB vector store (35% query resolution improvement)
 - Created custom UiPath packages for email automation (40% manual effort reduction)
 - Skills: Python, React, Node.js, TypeScript, Three.js, GLSL, AWS, Docker, Supabase
-- Certifications: AWS Cloud Practitioner, UiPath Advanced RPA Developer, Google Professional ML Engineer, Anthropic — Claude Code in Action (verify: https://verify.skilljar.com/c/z45xrycpcwer), Anthropic — Introduction to Model Context Protocol (verify: https://verify.skilljar.com/c/atxeopf3qctc)
+- Certifications: AWS Cloud Practitioner, UiPath Advanced RPA Developer, Google Professional ML Engineer, Anthropic — Claude Code in Action (verify: https://verify.skilljar.com/c/z45xrycpcwer), Anthropic — Introduction to Model Context Protocol (verify: https://verify.skilljar.com/c/atxeopf3qctc), Hugging Face — Fundamentals of LLMs (The LLM Course), Hugging Face — Fundamentals of MCP (The MCP Course)
 - Education: B.E. in IT from Pillai HOC College of Engineering
 - Projects: Indian Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 alternative RAG architectures), NeonBrew & Florescence (Three.js creative), Learning AI (ML/DL curriculum)
 - Open to roles: Intelligent Automation Engineer, AI/ML Engineer, Full Stack Developer
@@ -240,7 +240,7 @@ function getFallbackResponse(query) {
   if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('connect'))
     return 'You can reach Ayush at ayush.tomar55@gmail.com or connect on LinkedIn: linkedin.com/in/ayushtomar-rpa-ai — he usually responds within a day!';
   if (q.includes('certif'))
-    return 'Ayush holds 5 certifications: AWS Cloud Practitioner, UiPath Advanced RPA Developer, Google Professional ML Engineer, and two from Anthropic Education — "Claude Code in Action" and "Introduction to Model Context Protocol" (both verifiable via Skilljar).';
+    return 'Ayush holds 7 certifications: AWS Cloud Practitioner, UiPath Advanced RPA Developer, Google Professional ML Engineer, two from Anthropic Education (Claude Code in Action, Intro to MCP), and two from Hugging Face (Fundamentals of LLMs, Fundamentals of MCP).';
   if (q.includes('education') || q.includes('degree') || q.includes('college'))
     return 'B.E. in Information Technology from Pillai HOC College of Engineering & Technology (GPA: 7.15/10).';
   if (q.includes('hobby') || q.includes('interest') || q.includes('fun') || q.includes('outside') || q.includes('free time'))

@@ -599,16 +599,42 @@ button { cursor: pointer; border: none; background: none; color: inherit; font: 
 }
 
 .cert-card {
-  padding: 2rem;
   border: 1px solid var(--border);
   background: rgba(14,14,14,0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: border-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .cert-card:hover {
   border-color: rgba(0,229,255,0.15);
   transform: translateY(-2px);
+}
+
+.cert-image {
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.cert-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.cert-card:hover .cert-image img {
+  transform: scale(1.03);
+}
+
+.cert-body {
+  padding: 2rem;
+}
+
+/* Cards without images get padding directly */
+.cert-card:not(:has(.cert-image)) {
+  padding: 2rem;
 }
 
 .cert-issuer {
@@ -980,7 +1006,8 @@ footer {
   /* CERTIFICATIONS */
   #certifications { padding: 5rem var(--pad); }
   .certs-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .cert-card { padding: 1.5rem; }
+  .cert-card:not(:has(.cert-image)) { padding: 1.5rem; }
+  .cert-body { padding: 1.5rem; }
   .cert-name { font-size: 0.95rem; }
 
   /* CONTACT — smaller heading */
