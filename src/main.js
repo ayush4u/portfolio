@@ -247,6 +247,26 @@ function initSkillsAnimations() {
 }
 
 // ============
+// CERTIFICATIONS — staggered card reveals
+// ============
+function initCertificationsAnimations() {
+  gsap.utils.toArray('[data-anim="certReveal"]').forEach((el, i) => {
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      delay: i * 0.1,
+      ease: 'power3.out',
+    });
+  });
+}
+
+// ============
 // CONTACT — character-level reveal
 // ============
 function initContactAnimation() {
@@ -296,6 +316,7 @@ window.addEventListener('load', () => {
     initWorkScroll();
     initProjectShowcases();
     initSkillsAnimations();
+    initCertificationsAnimations();
     initContactAnimation();
     initChatbot();
     animate();
