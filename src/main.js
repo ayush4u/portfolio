@@ -218,30 +218,34 @@ function initWorkScroll() {
 }
 
 // ============
-// PROJECTS — cinematic scroll reveals
+// PROJECTS — bento grid card reveals
 // ============
 function initProjectShowcases() {
-  gsap.utils.toArray('.showcase-content').forEach((el) => {
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el.closest('.project-showcase'),
-        start: 'top 70%',
-        toggleActions: 'play none none none',
-      },
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'power3.out',
-    });
+  // Set per-card accent color from data attribute
+  document.querySelectorAll('.project-card').forEach((card) => {
+    const color = card.dataset.color;
+    if (color) {
+      card.style.setProperty('--card-accent', color + '15');
+    }
   });
 
-  // Accent line per project — color the left bar
-  gsap.utils.toArray('.project-showcase').forEach((el) => {
-    const color = el.dataset.color;
-    if (color) {
-      el.style.setProperty('--project-color', color);
-      el.style.color = color;
-    }
+  // Staggered reveal
+  gsap.utils.toArray('.project-card').forEach((el, i) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 40 },
+      {
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        delay: i * 0.08,
+        ease: 'power3.out',
+      }
+    );
   });
 }
 
