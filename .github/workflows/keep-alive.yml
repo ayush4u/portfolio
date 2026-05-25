@@ -1,0 +1,36 @@
+name: Keep Supabase Active
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC to ensure activity
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual runs to test the ping
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Database
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_KEY" ]; then
+            echo "Error: Supabase credentials are not set in GitHub secrets."
+            exit 1
+          fi
+          
+          echo "Sending query request to Supabase to keep database active..."
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X GET "$SUPABASE_URL/rest/v1/chat_messages?limit=1" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY")
+          
+          echo "Supabase API returned HTTP Status Code: $STATUS_CODE"
+          
+          if [ "$STATUS_CODE" -eq 200 ]; then
+            echo "Success! Database query executed successfully."
+          else
+            echo "Failed to query database. Expected HTTP 200 but got $STATUS_CODE."
+            exit 1
+          fi
