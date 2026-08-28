@@ -32,7 +32,6 @@ npm run dev        # http://localhost:5173
 | `VITE_SUPABASE_ANON_KEY` | Supabase anon/public key |
 | `SUPABASE_ACCESS_TOKEN` | Supabase personal access token used by the deployment workflow |
 | `SUPABASE_DB_PASSWORD` | Supabase project database password used to run migrations |
-| `SUPABASE_PROJECT_REF` | Project reference from the Supabase dashboard URL |
 
 ### Supabase Secrets (Edge Function)
 
@@ -50,7 +49,7 @@ cp .env.example .env
 ## Supabase Setup
 
 1. Create a Supabase project at [supabase.com](https://supabase.com).
-2. In GitHub Actions secrets, add `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD`, and `SUPABASE_PROJECT_REF` alongside the two `VITE_` secrets above.
+2. In GitHub Actions secrets, add `SUPABASE_ACCESS_TOKEN` and `SUPABASE_DB_PASSWORD` alongside the existing two `VITE_` secrets. The workflow derives the project reference from `VITE_SUPABASE_URL`.
 3. In Supabase Edge Function Secrets, set the runtime keys:
    ```bash
    supabase secrets set NVIDIA_API_KEY=nvapi-xxxxx RESEND_API_KEY=re_xxxxx

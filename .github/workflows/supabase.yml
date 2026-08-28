@@ -19,7 +19,7 @@ jobs:
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
 
     steps:
       - uses: actions/checkout@v4
@@ -32,13 +32,24 @@ jobs:
         shell: bash
         run: |
           missing=0
-          for name in SUPABASE_ACCESS_TOKEN SUPABASE_DB_PASSWORD SUPABASE_PROJECT_REF; do
+          for name in SUPABASE_ACCESS_TOKEN SUPABASE_DB_PASSWORD SUPABASE_URL; do
             if [ -z "${!name}" ]; then
               echo "::error title=Missing GitHub secret::$name is required to deploy Supabase."
               missing=1
             fi
           done
-          exit "$missing"
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+          project_ref="${SUPABASE_URL#https://}"
+          project_ref="${project_ref#http://}"
+          project_ref="${project_ref%%.*}"
+          if [ -z "$project_ref" ] || [ "$project_ref" = "$SUPABASE_URL" ]; then
+            echo "::error title=Invalid Supabase URL::VITE_SUPABASE_URL must be a Supabase project URL."
+            exit 1
+          fi
+          echo "SUPABASE_PROJECT_REF=$project_ref" >> "$GITHUB_ENV"
 
       - name: Apply database migrations
         run: |
