@@ -58,6 +58,8 @@ cp .env.example .env
 
 For an existing project that was edited in the Supabase dashboard, run `supabase db pull` once before enabling the workflow, then commit the generated baseline migration. This prevents an out-of-sync migration history from blocking `supabase db push`.
 
+If the remote project has historic migrations missing from Git, run the **Recover Supabase Migration History** workflow once. It downloads the historic SQL from Supabase and commits it before the normal deployment workflow runs.
+
 ## Certifications Section
 
 Disabled by default. To enable, edit `src/main.js`:
@@ -82,6 +84,7 @@ Push to `main` → GitHub Actions builds and deploys to GitHub Pages automatical
 portfolio/
 ├── .github/workflows/deploy.yml   # GitHub Pages deployment
 ├── .github/workflows/supabase.yml # Database migrations + Edge Function deployment
+├── .github/workflows/recover-supabase-migrations.yml # One-time migration-history recovery
 ├── supabase/
 │   ├── functions/chat/index.ts     # Edge Function (NVIDIA NIM proxy)
 │   └── migrations/                 # Database schema
