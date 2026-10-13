@@ -7,7 +7,17 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
-const EMBEDDING_MODEL = 'nvidia/nv-embedqa-e5-v5';
+const EMBEDDING_MODEL = 'nvidia/nemotron-3-embed-1b';
+const EMBEDDING_API_DIMS = 2048; // nemotron-3-embed-1b only serves 2048 dims
+const EMBEDDING_DB_DIMS = 1024;  // documents.embedding is vector(1024)
+
+// Matryoshka-style: keep first 1024 dims, then L2-renormalize (must match sync-knowledge)
+function toDbEmbedding(vec: number[]): number[] {
+  const head = vec.slice(0, EMBEDDING_DB_DIMS);
+  const norm = Math.sqrt(head.reduce((s, x) => s + x * x, 0)) || 1;
+  return head.map((x) => x / norm);
+}
+
 const GITHUB_USERNAME = 'ayush4u';
 
 const corsHeaders: Record<string, string> = {
@@ -43,11 +53,12 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
     const response = await fetch(`${NVIDIA_BASE_URL}/embeddings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${nvidiaKey}` },
-      body: JSON.stringify({ model: EMBEDDING_MODEL, input: [normalized], input_type: 'passage', encoding_format: 'float', truncate: 'END' }),
+      body: JSON.stringify({ model: EMBEDDING_MODEL, input: [normalized], input_type: 'passage', encoding_format: 'float', truncate: 'END', dimensions: EMBEDDING_API_DIMS }),
     });
     if (!response.ok) return null;
     const data = await response.json();
-    return data?.data?.[0]?.embedding ?? null;
+    const emb = data?.data?.[0]?.embedding;
+    return Array.isArray(emb) ? toDbEmbedding(emb) : null;
   } catch {
     return null;
   }
@@ -150,42 +161,42 @@ const PROFILE_CHUNKS = [
   {
     id: 'bio',
     title: 'Ayush Tomar — Bio',
-    content: 'Ayush Tomar is a Software Engineer based in Mumbai, India, with 4+ years of experience at Marsh McLennan in the pension domain. He specializes in Intelligent Automation using UiPath RPA, AI/ML workflows, and production-ready RAG systems. He is passionate about AGI, building products, and exploring cutting-edge AI technologies.',
+    content: 'Ayush Tomar is a Principal Software Engineer based in Mumbai, India, with 4+ years of experience at Marsh McLennan in the pension domain. He specializes in Intelligent Automation using UiPath RPA, AI/ML workflows, and production-ready RAG systems. He designs and ships automation that combines RPA with AI, and has led email automation projects for pension workflows.',
   },
   {
     id: 'skills',
     title: 'Ayush Tomar — Technical Skills',
-    content: 'Core technical skills: Python, JavaScript, TypeScript, React, Node.js, Three.js, GLSL shaders, WebGL. Cloud and infrastructure: AWS, Docker, Supabase, PostgreSQL, MongoDB, ChromaDB. AI/ML tools: TensorFlow, PyTorch, scikit-learn, OpenAI APIs, Groq, Hugging Face, UiPath RPA, LangChain. Frontend frameworks and tools: Next.js, Tailwind CSS, Vite, GSAP animations.',
+    content: 'Core technical skills: Python, JavaScript, TypeScript, React, Node.js, Three.js, GLSL shaders, WebGL. Cloud and DevOps: AWS, Docker, Kubernetes, GitHub Actions CI/CD (his portfolio and Pdfroo deploy through GitHub Actions), Supabase, PostgreSQL, MongoDB, ChromaDB. AI/ML tools: TensorFlow, PyTorch, scikit-learn, OpenAI APIs, Groq, Hugging Face, UiPath RPA, LangChain. Frontend frameworks and tools: Next.js, Tailwind CSS, Vite, GSAP animations.',
   },
   {
     id: 'certifications',
     title: 'Ayush Tomar — Certifications',
-    content: 'Professional certifications (7 total): 1) AWS Certified Cloud Practitioner (Amazon Web Services). 2) Advanced RPA Developer (UiPath Academy). 3) Professional Machine Learning Engineer (Google Cloud). 4) Claude Code in Action (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/z45xrycpcwer). 5) Introduction to Model Context Protocol (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/atxeopf3qctc). 6) Fundamentals of LLMs — The LLM Course (Hugging Face, April 2026). 7) Fundamentals of MCP — The MCP Course (Hugging Face, April 2026). These certifications span cloud computing, robotic process automation, machine learning, large language models, MCP (Model Context Protocol), and AI agent development.',
+    content: 'Certifications (4): 1) Claude Code in Action (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/z45xrycpcwer). 2) Introduction to Model Context Protocol (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/atxeopf3qctc). 3) Fundamentals of LLMs, The LLM Course (Hugging Face, April 2026). 4) The MCP Course: Unit 1 (Hugging Face, April 2026). If asked about UiPath, AWS or other certifications, say: his certifications are the four listed, and his UiPath work is hands-on production experience at Marsh McLennan.',
   },
   {
     id: 'education',
     title: 'Ayush Tomar — Education',
-    content: 'Education: Bachelor of Engineering (B.E.) in Information Technology from Pillai HOC College of Engineering and Technology, affiliated with University of Mumbai.',
+    content: 'Education: B.Tech in Information Technology (2021) from Pillai HOC College of Engineering and Technology.',
   },
   {
     id: 'experience-marsh',
     title: 'Ayush Tomar — Work Experience at Marsh McLennan',
-    content: 'Ayush works at Marsh McLennan (a Fortune 500 company and global leader in risk, strategy, and people advisory) in Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (reducing manual effort by ~40%), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that improved query resolution by 35%.',
+    content: 'Ayush works at Marsh McLennan (a global leader in risk, strategy, and people advisory) in Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (40% less manual verification), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that reached 90% response accuracy and made query resolution 35% faster.',
   },
   {
     id: 'contact',
     title: 'Ayush Tomar — Contact & Availability',
-    content: 'Contact Ayush: Email ayush.tomar55@gmail.com, LinkedIn linkedin.com/in/ayushtomar-rpa-ai, GitHub github.com/ayush4u. Availability: generally weekday evenings IST and weekends. He is open to freelance, contract, and full-time roles. Portfolio: ayush4u.github.io/portfolio/',
+    content: 'Contact Ayush by email at ayushtomar55@gmail.com, on LinkedIn at linkedin.com/in/ayushtomar-rpa-ai, or on GitHub at github.com/ayush4u. He is happy to talk about automation and AI projects, and visitors can leave their query in this chat so it reaches him by email. Portfolio: ayush4u.github.io/portfolio/',
   },
   {
     id: 'interests',
     title: 'Ayush Tomar — Interests & Hobbies',
-    content: 'Outside work, Ayush enjoys building products, playing cricket, and exploring cafes and coffee culture. He is fascinated by how AI can augment human intelligence rather than replace it. He is currently exploring ways to make AGI beneficial for humanity while maintaining safety and ethical considerations.',
+    content: 'Outside work, Ayush enjoys building products, playing cricket, and exploring cafes and coffee culture. He is fascinated by how AI can augment human intelligence rather than replace it.',
   },
   {
     id: 'work-focus',
     title: 'Ayush Tomar — Current Work Focus',
-    content: 'Ayush is currently working on: Artificial General Intelligence (AGI) research, Robotic Process Automation (RPA) with UiPath and AI-powered agents, Machine Learning & Deep Learning with Python/TensorFlow/PyTorch, Full-Stack Development with React/Node.js/Three.js, and contributing to open-source projects. His tech stack includes Python, JavaScript, TypeScript, React, Node.js, MongoDB, and UiPath.',
+    content: 'Ayush designs and ships automation that combines RPA with AI. His work includes UiPath bots, RAG chatbots and email-resolution engines, MCP-based tooling, and Pdfroo, a browser-based PDF editor (https://ayush4u.github.io/pdfroo/). He directed the 2025 email automation project for pension workflows and led further email automation initiatives. His stack includes Python, JavaScript, TypeScript, Node.js, Three.js, Supabase and UiPath.',
   },
 ];
 

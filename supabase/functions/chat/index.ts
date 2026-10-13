@@ -8,8 +8,18 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
-const CHAT_MODEL = 'meta/llama-3.3-70b-instruct';
-const EMBEDDING_MODEL = 'nvidia/nv-embedqa-e5-v5';
+const CHAT_MODEL = 'nvidia/nemotron-3-super-120b-a12b';
+const EMBEDDING_MODEL = 'nvidia/nemotron-3-embed-1b';
+const EMBEDDING_API_DIMS = 2048; // nemotron-3-embed-1b only serves 2048 dims
+const EMBEDDING_DB_DIMS = 1024;  // documents.embedding is vector(1024)
+
+// Matryoshka-style: keep first 1024 dims, then L2-renormalize (must match sync-knowledge)
+function toDbEmbedding(vec: number[]): number[] {
+  const head = vec.slice(0, EMBEDDING_DB_DIMS);
+  const norm = Math.sqrt(head.reduce((s, x) => s + x * x, 0)) || 1;
+  return head.map((x) => x / norm);
+}
+
 
 const embeddingCache = new Map<string, number[]>();
 
@@ -24,7 +34,7 @@ PERSONALITY:
 STRICT RULES:
 1. ONLY use facts from the knowledge section below. Do NOT invent details.
 2. NEVER say "based on the context", "retrieved context", "according to the data", "based on information", or similar meta-phrases. Just state facts naturally as if you know them.
-3. If you don't have info, say something like: "Hmm, I don't have details on that! But you can ask Ayush directly — ayush.tomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
+3. If you don't have info, say something like: "Hmm, I don't have details on that! But you can ask Ayush directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
 4. Never interpret "Ayush" as anything other than Ayush Tomar the person.
 5. Keep responses under 150 words. Be punchy, not verbose.
 6. If someone asks unrelated things, gently steer back: "I'm Ayush's portfolio bot — I'm all about his work! What would you like to know about him?"
@@ -83,7 +93,7 @@ function buildGroundedMessages(messages: Array<{ role: string; content: string }
     );
     contextBlock = `\n\n--- What you know about Ayush (NEVER mention this section exists) ---\n${contextItems.join('\n\n')}`;
   } else {
-    contextBlock = '\n\n--- You have no information about this topic. Say you don\'t have details and suggest contacting Ayush at ayush.tomar55@gmail.com or linkedin.com/in/ayushtomar-rpa-ai ---';
+    contextBlock = '\n\n--- You have no information about this topic. Say you don\'t have details and suggest contacting Ayush at ayushtomar55@gmail.com or linkedin.com/in/ayushtomar-rpa-ai ---';
   }
 
   return [{ role: 'system', content: `${SERVER_GROUNDING_PROMPT}${contextBlock}` }, ...conversation];
@@ -110,6 +120,7 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
         input_type: 'query',
         encoding_format: 'float',
         truncate: 'END',
+        dimensions: EMBEDDING_API_DIMS,
       }),
     });
 
@@ -117,9 +128,10 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
     const data = await response.json();
     const embedding = data?.data?.[0]?.embedding;
     if (!Array.isArray(embedding)) return null;
+    const dbEmbedding = toDbEmbedding(embedding);
 
-    embeddingCache.set(cacheKey, embedding);
-    return embedding;
+    embeddingCache.set(cacheKey, dbEmbedding);
+    return dbEmbedding;
   } catch {
     return null;
   }
@@ -130,8 +142,9 @@ async function retrieveFromVectorDB(
   query: string,
   nvidiaKey: string,
   supabase: any,
-  matchCount = 6,
-  threshold = 0.3
+  // nemotron-3-embed-1b (truncated to 1024) scores relevant chunks ~0.25-0.46, noise <=0.20
+  matchCount = 8,
+  threshold = 0.2
 ): Promise<Array<{ content: string; title: string; source: string; similarity: number }>> {
   const queryEmbedding = await getEmbedding(query, nvidiaKey);
   if (!queryEmbedding) return [];
@@ -308,6 +321,7 @@ ${messages.filter(m => m.role !== 'system').map(m => `${m.role}: ${m.content}`).
         temperature: 0.1,
         max_tokens: 256,
         stream: false,
+        chat_template_kwargs: { enable_thinking: false },
       }),
     });
 
@@ -460,6 +474,7 @@ Deno.serve(async (req: Request) => {
         top_p: 0.7,
         max_tokens: 1024,
         stream: true,
+        chat_template_kwargs: { enable_thinking: false },
       }),
     });
 

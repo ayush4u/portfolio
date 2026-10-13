@@ -1,296 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ayush Tomar — AI/ML Engineer & Automation Architect</title>
-  <meta name="description" content="Portfolio of Ayush Tomar — building intelligent bots, AI agents, RAG pipelines, and automation systems." />
-  <meta name="theme-color" content="#060606" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ayush Tomar | Principal Software Engineer</title>
+<meta name="description" content="Ayush Tomar builds intelligent automation that blends UiPath RPA with AI and RAG systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <canvas id="webgl"></canvas>
+<div class="wrap">
+<nav><b>ayush.tomar</b><span><a href="#about">about</a><a href="#work">work</a><a href="#projects">projects</a><a href="#skills">skills</a><a href="#certs">certificates</a><a href="#contact">say hi</a></span></nav>
 
-  <div id="loader">
-    <div class="loader-inner">
-      <span class="loader-text">AT</span>
-      <div class="loader-bar"><div class="loader-fill"></div></div>
-    </div>
+<section data-jello-section class="hero">
+ <div>
+  <p class="note">hi, I'm Ayush ✿ Principal Software Engineer</p>
+  <h1>I ship automation that blends <em>RPA</em> and <em>AI</em>.</h1>
+  <p>I build RAG chatbots, custom UiPath packages and automation pipelines that give teams their hours back.</p>
+  <div class="btns">
+   <a class="btn" href="#work" style="background:var(--butter)">See my work</a>
+   <a class="btn" href="#about" style="background:var(--mint)">About me</a>
+   <div class="arrow"><svg viewBox="0 0 110 70" fill="none" stroke="#2d2a32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M105 6 C 80 -2, 58 16, 72 30 C 86 44, 62 54, 42 47 C 28 42, 16 40, 4 40"/><path d="M15 31 L4 40 L15 49"/></svg><span class="note">start here!</span></div>
   </div>
+  <div class="metrics"><div><b>20+ hrs</b><span>saved / week</span></div><div><b>90%</b><span>response accuracy</span></div><div><b>35%</b><span>faster resolution</span></div></div>
+ </div>
+ <div class="blobbox">
+  <div id="creature-root" aria-hidden="true"></div>
+  <div id="jello-hero" aria-hidden="true"></div>
+  <div class="blob"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i></div>
+  <span class="spark" style="left:12%;top:0">✦</span><span class="spark" style="right:14%;bottom:6%;color:#d0587a">♥</span><span class="note" style="position:absolute;right:0;top:10px">say hello ↓</span>
+ </div>
+</section>
 
-  <div id="app">
-    <!-- NAV -->
-    <nav id="nav">
-      <a href="#hero" class="nav-logo">AT</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications" style="display:none">Certifications</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <button id="nav-toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
+<section data-jello-section id="about"><h2>About me</h2><p class="note">the short story</p>
+ <div data-jello-curious class="card about" style="margin-top:20px">
+  <div class="photo">photo here ☺</div>
+  <div><p style="font-size:18px">Principal Software Engineer with 4+ years at Marsh McLennan in Mumbai, building intelligent automation for the pension industry. I architect RAG chatbots with OpenAI, build custom UiPath packages that cut manual work by 40%, and lead the delivery of automation that runs in production.</p><p class="mono" style="font-size:13px;margin-top:10px">📍 Mumbai · 🎓 B.Tech IT, 2021</p>
+   <div class="timeline">
+    <div class="tl" style="background:var(--sky)">RPA<small>bots that click</small></div>
+    <svg class="squig" viewBox="0 0 60 20" fill="none" stroke="#2d2a32" stroke-width="2.5" stroke-linecap="round"><path d="M2 10 q8 -10 16 0 t16 0 t16 0"/><path d="M50 4 l7 6 -7 6"/></svg>
+    <div class="tl" style="background:var(--lav)">AI<small>bots that think</small></div>
+    <svg class="squig" viewBox="0 0 60 20" fill="none" stroke="#2d2a32" stroke-width="2.5" stroke-linecap="round"><path d="M2 10 q8 -10 16 0 t16 0 t16 0"/><path d="M50 4 l7 6 -7 6"/></svg>
+    <div class="tl" style="background:var(--butter)">Leadership<small>teams that ship</small></div>
+   </div></div></div></section>
 
-    <!-- ====== HERO — Full viewport, left-anchored ====== -->
-    <section id="hero" class="scene-section" data-scene-state="hero">
-      <div class="hero-content">
-        <div class="hero-label">
-          <span class="label-line"></span>
-          <span class="label-text">Software Engineer</span>
-        </div>
-        <h1 class="hero-name">
-          <span class="name-line" data-anim="charReveal">Ayush</span>
-          <span class="name-line" data-anim="charReveal">Tomar<span class="accent-dot">.</span></span>
-        </h1>
-        <p class="hero-desc">I build AI agents, intelligent bots,<br/>RAG pipelines, and automation systems.</p>
-        <div class="hero-meta">
-          <span>AI / ML</span>
-          <span class="meta-sep">/</span>
-          <span>Agents & Bots</span>
-          <span class="meta-sep">/</span>
-          <span>RAG</span>
-          <span class="meta-sep">/</span>
-          <span>RPA</span>
-        </div>
-      </div>
-      <div class="scroll-hint">
-        <span>Scroll to explore</span>
-        <div class="scroll-hint-line"></div>
-      </div>
-    </section>
+<section data-jello-section id="work"><h2>Work</h2><p class="note">things that run in production</p>
+ <div class="work">
+  <div data-jello-curious class="card" style="background:var(--pink)"><span class="num">01</span><h3>RAG Chatbot &amp; Email AI</h3><p>OpenAI LLM + MongoDB vector store chatbot and ML-powered pension email processing.</p><div class="metric">90%<small>response accuracy</small></div><div class="metric" style="font-size:34px">35%<small>faster query resolution</small></div><span class="tag">Python</span><span class="tag">OpenAI</span><span class="tag">RAG</span><span class="tag">React</span></div>
+  <div data-jello-curious class="card" style="background:var(--mint)"><span class="num">02</span><h3>Reply Draft Package</h3><p>Custom UiPath package that drafts email replies for review.</p><div class="metric">40%<small>less manual verification</small></div><span class="tag">UiPath</span><span class="tag">C#</span><span class="tag">Outlook API</span></div>
+  <div data-jello-curious class="card" style="background:var(--sky)"><span class="num">03</span><h3>Email Resolution Engine</h3><p>Automated routing and resolution of inbound emails.</p><div class="metric">25%<small>higher delivery rate</small></div><span class="tag">UiPath</span><span class="tag">Email</span><span class="tag">C#</span></div>
+  <div data-jello-curious class="card" style="background:var(--butter)"><span class="num">04</span><h3>WIP Dashboard</h3><p>Work-in-progress reporting that replaced manual tracking.</p><div class="metric">20+ hrs<small>saved every week</small></div><span class="tag">Python</span><span class="tag">SMTP</span><span class="tag">Dashboard</span></div>
+  <div data-jello-curious class="card" style="background:var(--lav)"><span class="num">05</span><h3>Foundation</h3><p>The RPA groundwork the rest of the automation stands on.</p><span class="tag">UiPath</span><span class="tag">RPA</span></div>
+ </div></section>
 
-    <!-- ====== ABOUT — Staggered cinematic text ====== -->
-    <section id="about" class="scene-section" data-scene-state="about">
-      <div class="about-container">
-        <div class="about-left">
-          <span class="section-label"><span class="label-line"></span>About</span>
-          <p class="about-lead" data-anim="lineReveal">Software Engineer with <strong>4+ years</strong> at <strong>Marsh McLennan</strong>, specializing in turning complex pension workflows into intelligent automated systems.</p>
-          <p class="about-body" data-anim="lineReveal">I architect RAG chatbots with OpenAI, build custom UiPath packages that cut manual work by 40%, and create immersive web experiences with Three.js and custom GLSL shaders.</p>
-        </div>
-        <div class="about-right">
-          <div class="about-stat" data-anim="statReveal">
-            <span class="stat-num" data-count="4">0</span><span class="stat-plus">+</span>
-            <span class="stat-lbl">Years</span>
-          </div>
-          <div class="about-stat" data-anim="statReveal">
-            <span class="stat-num" data-count="40">0</span><span class="stat-unit">%</span>
-            <span class="stat-lbl">Effort Reduced</span>
-          </div>
-          <div class="about-stat" data-anim="statReveal">
-            <span class="stat-num" data-count="10">0</span><span class="stat-plus">+</span>
-            <span class="stat-lbl">Projects</span>
-          </div>
-        </div>
-      </div>
-    </section>
+<section data-jello-section id="featured" style="position:relative"><span class="jello-star" style="position:absolute;top:40%;left:3%" aria-hidden="true"></span><h2>Featured</h2><p class="note">my favourite side quest ★</p>
+ <div data-jello-curious class="card sheet" style="margin-top:20px"><div><span class="num">FEATURED</span><h3 style="font-size:44px">Pdfroo</h3><p style="font-size:18px;margin:10px 0 16px">A browser-based PDF editor. Annotate, merge and sign, right in your browser.</p><span class="tag">JavaScript</span><span class="tag">PDF</span><span class="tag">GitHub Actions</span><br><br><a class="btn" href="https://ayush4u.github.io/pdfroo/" target="_blank" rel="noopener" style="background:var(--pink)">Try it live →</a></div>
+  <a class="demo" href="https://ayush4u.github.io/pdfroo/" target="_blank" rel="noopener" aria-label="Open Pdfroo live demo"><div class="bar"><i></i><i style="background:var(--butter)"></i><i style="background:var(--mint)"></i></div><div class="page"></div><div class="page" style="left:120px;top:76px;transform:rotate(5deg)"></div><div class="tools"><span>✎ annotate</span><span>⧉ merge</span><span>✍ sign</span></div><span class="note" style="position:absolute;bottom:10px;right:20px">click to try it live</span></a></div></section>
 
-    <!-- ====== WORK — Horizontal scrolling experience strip ====== -->
-    <section id="work" class="scene-section scene-section--pinned" data-scene-state="work">
-      <div class="work-header">
-        <span class="section-label"><span class="label-line"></span>Experience</span>
-        <h2 class="work-heading">Marsh McLennan</h2>
-        <p class="work-role">Software Engineer — Intelligent Automation</p>
-      </div>
-      <div class="work-track">
-        <div class="work-card" data-year="2025">
-          <span class="work-year">2025</span>
-          <h3>RAG Chatbot & Email AI</h3>
-          <p>OpenAI LLM + MongoDB vector store chatbot. ML-powered pension email processing. 35% faster query resolution.</p>
-          <div class="work-tags"><span>Python</span><span>OpenAI</span><span>RAG</span><span>React</span></div>
-        </div>
-        <div class="work-card" data-year="2024">
-          <span class="work-year">2024</span>
-          <h3>Reply Draft Package</h3>
-          <p>Custom UiPath package for auto-generating pension email drafts. 40% reduction in manual effort across teams.</p>
-          <div class="work-tags"><span>UiPath</span><span>C#</span><span>Outlook API</span></div>
-        </div>
-        <div class="work-card" data-year="2023">
-          <span class="work-year">2023</span>
-          <h3>Email Resolution Engine</h3>
-          <p>Dynamic subject/content modification system for undeliverable pension emails. 25% delivery rate boost.</p>
-          <div class="work-tags"><span>UiPath</span><span>Email</span><span>C#</span></div>
-        </div>
-        <div class="work-card" data-year="2022">
-          <span class="work-year">2022</span>
-          <h3>WIP Dashboard</h3>
-          <p>Real-time pension tracking dashboard with automated triggers. Saved 20 hours/week in manual reporting.</p>
-          <div class="work-tags"><span>Python</span><span>SMTP</span><span>Dashboard</span></div>
-        </div>
-        <div class="work-card" data-year="2021">
-          <span class="work-year">2021</span>
-          <h3>Foundation</h3>
-          <p>Joined the pension automation team. Mastered UiPath RPA. Reduced processing errors by 15%.</p>
-          <div class="work-tags"><span>UiPath</span><span>RPA</span></div>
-        </div>
-      </div>
-    </section>
+<section data-jello-section id="projects"><h2>Projects</h2>
+ <div class="chips" id="filters"><span class="chip on" data-f="all">all</span><span class="chip" data-f="ai">ai</span><span class="chip" data-f="web">web</span><span class="chip" data-f="data">data</span><span class="chip" data-f="ml">ml</span></div>
+ <div class="grid">
+  <svg class="doodle" style="left:31%;top:60px" viewBox="0 0 60 30" fill="none" stroke="#2d2a32" stroke-width="2.5" stroke-linecap="round"><path d="M2 20 Q30 -5 54 16"/><path d="M46 8 l9 9 -12 2"/></svg>
+  <svg class="doodle" style="left:65%;top:70px" viewBox="0 0 60 30" fill="none" stroke="#2d2a32" stroke-width="2.5" stroke-linecap="round"><path d="M2 10 Q30 35 54 12"/><path d="M44 10 l11 1 -4 10"/></svg>
+  <div data-jello-curious class="card sticker" data-cat="data web" style="--r:-2deg"><div class="thumb" style="background:var(--peach)"></div><span class="num">01</span><h3>India Monitor</h3><p>Real-time India dashboard.</p><span class="tag">data</span><span class="tag">dashboard</span><div class="links"><a href="https://ayush4u.github.io/Indian-Monitor/" target="_blank" rel="noopener">live ↗</a><a href="https://github.com/ayush4u/Indian-Monitor" target="_blank" rel="noopener">code ↗</a></div></div>
+  <div data-jello-curious class="card sticker" data-cat="ai" style="--r:1.5deg"><div class="thumb" style="background:var(--lav)"></div><span class="num">02</span><h3>DocuBot AI</h3><p>Enterprise-grade RAG chatbot with multi-provider LLM routing and smart chunking.</p><span class="tag">ai</span><span class="tag">RAG</span><div class="links"><a href="https://github.com/ayush4u/DocuBot-AI" target="_blank" rel="noopener">code ↗</a></div></div>
+  <div data-jello-curious class="card sticker" data-cat="ai" style="--r:-1deg"><div class="thumb" style="background:var(--mint)"></div><span class="num">03</span><h3>RAG Without Vectors</h3><p>10 alternative RAG architectures.</p><span class="tag">ai</span><span class="tag">Python</span><div class="links"><a href="https://github.com/ayush4u/different_types_of_rag" target="_blank" rel="noopener">code ↗</a></div></div>
+  <div data-jello-curious class="card sticker" data-cat="web" style="--r:2deg"><div class="thumb" style="background:var(--butter)"></div><span class="num">04</span><h3>NeonBrew</h3><p>Creative Three.js web experience.</p><span class="tag">web</span><span class="tag">Three.js</span><div class="links"><a href="https://ayush4u.github.io/neonbrew/" target="_blank" rel="noopener">live ↗</a><a href="https://github.com/ayush4u/neonbrew" target="_blank" rel="noopener">code ↗</a></div></div>
+  <div data-jello-curious class="card sticker" data-cat="web" style="--r:-1.5deg"><div class="thumb" style="background:var(--pink)"></div><span class="num">05</span><h3>Florescence</h3><p>Creative Three.js floral experience.</p><span class="tag">web</span><span class="tag">Three.js</span><div class="links"><a href="https://ayush4u.github.io/florescence/" target="_blank" rel="noopener">live ↗</a><a href="https://github.com/ayush4u/florescence" target="_blank" rel="noopener">code ↗</a></div></div>
+  <div data-jello-curious class="card sticker" data-cat="ml" style="--r:1deg"><div class="thumb" style="background:var(--sky)"></div><span class="num">06</span><h3>ML From Scratch</h3><p>Core ML algorithms built from first principles.</p><span class="tag">ml</span><span class="tag">Python</span><div class="links"><a href="https://github.com/ayush4u/learning-ai" target="_blank" rel="noopener">code ↗</a></div></div>
+ </div></section>
 
-    <!-- ====== PROJECTS — Compact bento grid ====== -->
-    <section id="projects" class="scene-section" data-scene-state="projects">
-      <span class="section-label section-label--center"><span class="label-line"></span>Selected Work</span>
+<section data-jello-section id="skills" style="position:relative"><span class="jello-star" style="position:absolute;top:40%;right:4%" aria-hidden="true"></span><h2>Skills</h2>
+ <div class="skills">
+  <div data-jello-curious class="card" style="background:var(--pink)"><h3>Automation</h3><span class="tag">UiPath RPA</span><span class="tag">C#</span><span class="tag">Outlook API</span><span class="tag">SMTP</span></div>
+  <div data-jello-curious class="card" style="background:var(--lav)"><h3>AI</h3><span class="tag">OpenAI</span><span class="tag">RAG</span><span class="tag">MCP</span><span class="tag">Embeddings</span><span class="tag">MongoDB</span></div>
+  <div data-jello-curious class="card" style="background:var(--mint)"><h3>Code &amp; Web</h3><span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Three.js</span><span class="tag">Supabase</span></div>
+  <div data-jello-curious class="card" style="background:var(--butter)"><h3>Cloud &amp; DevOps</h3><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">GitHub Actions</span></div>
+ </div></section>
 
-      <div class="projects-grid">
-        <div class="project-card project-card--featured" data-color="#00e5ff">
-          <span class="card-num">01</span>
-          <h3 class="card-title">India Monitor</h3>
-          <p class="card-desc">Real-time intelligence dashboard — live weather, finance, transport, flight tracking, news, and state-level data with glassmorphism UI.</p>
-          <div class="card-tech"><span>TypeScript</span><span>Vite</span><span>Leaflet.js</span><span>REST APIs</span></div>
-          <div class="card-links">
-            <a href="https://ayush4u.github.io/Indian-Monitor/" target="_blank" rel="noopener">Live Demo ↗</a>
-            <a href="https://github.com/ayush4u/Indian-Monitor" target="_blank" rel="noopener">Source ↗</a>
-          </div>
-        </div>
+<section data-jello-section id="certs"><h2>Certificates</h2>
+ <div class="certs">
+  <div data-jello-curious class="card cert"><img src="./certs/claude-code-in-action.jpg" alt="Claude Code in Action certificate" loading="lazy"><h4>Claude Code in Action</h4><p>Anthropic · Apr 2026</p><a href="https://verify.skilljar.com/c/z45xrycpcwer" target="_blank" rel="noopener">Verify ↗</a></div>
+  <div data-jello-curious class="card cert"><img src="./certs/intro-mcp.jpg" alt="Introduction to MCP certificate" loading="lazy"><h4>Introduction to MCP</h4><p>Anthropic · Apr 2026</p><a href="https://verify.skilljar.com/c/atxeopf3qctc" target="_blank" rel="noopener">Verify ↗</a></div>
+  <div data-jello-curious class="card cert"><img src="./certs/hf-llm-fundamentals.webp" alt="Fundamentals of LLMs certificate" loading="lazy"><h4>Fundamentals of LLMs, The LLM Course</h4><p>Hugging Face · Apr 2026</p><a href="https://cdn-uploads.huggingface.co/production/uploads/noauth/KU7p_CjheQU0uVtXe9_ha.webp" target="_blank" rel="noopener">Verify ↗</a></div>
+  <div data-jello-curious class="card cert"><img src="./certs/hf-mcp-fundamentals.webp" alt="The MCP Course Unit 1 certificate" loading="lazy"><h4>The MCP Course: Unit 1</h4><p>Hugging Face · Apr 2026</p><a href="https://cdn-uploads.huggingface.co/production/uploads/noauth/e70CiZ_3huitm6t-c10a5.webp" target="_blank" rel="noopener">Verify ↗</a></div>
+  <div data-jello-curious class="card cert dark hands"><div class="badge" style="background:var(--mint);color:var(--ink)">🤖</div><h4>Hands-on: UiPath RPA</h4><p>experience, in production</p><span class="note" style="font-size:20px">experience, not a cert ♡</span></div>
+ </div></section>
 
-        <div class="project-card project-card--featured" data-color="#ff3366">
-          <span class="card-num">02</span>
-          <h3 class="card-title">DocuBot AI</h3>
-          <p class="card-desc">Enterprise-grade RAG chatbot with multi-provider LLM routing, dual database architecture, and smart chunking strategies.</p>
-          <div class="card-tech"><span>Node.js</span><span>React</span><span>Supabase</span><span>ChromaDB</span><span>RAG</span></div>
-          <div class="card-links">
-            <a href="https://github.com/ayush4u/DocuBot-AI" target="_blank" rel="noopener">Source ↗</a>
-          </div>
-        </div>
+<section data-jello-section id="contact"><div data-jello-curious class="card hi"><p class="note">psst</p><h2>Say hi 👋</h2><p style="font-size:18px;margin:8px 0 22px">Questions about a project? Ask in the chat, or reach me directly.</p><a class="btn" href="#" data-open-chat style="background:var(--pink)">Open the chat →</a>
+ <div class="contact-links"><a href="mailto:ayushtomar55@gmail.com">ayushtomar55@gmail.com</a><a href="https://www.linkedin.com/in/ayushtomar-rpa-ai/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/ayush4u" target="_blank" rel="noopener">GitHub ↗</a></div></div></section>
+<footer style="position:relative"><span class="jello-star" style="position:absolute;top:10px;left:20%" aria-hidden="true"></span>made with ♥ and too much chai · ayush tomar</footer>
+</div>
 
-        <div class="project-card" data-color="#a855f7">
-          <span class="card-num">03</span>
-          <h3 class="card-title">RAG Without Vectors</h3>
-          <p class="card-desc">10 alternative RAG architectures — BM25, SQL, Knowledge Graph, Web Search, API-based, CAG, TF-IDF. Zero vector databases.</p>
-          <div class="card-tech"><span>Python</span><span>Flask</span><span>NetworkX</span><span>SQLite</span></div>
-          <div class="card-links">
-            <a href="https://github.com/ayush4u/different_types_of_rag" target="_blank" rel="noopener">Source ↗</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-color="#f43f5e">
-          <span class="card-num">04</span>
-          <h3 class="card-title">NeonBrew</h3>
-          <p class="card-desc">Immersive Three.js cyberpunk cityscape — custom GLSL shaders for neon lights, volumetric rain, reflective wet streets.</p>
-          <div class="card-tech"><span>Three.js</span><span>GLSL</span><span>WebGL</span><span>Vite</span></div>
-          <div class="card-links">
-            <a href="https://ayush4u.github.io/neonbrew/" target="_blank" rel="noopener">Live Demo ↗</a>
-            <a href="https://github.com/ayush4u/neonbrew" target="_blank" rel="noopener">Source ↗</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-color="#22d3ee">
-          <span class="card-num">05</span>
-          <h3 class="card-title">Florescence</h3>
-          <p class="card-desc">Procedural flower generation — custom vertex/fragment shaders, organic petal geometry, animated growth sequences.</p>
-          <div class="card-tech"><span>Three.js</span><span>GLSL</span><span>Procedural</span></div>
-          <div class="card-links">
-            <a href="https://ayush4u.github.io/florescence/" target="_blank" rel="noopener">Live Demo ↗</a>
-            <a href="https://github.com/ayush4u/florescence" target="_blank" rel="noopener">Source ↗</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-color="#eab308">
-          <span class="card-num">06</span>
-          <h3 class="card-title">Learning AI</h3>
-          <p class="card-desc">Hands-on ML/DL path — math foundations to PyTorch. Linear algebra, optimization, algorithms from scratch.</p>
-          <div class="card-tech"><span>Python</span><span>PyTorch</span><span>NumPy</span></div>
-          <div class="card-links">
-            <a href="https://github.com/ayush4u/learning-ai" target="_blank" rel="noopener">Source ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====== SKILLS — Minimal flowing layout ====== -->
-    <section id="skills" class="scene-section" data-scene-state="skills">
-      <div class="skills-container">
-        <span class="section-label"><span class="label-line"></span>Toolkit</span>
-        <div class="skills-flow">
-          <div class="skill-row" data-anim="flowIn">
-            <span class="skill-cat">AI</span>
-            <span>OpenAI</span><span>RAG</span><span>NLP</span><span>PyTorch</span><span>Scikit-learn</span><span>Hugging Face</span><span>LangChain</span><span>ChromaDB</span>
-          </div>
-          <div class="skill-row" data-anim="flowIn">
-            <span class="skill-cat">RPA</span>
-            <span>UiPath</span><span>Orchestrator</span><span>Custom Activities</span><span>Email Automation</span>
-          </div>
-          <div class="skill-row" data-anim="flowIn">
-            <span class="skill-cat">Web</span>
-            <span>React</span><span>Node.js</span><span>TypeScript</span><span>Three.js</span><span>GLSL</span><span>WebGL</span><span>Next.js</span>
-          </div>
-          <div class="skill-row" data-anim="flowIn">
-            <span class="skill-cat">Infra</span>
-            <span>AWS</span><span>Docker</span><span>GitHub Actions</span><span>Supabase</span><span>CI/CD</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====== CERTIFICATIONS — populated by config in main.js ====== -->
-    <section id="certifications" class="scene-section section-hidden" data-scene-state="skills">
-      <div class="certs-container">
-        <span class="section-label"><span class="label-line"></span>Certifications</span>
-        <div class="certs-grid"></div>
-      </div>
-    </section>
-
-    <!-- ====== CONTACT ====== -->
-    <section id="contact" class="scene-section" data-scene-state="contact">
-      <div class="contact-container">
-        <span class="section-label"><span class="label-line"></span>Contact</span>
-        <h2 class="contact-heading" data-anim="charReveal">Let's build something together<span class="accent-dot">.</span></h2>
-        <div class="contact-links">
-          <a href="mailto:ayush.tomar55@gmail.com" class="contact-link">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">ayush.tomar55@gmail.com</span>
-          </a>
-          <a href="https://linkedin.com/in/ayushtomar-rpa-ai" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">ayushtomar-rpa-ai</span>
-          </a>
-          <a href="https://github.com/ayush4u" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">GitHub</span>
-            <span class="contact-value">ayush4u</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <span>Ayush Tomar © 2026</span>
-      <span>Built with Three.js, GLSL & curiosity</span>
-    </footer>
-  </div>
-
-  <!-- CHATBOT -->
-  <div id="chatbot">
-    <button id="chat-toggle" aria-label="Open AI Chat">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-    </button>
-    <div id="chat-panel" class="chat-closed">
-      <div class="chat-header">
-        <div class="chat-header-info">
-          <div class="chat-pulse"></div>
-          <span>Ask me anything</span>
-        </div>
-        <button id="chat-close" aria-label="Close chat">&#10005;</button>
-      </div>
-      <div id="chat-messages">
-        <div class="chat-msg assistant">
-          <div class="chat-content"><p>Hey! I'm Ayush's AI assistant. Ask me about his experience, projects, skills, or anything else!</p></div>
-        </div>
-      </div>
-      <form id="chat-form">
-        <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" maxlength="500" />
-        <button type="submit" aria-label="Send">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <script type="module" src="/src/main.js"></script>
+<button class="fab" id="chat-toggle" aria-label="Open chat" aria-expanded="false" aria-controls="chat-panel"><span class="av">AT</span></button>
+<div class="scrim" id="chat-scrim"></div>
+<div class="chat chat-closed" id="chat-panel" role="dialog" aria-label="Ask about Ayush's work">
+ <header><div class="av">AT</div><div><b>Ask about Ayush's work</b><small>usually answers in seconds</small></div><button id="chat-close" aria-label="Close chat">×</button></header>
+ <div class="msgs" id="chat-messages"><div class="chat-msg assistant"><div class="chat-content"><p>Hi! Ask me anything about Ayush's projects, skills or experience.</p></div></div></div>
+ <div class="qr"><button class="chip chat-chip" data-msg="Tell me about Ayush's projects">Projects</button><button class="chip chat-chip" data-msg="What are Ayush's skills?">Skills</button><button class="chip chat-chip" data-msg="I'd like to contact Ayush">Contact Ayush</button></div>
+ <form id="chat-form"><input id="chat-input" type="text" placeholder="Type a question…" autocomplete="off" maxlength="500" aria-label="Your question"><button type="submit" aria-label="Send">↑</button></form>
+</div>
+<script type="module" src="/src/main.js"></script>
 </body>
 </html>

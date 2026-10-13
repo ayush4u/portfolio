@@ -1,0 +1,62 @@
+.jello{--s:96px;--jello-fill:var(--pink,#ffd6e0);--jello-stroke:var(--ink,#2d2a32);--jello-shadow:var(--ink,#2d2a32);--jello-shadow-x:3px;--jello-shadow-y:4px;--jello-stroke-width:3px;--jello-blush:#ff8fab;--jello-accent:var(--butter,#fff1b8);--jello-accent-2:var(--mint,#cdf0dc);--jello-bubble-bg:#fff;--jello-font:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;position:fixed;top:0;right:calc(env(safe-area-inset-right,0px) + 10px);width:var(--s);height:var(--s);z-index:900;transform:translate3d(0,var(--y,120px),0);transition:transform .6s cubic-bezier(.34,1.56,.64,1);will-change:transform;pointer-events:none;font-family:var(--jello-font)}
+.jello svg{width:100%;height:100%;overflow:visible;pointer-events:auto;cursor:pointer;display:block}
+.jello-lean{transform-origin:50% 100%;transform:rotate(var(--lean,0deg));transition:transform .4s ease}
+.jello-body{transform-origin:50% 100%;animation:jb 3.2s ease-in-out infinite}
+@keyframes jb{50%{transform:scale(1.04,.95)}}
+.jello.hop .jello-lean{animation:jh .6s ease}
+@keyframes jh{30%{transform:translateY(-22px) scale(.92,1.08)}70%{transform:translateY(0) scale(1.1,.88)}}
+.jello.wobble .jello-body{animation:jw .7s ease}
+@keyframes jw{20%{transform:scale(1.15,.85)}40%{transform:scale(.9,1.1)}60%{transform:scale(1.06,.95)}80%{transform:scale(.98,1.02)}}
+.jello-eye{transform-box:fill-box;transform-origin:center;transition:transform .08s}
+.jello.blink .jello-eye{transform:scaleY(.1)}
+.jello-hat{opacity:0;transform:translateY(-10px);transition:.5s}
+.jello.party .jello-hat{opacity:1;transform:none}
+.jello-bubble{position:absolute;right:calc(100% - 2px);top:-16px;background:var(--jello-bubble-bg);color:var(--jello-stroke);border:2px solid var(--jello-stroke);border-radius:14px 14px 4px 14px;padding:4px 10px;font-size:12px;font-weight:600;white-space:nowrap;box-shadow:3px 3px 0 var(--jello-shadow);opacity:0;transform:scale(.6);transform-origin:100% 100%;transition:.25s}
+.jello-bubble.show{opacity:1;transform:none}
+.jello-dots i{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--jello-stroke);animation:jd 1s infinite}
+.jello-dots i:nth-child(2){animation-delay:.15s}.jello-dots i:nth-child(3){animation-delay:.3s}
+@keyframes jd{50%{transform:translateY(-4px);opacity:.4}}
+.jello-count{position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);font-size:11px;color:var(--jello-stroke);background:var(--jello-accent);border:1.5px solid var(--jello-stroke);border-radius:999px;padding:0 7px;white-space:nowrap}
+.jello-mouth-yawn{opacity:0}
+.jello.yawn .jello-mouth{opacity:0}.jello.yawn .jello-mouth-yawn{opacity:1}
+.jello-star{cursor:pointer;display:inline-block;transition:transform .3s,opacity .3s}
+.jello-star:hover{transform:rotate(20deg) scale(1.2)}
+.jello-star.collected{opacity:.15;transform:scale(.5);pointer-events:none}
+html[data-theme=dark] .jello{--jello-fill:#e6dcff;--jello-stroke:#141218;--jello-shadow:#000;--jello-bubble-bg:#fdf6e9}
+@media (prefers-color-scheme:dark){html:not([data-theme=light]) .jello{--jello-fill:#e6dcff;--jello-stroke:#141218;--jello-shadow:#000;--jello-bubble-bg:#fdf6e9}}
+@media (max-width:600px){.jello{--s:56px;right:calc(env(safe-area-inset-right,0px) + 6px)}.jello-bubble{font-size:11px}}
+.jello.jello-rm,.jello.jello-rm *{animation:none!important;transition:none!important}
+.jello.aside{right:auto;left:calc(env(safe-area-inset-left,0px) + 8px);--s:56px}
+
+.jello.jello-hero{transform-origin:0 0;transition:opacity .25s linear}
+.jello.jello-hero-idle svg{animation:jhi 2.4s ease-in-out infinite}
+@keyframes jhi{50%{transform:translateY(-6%)}}
+.jello.jello-hero.jello-rm{transition:none!important}
+.jello.jello-hero-idle .jello-count{opacity:0}
+
+/* flat neo-brutalist skin: no gradients, no ids */
+.jello-fill{fill:var(--jello-fill);stroke:var(--jello-stroke);stroke-width:var(--jello-stroke-width);stroke-linejoin:round}
+/* hard shadow: CSS filter offset divided by the hero scale (--jello-k) so it stays 3px/4px on screen at every size */
+.jello>svg{filter:drop-shadow(calc(var(--jello-shadow-x) / var(--jello-k,1)) calc(var(--jello-shadow-y) / var(--jello-k,1)) 0 var(--jello-shadow))}
+.jello-ink{fill:var(--jello-stroke)}
+.jello-blush{fill:var(--jello-blush);opacity:.75}
+.jello-mouth{stroke:var(--jello-stroke);stroke-width:2.5px}
+.jello-hatc{fill:var(--jello-accent);stroke:var(--jello-stroke);stroke-width:2px;stroke-linejoin:round}
+.jello-hatb{fill:var(--jello-accent-2);stroke:var(--jello-stroke);stroke-width:2px}
+.jello svg{transition:opacity .25s}
+.jello.jello-over-text svg,.jello.jello-over-text .jello-count{opacity:.4}
+
+.jello svg *{vector-effect:non-scaling-stroke}
+
+/* badge: mini face inside a button (e.g. chat launcher). Children other than the face are hidden visually. */
+.jello-badged{overflow:visible}
+.jello-badged>:not(.jello-badge){visibility:hidden}
+.jello-badge{--jello-fill:var(--pink,#ffd6e0);--jello-stroke:var(--ink,#2d2a32);--jello-blush:#ff8fab;--jello-stroke-width:3px;position:absolute;inset:-2.5px;display:block;pointer-events:none}
+.jello-badge svg{width:100%;height:100%;display:block;overflow:visible}
+.jello-badge svg *{vector-effect:non-scaling-stroke}
+.jello-badge .jello-mouth,.jello-badge-sq{stroke:var(--jello-stroke);stroke-width:2.5px;stroke-linecap:round}
+.jello-badge-eye{transform-box:fill-box;transform-origin:center;transition:transform .08s}
+.jello-badge.blink .jello-badge-eye{transform:scaleY(.1)}
+.jello-badge-sq{opacity:0}
+.jello-badge.happy .jello-badge-eye{opacity:0}.jello-badge.happy .jello-badge-sq{opacity:1}
+.jello-badge.jello-rm *{transition:none!important;animation:none!important}
