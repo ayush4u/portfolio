@@ -14,7 +14,7 @@ export function initCreature() {
       window.Creature.mount(root, { reducedMotion: rq.matches });
       api = window.Creature;
     } else {
-      Jello.mount({ chatPanel: panel, safeZone: 96, reducedMotion: rq.matches });
+      Jello.mount({ chatPanel: panel, safeZone: 96, reducedMotion: rq.matches, hero: '#jello-hero' });
       api = Jello;
     }
     document.body.classList.add('creature-mounted');
