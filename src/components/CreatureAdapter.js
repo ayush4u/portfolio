@@ -18,6 +18,8 @@ export function initCreature() {
       api = Jello;
     }
     document.body.classList.add('creature-mounted');
+    const fab = document.getElementById('chat-toggle');
+    if (fab && api === Jello && typeof Jello.badge === 'function') Jello.badge(fab, { reducedMotion: rq.matches });
   } catch (err) {
     console.warn('Mascot mount failed, keeping CSS blob', err);
     return;
