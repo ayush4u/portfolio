@@ -76,6 +76,13 @@ nav b{font-size:20px} nav span{font-family:'JetBrains Mono';font-size:13px}
 .hi h2{font-size:52px}
 footer{text-align:center;padding:30px;font-family:'JetBrains Mono';font-size:12px}
 /* chat */
+
+/* say hello → chat fab */
+.say-hello{position:fixed;right:92px;bottom:96px;z-index:21;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:0}
+.say-hello .note{font-size:22px;line-height:1;white-space:nowrap;margin-right:8px}
+.say-hello svg{display:block;margin-top:-4px;margin-right:-6px}
+body.chat-is-open .say-hello{display:none}
+@media(max-width:639px){.say-hello{display:none}}
 .fab{position:fixed;right:24px;bottom:24px;width:68px;height:68px;border-radius:50%;background:var(--pink);border:2.5px solid var(--ink);box-shadow:3px 4px 0 var(--ink);display:grid;place-items:center;z-index:20}
 .mini{width:40px;height:36px;background:linear-gradient(160deg,#ffc2d4,#c9b6ff);border:2px solid var(--ink);border-radius:58% 42% 47% 53%/55% 50% 50% 45%;position:relative}
 .mini::before,.mini::after{content:"";position:absolute;top:13px;width:5px;height:7px;background:var(--ink);border-radius:50%}
@@ -131,7 +138,7 @@ nav a{text-decoration:none;margin-left:14px}
 .links{margin-top:12px;display:flex;gap:12px;font-family:'JetBrains Mono';font-size:13px;font-weight:600}
 .sticker.hide{display:none}
 .chip{cursor:pointer}
-.cert img{width:100%;aspect-ratio:4/3;object-fit:cover;border:2px solid var(--ink);border-radius:12px;margin-bottom:10px;background:#fff}
+.cert img{width:auto;max-width:100%;height:auto;max-height:140px;object-fit:contain;object-position:center;border:2px solid var(--ink);border-radius:12px;margin-bottom:10px;background:#fff;display:block}
 .contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-family:'JetBrains Mono';font-size:14px}
 #creature-root:empty{display:none}
 .creature-mounted .blob{display:none}
@@ -150,10 +157,24 @@ nav a{text-decoration:none;margin-left:14px}
 #chat-form button{width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--cream);border:0;font-size:18px;cursor:pointer}
 .chat header button{margin-left:auto;background:none;border:0;font-size:20px;cursor:pointer}
 .fab{cursor:pointer}
+/* phone: compact chat fab + hero safe space */
+@media(max-width:639px){
+  .fab{width:48px;height:48px;right:max(12px,env(safe-area-inset-right,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:40;box-shadow:2px 3px 0 var(--ink);border-width:2px}
+  .fab .av{width:26px;height:26px;font-size:10px}
+  .jello-badge{inset:-2px}
+  .hero{gap:8px;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  .hero > div:first-child > p.note{margin-top:0}
+  #jello-hero{width:140px;height:140px}
+  .creature-mounted .blobbox{min-height:140px;margin-bottom:0}
+  .blobbox{margin-bottom:0}
+  .hero .blob{margin:-48px 0 -36px}
+}
+
 .chat-chip{background:#fff}
 @media(max-width:699px){nav a{display:none}.metrics b{font-size:20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body.chat-is-open .chat{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+body.chat-is-open .fab{opacity:1;visibility:visible;pointer-events:auto}
 @media(min-width:700px){.arrow{left:318px;top:4px;width:110px}.arrow svg{transform:scaleY(-1)}.arrow .note{left:96px;top:58px}}
 /* hero mascot slot (filled by updated Jello module) */
 #jello-hero{width:280px;height:280px;aspect-ratio:1;flex:none}
