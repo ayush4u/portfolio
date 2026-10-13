@@ -25,16 +25,16 @@ If someone asks about Ayush, answer from the facts below. Never say "I don't kno
 Be helpful, concise, warm, and professional.
 
 About Ayush:
-- Software Engineer with 4+ years at Marsh McLennan (pension industry), Mumbai
+- Principal Software Engineer with 4+ years at Marsh McLennan (pension industry), Navi Mumbai
 - Specializes in Intelligent Automation (UiPath RPA), AI/ML, RAG systems
 - Built RAG chatbot with OpenAI LLM, embeddings, MongoDB vector store (90% response accuracy, 35% faster query resolution)
-- Created custom UiPath packages for email automation (40% manual effort reduction)
+- Created custom UiPath packages for email automation (40% less manual verification)
 - Skills: Python, React, Node.js, TypeScript, Three.js, GLSL, Supabase, UiPath RPA, RAG, MCP. Cloud and DevOps: AWS, Docker, Kubernetes, GitHub Actions CI/CD (his portfolio and Pdfroo deploy through GitHub Actions)
-- Certifications (only these four): Anthropic — Claude Code in Action (verify: https://verify.skilljar.com/c/z45xrycpcwer), Anthropic — Introduction to Model Context Protocol (verify: https://verify.skilljar.com/c/atxeopf3qctc), Hugging Face — Fundamentals of LLMs (The LLM Course), Hugging Face — The MCP Course: Unit 1. If asked about other certifications (UiPath, AWS, etc.), say he hasn't taken that exam and highlight his hands-on production experience instead. Never claim any other certification.
-- Education: B.E. in IT from Pillai HOC College of Engineering
-- Projects: Indian Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 alternative RAG architectures), NeonBrew & Florescence (Three.js creative), ML From Scratch (core ML algorithms built from first principles), Pdfroo (browser-based PDF editor: https://ayush4u.github.io/pdfroo/)
+- Certifications (only these four): Anthropic — Claude Code in Action (verify: https://verify.skilljar.com/c/z45xrycpcwer), Anthropic — Introduction to Model Context Protocol (verify: https://verify.skilljar.com/c/atxeopf3qctc), Hugging Face — Fundamentals of LLMs (The LLM Course), Hugging Face — The MCP Course: Unit 1. If asked about other certifications (UiPath, AWS, etc.), say: his certifications are the four listed, and his UiPath work is hands-on production experience at Marsh McLennan. Never claim any other certification.
+- Education: B.Tech IT (2021) from Pillai HOC College of Engineering
+- Projects: India Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 alternative RAG architectures), NeonBrew & Florescence (Three.js creative), ML From Scratch (core ML algorithms built from first principles), Pdfroo (browser-based PDF editor: https://ayush4u.github.io/pdfroo/)
 - Contact: ayushtomar55@gmail.com, LinkedIn: ayushtomar-rpa-ai, GitHub: ayush4u
-- Availability: Generally free on weekday evenings (IST) and weekends. Best way to reach him is via email — he usually responds within a day.
+- Best way to reach him is via email; he usually responds within a day.
 - Hobbies & Interests: loves building things (software and otherwise), avid cricket player, exploring cafes and coffee culture — a true coffee enthusiast
 
 ENQUIRIES:
@@ -43,7 +43,7 @@ Never discuss Ayush's career plans, job search, target roles or what he is study
 2. Politely collect the following details one at a time in a conversational way:
    - Their name
    - Company or organization (if any)
-   - Brief description of the project or role
+   - Brief description of the project or enquiry
    - Their preferred contact method (email, LinkedIn, etc.)
 3. After collecting the info, confirm by summarizing what they shared and let them know Ayush will reach out soon.
 4. Always provide Ayush's email (ayushtomar55@gmail.com) and LinkedIn (linkedin.com/in/ayushtomar-rpa-ai) so they can also reach out directly.
@@ -63,18 +63,30 @@ export function initChatbot() {
 
   if (!toggle || !panel) return;
 
-  // Toggle panel
-  toggle.addEventListener('click', () => {
-    const isOpen = panel.classList.contains('chat-open');
-    panel.classList.toggle('chat-open');
-    panel.classList.toggle('chat-closed');
-    if (!isOpen) input.focus();
-  });
+  // Open / close (panel on desktop, drawer on tablet, bottom sheet on phone)
+  const scrim = document.getElementById('chat-scrim');
+  const setOpen = (open) => {
+    document.body.classList.toggle('chat-is-open', open);
+    panel.classList.toggle('chat-open', open);
+    panel.classList.toggle('chat-closed', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    window.dispatchEvent(new CustomEvent('chat:open', { detail: open }));
+    if (open) setTimeout(() => input.focus(), 50);
+  };
+  toggle.addEventListener('click', () => setOpen(!panel.classList.contains('chat-open')));
+  close.addEventListener('click', () => setOpen(false));
+  if (scrim) scrim.addEventListener('click', () => setOpen(false));
+  document.querySelectorAll('[data-open-chat]').forEach((el) =>
+    el.addEventListener('click', (e) => { e.preventDefault(); setOpen(true); }));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
 
-  close.addEventListener('click', () => {
-    panel.classList.remove('chat-open');
-    panel.classList.add('chat-closed');
-  });
+  // Quick-reply chips send a normal chat message (Contact Ayush is a chat message, not a form)
+  document.querySelectorAll('.chat-chip[data-msg]').forEach((chip) =>
+    chip.addEventListener('click', () => {
+      if (input.disabled) return;
+      input.value = chip.dataset.msg;
+      form.requestSubmit();
+    }));
 
   // Scroll isolation — prevent chatbot scroll from leaking to page
   messages.addEventListener('wheel', (e) => {
@@ -118,6 +130,7 @@ export function initChatbot() {
     history.push({ role: 'user', content: text });
 
     const typing = appendTyping();
+    window.dispatchEvent(new CustomEvent('chat:thinking', { detail: true }));
 
     try {
       let reply;
@@ -155,6 +168,7 @@ export function initChatbot() {
       console.error('Chat error:', err);
     }
 
+    window.dispatchEvent(new CustomEvent('chat:thinking', { detail: false }));
     input.disabled = false;
     input.focus();
   });
@@ -302,13 +316,13 @@ async function storeMessage(userMsg, assistantMsg) {
 function getFallbackResponse(query) {
   const q = query.toLowerCase();
   if (q.includes('role') || q.includes('current') || q.includes('job') || q.includes('position'))
-    return 'Ayush is currently a Software Engineer at Marsh McLennan in Mumbai, working on intelligent automation for the pension industry — building RPA bots, AI pipelines, and RAG systems.';
+    return 'Ayush is currently a Principal Software Engineer at Marsh McLennan in Navi Mumbai, working on intelligent automation for the pension industry — building RPA bots, AI pipelines, and RAG systems.';
   if (q.includes('experience') || q.includes('work') || q.includes('company'))
     return 'Ayush has 4+ years at Marsh McLennan, building intelligent automation solutions for the pension industry — from custom UiPath packages to RAG chatbots with OpenAI.';
   if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('tool'))
     return 'His core skills include UiPath RPA, Python, OpenAI/RAG systems, React, Node.js, TypeScript, AWS, Docker, and Supabase.';
   if (q.includes('project'))
-    return 'Key projects: Indian Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 RAG architectures), NeonBrew & Florescence (creative web), and ML From Scratch (core ML algorithms built from first principles), Pdfroo (browser-based PDF editor: https://ayush4u.github.io/pdfroo/).';
+    return 'Key projects: India Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 RAG architectures), NeonBrew & Florescence (creative web), and ML From Scratch (core ML algorithms built from first principles), Pdfroo (browser-based PDF editor: https://ayush4u.github.io/pdfroo/).';
   if (q.includes('hire') || q.includes('freelanc') || q.includes('gig') || q.includes('available') || q.includes('contract') || q.includes('work with') || q.includes('opportunity'))
     return 'Ayush would love to hear about your project! You can reach him at ayushtomar55@gmail.com or on LinkedIn: linkedin.com/in/ayushtomar-rpa-ai';
   if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('connect'))
@@ -316,7 +330,7 @@ function getFallbackResponse(query) {
   if (q.includes('certif'))
     return 'Ayush holds 4 certifications: two from Anthropic Education (Claude Code in Action, Introduction to MCP) and two from Hugging Face (Fundamentals of LLMs, The MCP Course: Unit 1). He also has years of hands-on UiPath RPA work in production.';
   if (q.includes('education') || q.includes('degree') || q.includes('college'))
-    return 'B.E. in Information Technology from Pillai HOC College of Engineering & Technology (GPA: 7.15/10).';
+    return 'B.Tech in Information Technology (2021) from Pillai HOC College of Engineering & Technology (GPA: 7.15/10).';
   if (q.includes('hobby') || q.includes('interest') || q.includes('fun') || q.includes('outside') || q.includes('free time'))
     return 'Outside work, Ayush loves building things, playing cricket, exploring cafes, and is a true coffee enthusiast ☕';
   if (q.includes('hello') || q.includes('hey') || q.includes('hi') || q.includes('sup') || q.includes('yo'))
