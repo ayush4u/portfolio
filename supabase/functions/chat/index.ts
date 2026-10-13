@@ -8,8 +8,18 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
-const CHAT_MODEL = 'nvidia/llama-3.1-nemotron-70b-instruct';
-const EMBEDDING_MODEL = 'nvidia/llama-3.2-nv-embedqa-1b-v1';
+const CHAT_MODEL = 'nvidia/nemotron-3-super-120b-a12b';
+const EMBEDDING_MODEL = 'nvidia/nemotron-3-embed-1b';
+const EMBEDDING_API_DIMS = 2048; // nemotron-3-embed-1b only serves 2048 dims
+const EMBEDDING_DB_DIMS = 1024;  // documents.embedding is vector(1024)
+
+// Matryoshka-style: keep first 1024 dims, then L2-renormalize (must match sync-knowledge)
+function toDbEmbedding(vec: number[]): number[] {
+  const head = vec.slice(0, EMBEDDING_DB_DIMS);
+  const norm = Math.sqrt(head.reduce((s, x) => s + x * x, 0)) || 1;
+  return head.map((x) => x / norm);
+}
+
 
 const embeddingCache = new Map<string, number[]>();
 
@@ -110,7 +120,7 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
         input_type: 'query',
         encoding_format: 'float',
         truncate: 'END',
-        dimensions: 1024,
+        dimensions: EMBEDDING_API_DIMS,
       }),
     });
 
@@ -118,9 +128,10 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
     const data = await response.json();
     const embedding = data?.data?.[0]?.embedding;
     if (!Array.isArray(embedding)) return null;
+    const dbEmbedding = toDbEmbedding(embedding);
 
-    embeddingCache.set(cacheKey, embedding);
-    return embedding;
+    embeddingCache.set(cacheKey, dbEmbedding);
+    return dbEmbedding;
   } catch {
     return null;
   }
@@ -309,6 +320,7 @@ ${messages.filter(m => m.role !== 'system').map(m => `${m.role}: ${m.content}`).
         temperature: 0.1,
         max_tokens: 256,
         stream: false,
+        chat_template_kwargs: { enable_thinking: false },
       }),
     });
 
@@ -461,6 +473,7 @@ Deno.serve(async (req: Request) => {
         top_p: 0.7,
         max_tokens: 1024,
         stream: true,
+        chat_template_kwargs: { enable_thinking: false },
       }),
     });
 

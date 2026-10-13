@@ -7,7 +7,17 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
-const EMBEDDING_MODEL = 'nvidia/llama-3.2-nv-embedqa-1b-v1';
+const EMBEDDING_MODEL = 'nvidia/nemotron-3-embed-1b';
+const EMBEDDING_API_DIMS = 2048; // nemotron-3-embed-1b only serves 2048 dims
+const EMBEDDING_DB_DIMS = 1024;  // documents.embedding is vector(1024)
+
+// Matryoshka-style: keep first 1024 dims, then L2-renormalize (must match sync-knowledge)
+function toDbEmbedding(vec: number[]): number[] {
+  const head = vec.slice(0, EMBEDDING_DB_DIMS);
+  const norm = Math.sqrt(head.reduce((s, x) => s + x * x, 0)) || 1;
+  return head.map((x) => x / norm);
+}
+
 const GITHUB_USERNAME = 'ayush4u';
 
 const corsHeaders: Record<string, string> = {
@@ -43,11 +53,12 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
     const response = await fetch(`${NVIDIA_BASE_URL}/embeddings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${nvidiaKey}` },
-      body: JSON.stringify({ model: EMBEDDING_MODEL, input: [normalized], input_type: 'passage', encoding_format: 'float', truncate: 'END', dimensions: 1024 }),
+      body: JSON.stringify({ model: EMBEDDING_MODEL, input: [normalized], input_type: 'passage', encoding_format: 'float', truncate: 'END', dimensions: EMBEDDING_API_DIMS }),
     });
     if (!response.ok) return null;
     const data = await response.json();
-    return data?.data?.[0]?.embedding ?? null;
+    const emb = data?.data?.[0]?.embedding;
+    return Array.isArray(emb) ? toDbEmbedding(emb) : null;
   } catch {
     return null;
   }
