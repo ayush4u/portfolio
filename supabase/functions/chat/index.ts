@@ -8,8 +8,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
-const CHAT_MODEL = 'meta/llama-3.3-70b-instruct';
-const EMBEDDING_MODEL = 'nvidia/nv-embedqa-e5-v5';
+const CHAT_MODEL = 'nvidia/llama-3.1-nemotron-70b-instruct';
+const EMBEDDING_MODEL = 'nvidia/llama-3.2-nv-embedqa-1b-v1';
 
 const embeddingCache = new Map<string, number[]>();
 
@@ -110,6 +110,7 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
         input_type: 'query',
         encoding_format: 'float',
         truncate: 'END',
+        dimensions: 1024,
       }),
     });
 

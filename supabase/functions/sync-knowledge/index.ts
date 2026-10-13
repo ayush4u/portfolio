@@ -7,7 +7,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
-const EMBEDDING_MODEL = 'nvidia/nv-embedqa-e5-v5';
+const EMBEDDING_MODEL = 'nvidia/llama-3.2-nv-embedqa-1b-v1';
 const GITHUB_USERNAME = 'ayush4u';
 
 const corsHeaders: Record<string, string> = {
@@ -43,7 +43,7 @@ async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] |
     const response = await fetch(`${NVIDIA_BASE_URL}/embeddings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${nvidiaKey}` },
-      body: JSON.stringify({ model: EMBEDDING_MODEL, input: [normalized], input_type: 'passage', encoding_format: 'float', truncate: 'END' }),
+      body: JSON.stringify({ model: EMBEDDING_MODEL, input: [normalized], input_type: 'passage', encoding_format: 'float', truncate: 'END', dimensions: 1024 }),
     });
     if (!response.ok) return null;
     const data = await response.json();
