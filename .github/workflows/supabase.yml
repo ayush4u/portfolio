@@ -14,11 +14,10 @@ concurrency:
 
 jobs:
   deploy:
-    name: Migrate database and deploy functions
+    name: Deploy Edge Functions
     runs-on: ubuntu-latest
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
       SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
 
     steps:
@@ -32,7 +31,7 @@ jobs:
         shell: bash
         run: |
           missing=0
-          for name in SUPABASE_ACCESS_TOKEN SUPABASE_DB_PASSWORD SUPABASE_URL; do
+          for name in SUPABASE_ACCESS_TOKEN SUPABASE_URL; do
             if [ -z "${!name}" ]; then
               echo "::error title=Missing GitHub secret::$name is required to deploy Supabase."
               missing=1
@@ -51,10 +50,8 @@ jobs:
           fi
           echo "SUPABASE_PROJECT_REF=$project_ref" >> "$GITHUB_ENV"
 
-      - name: Apply database migrations
-        run: |
-          supabase link --project-ref "$SUPABASE_PROJECT_REF"
-          supabase db push
+      # No `supabase db push`: this project is shared with another app (applyiq) whose
+      # migration history isn't in this repo. Apply portfolio schema changes manually.
 
       - name: Deploy Edge Functions
         run: supabase functions deploy --project-ref "$SUPABASE_PROJECT_REF" --use-api

@@ -264,7 +264,15 @@ async function processRepo(
       .replace(/\n{2,}/g, '\n')
       .trim();
 
-    const chunks = chunkText(cleanReadme, 600);
+    // Keep the bot on shipped work: drop AGI / learning / future-plan statements
+    const OFF_LIMITS = /\bAGI\b|artificial general intelligence|currently (exploring|learning)|what i'?m working on|future plans?|job search|open to (work|roles|opportunities)/i;
+    const filteredReadme = cleanReadme
+      .split('\n')
+      .map((line) => line.split(/(?<=[.!?])\s+/).filter((sent) => !OFF_LIMITS.test(sent)).join(' '))
+      .filter((line) => line.trim())
+      .join('\n');
+
+    const chunks = chunkText(filteredReadme, 600);
     let chunkIdx = 0;
     for (const chunk of chunks.slice(0, 6)) {
       const chunkId = `${fullName}/readme/${chunkIdx}`;
