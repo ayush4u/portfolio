@@ -142,8 +142,9 @@ async function retrieveFromVectorDB(
   query: string,
   nvidiaKey: string,
   supabase: any,
-  matchCount = 6,
-  threshold = 0.3
+  // nemotron-3-embed-1b (truncated to 1024) scores relevant chunks ~0.25-0.46, noise <=0.20
+  matchCount = 8,
+  threshold = 0.2
 ): Promise<Array<{ content: string; title: string; source: string; similarity: number }>> {
   const queryEmbedding = await getEmbedding(query, nvidiaKey);
   if (!queryEmbedding) return [];
