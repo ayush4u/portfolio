@@ -181,7 +181,7 @@ const PROFILE_CHUNKS = [
   {
     id: 'experience-marsh',
     title: 'Ayush Tomar — Work Experience at Marsh McLennan',
-    content: 'Ayush works at Marsh McLennan (a global leader in risk, strategy, and people advisory) in Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (40% less manual verification), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that reached 90% response accuracy and made query resolution 35% faster.',
+    content: 'Ayush works at Marsh McLennan (a global leader in risk, strategy, and people advisory) in Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (40% less manual verification), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that reached 90% response accuracy and made query resolution 35% faster. That work RAG chatbot is an internal Marsh McLennan system with no public code or repo; it is unrelated to his personal DocuBot-AI project.',
   },
   {
     id: 'contact',
