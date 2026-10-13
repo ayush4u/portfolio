@@ -155,3 +155,13 @@ nav a{text-decoration:none;margin-left:14px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body.chat-is-open .chat{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
 @media(min-width:700px){.arrow{left:318px;top:4px;width:110px}.arrow svg{transform:scaleY(-1)}.arrow .note{left:96px;top:58px}}
+/* hero mascot slot (filled by updated Jello module) */
+#jello-hero{width:280px;height:280px;aspect-ratio:1;flex:none}
+.creature-mounted .blobbox{min-height:280px;align-items:center}
+@media(max-width:699px){#jello-hero{width:160px;height:160px}.creature-mounted .blobbox{min-height:160px;margin-bottom:8px}}
+.blobbox:has(#jello-hero) .blob{position:absolute;left:50%;top:50%;translate:-50% -50%}
+.creature-mounted .blob{display:none}
+/* start-here arrow: curl from top-right down into the About me button */
+.arrow,.arrow svg{transform:none}
+@media(min-width:700px){.arrow{left:292px;top:-18px;width:110px}.arrow .note{left:104px;top:-14px}}
+@media(max-width:699px){.btns{margin-bottom:46px}.arrow{left:auto;right:4px;top:auto;bottom:-52px;width:96px}.arrow svg{transform:scaleY(-1)}.arrow .note{left:-84px;top:auto;bottom:2px}}
