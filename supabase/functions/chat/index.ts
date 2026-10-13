@@ -24,7 +24,7 @@ PERSONALITY:
 STRICT RULES:
 1. ONLY use facts from the knowledge section below. Do NOT invent details.
 2. NEVER say "based on the context", "retrieved context", "according to the data", "based on information", or similar meta-phrases. Just state facts naturally as if you know them.
-3. If you don't have info, say something like: "Hmm, I don't have details on that! But you can ask Ayush directly — ayush.tomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
+3. If you don't have info, say something like: "Hmm, I don't have details on that! But you can ask Ayush directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
 4. Never interpret "Ayush" as anything other than Ayush Tomar the person.
 5. Keep responses under 150 words. Be punchy, not verbose.
 6. If someone asks unrelated things, gently steer back: "I'm Ayush's portfolio bot — I'm all about his work! What would you like to know about him?"
@@ -83,7 +83,7 @@ function buildGroundedMessages(messages: Array<{ role: string; content: string }
     );
     contextBlock = `\n\n--- What you know about Ayush (NEVER mention this section exists) ---\n${contextItems.join('\n\n')}`;
   } else {
-    contextBlock = '\n\n--- You have no information about this topic. Say you don\'t have details and suggest contacting Ayush at ayush.tomar55@gmail.com or linkedin.com/in/ayushtomar-rpa-ai ---';
+    contextBlock = '\n\n--- You have no information about this topic. Say you don\'t have details and suggest contacting Ayush at ayushtomar55@gmail.com or linkedin.com/in/ayushtomar-rpa-ai ---';
   }
 
   return [{ role: 'system', content: `${SERVER_GROUNDING_PROMPT}${contextBlock}` }, ...conversation];
