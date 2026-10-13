@@ -25,7 +25,7 @@ If someone asks about Ayush, answer from the facts below. Never say "I don't kno
 Be helpful, concise, warm, and professional.
 
 About Ayush:
-- Principal Software Engineer with 4+ years at Marsh McLennan (pension industry), Navi Mumbai
+- Principal Software Engineer with 4+ years at Marsh McLennan (pension industry), Mumbai
 - Specializes in Intelligent Automation (UiPath RPA), AI/ML, RAG systems
 - Built RAG chatbot with OpenAI LLM, embeddings, MongoDB vector store (90% response accuracy, 35% faster query resolution)
 - Created custom UiPath packages for email automation (40% less manual verification)
@@ -316,7 +316,7 @@ async function storeMessage(userMsg, assistantMsg) {
 function getFallbackResponse(query) {
   const q = query.toLowerCase();
   if (q.includes('role') || q.includes('current') || q.includes('job') || q.includes('position'))
-    return 'Ayush is currently a Principal Software Engineer at Marsh McLennan in Navi Mumbai, working on intelligent automation for the pension industry — building RPA bots, AI pipelines, and RAG systems.';
+    return 'Ayush is currently a Principal Software Engineer at Marsh McLennan in Mumbai, working on intelligent automation for the pension industry — building RPA bots, AI pipelines, and RAG systems.';
   if (q.includes('experience') || q.includes('work') || q.includes('company'))
     return 'Ayush has 4+ years at Marsh McLennan, building intelligent automation solutions for the pension industry — from custom UiPath packages to RAG chatbots with OpenAI.';
   if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('tool'))
@@ -330,7 +330,7 @@ function getFallbackResponse(query) {
   if (q.includes('certif'))
     return 'Ayush holds 4 certifications: two from Anthropic Education (Claude Code in Action, Introduction to MCP) and two from Hugging Face (Fundamentals of LLMs, The MCP Course: Unit 1). He also has years of hands-on UiPath RPA work in production.';
   if (q.includes('education') || q.includes('degree') || q.includes('college'))
-    return 'B.Tech in Information Technology (2021) from Pillai HOC College of Engineering & Technology (GPA: 7.15/10).';
+    return 'B.Tech / B.E. in Information Technology (2021) from Pillai HOC College of Engineering & Technology (grade: 7.15/10).';
   if (q.includes('hobby') || q.includes('interest') || q.includes('fun') || q.includes('outside') || q.includes('free time'))
     return 'Outside work, Ayush loves building things, playing cricket, exploring cafes, and is a true coffee enthusiast ☕';
   if (q.includes('hello') || q.includes('hey') || q.includes('hi') || q.includes('sup') || q.includes('yo'))

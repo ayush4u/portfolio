@@ -150,7 +150,7 @@ const PROFILE_CHUNKS = [
   {
     id: 'bio',
     title: 'Ayush Tomar — Bio',
-    content: 'Ayush Tomar is a Principal Software Engineer based in Navi Mumbai, India, with 4+ years of experience at Marsh McLennan in the pension domain. He specializes in Intelligent Automation using UiPath RPA, AI/ML workflows, and production-ready RAG systems. He designs and ships automation that combines RPA with AI, and leads projects end to end.',
+    content: 'Ayush Tomar is a Principal Software Engineer based in Mumbai, India, with 4+ years of experience at Marsh McLennan in the pension domain. He specializes in Intelligent Automation using UiPath RPA, AI/ML workflows, and production-ready RAG systems. He designs and ships automation that combines RPA with AI, and has led email automation projects for pension workflows.',
   },
   {
     id: 'skills',
@@ -165,12 +165,12 @@ const PROFILE_CHUNKS = [
   {
     id: 'education',
     title: 'Ayush Tomar — Education',
-    content: 'Education: B.Tech in Information Technology (2021) from Pillai HOC College of Engineering and Technology, affiliated with University of Mumbai.',
+    content: 'Education: B.Tech in Information Technology (2021) from Pillai HOC College of Engineering and Technology.',
   },
   {
     id: 'experience-marsh',
     title: 'Ayush Tomar — Work Experience at Marsh McLennan',
-    content: 'Ayush works at Marsh McLennan (a Fortune 500 company and global leader in risk, strategy, and people advisory) in Navi Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (40% less manual verification), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that reached 90% response accuracy and made query resolution 35% faster.',
+    content: 'Ayush works at Marsh McLennan (a global leader in risk, strategy, and people advisory) in Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (40% less manual verification), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that reached 90% response accuracy and made query resolution 35% faster.',
   },
   {
     id: 'contact',
@@ -185,7 +185,7 @@ const PROFILE_CHUNKS = [
   {
     id: 'work-focus',
     title: 'Ayush Tomar — Current Work Focus',
-    content: 'Ayush designs and ships automation that combines RPA with AI. His work includes UiPath bots, RAG chatbots and email-resolution engines, MCP-based tooling, and Pdfroo, a browser-based PDF editor (https://ayush4u.github.io/pdfroo/). He leads these projects end to end, from shaping the idea and the architecture to coordinating the people who use them. His stack includes Python, JavaScript, TypeScript, Node.js, Three.js, Supabase and UiPath.',
+    content: 'Ayush designs and ships automation that combines RPA with AI. His work includes UiPath bots, RAG chatbots and email-resolution engines, MCP-based tooling, and Pdfroo, a browser-based PDF editor (https://ayush4u.github.io/pdfroo/). He directed the 2025 email automation project for pension workflows and led further email automation initiatives. His stack includes Python, JavaScript, TypeScript, Node.js, Three.js, Supabase and UiPath.',
   },
 ];
 
