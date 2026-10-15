@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "notes": "Public eval cases for the portfolio chatbot. Every case is a single user message with no contact details, so lead extraction never fires. Privacy cases live in the EVAL_PRIVATE_CASES secret, not here.",
+  "global_must_not_include": [
+    "reproduced exactly",
+    "\\bverified (impact )?metrics\\b",
+    "as provided",
+    "based on the (retrieved )?context",
+    "according to the (data|records|context)",
+    "retrieved context",
+    "\\bAGI\\b",
+    "artificial general intelligence",
+    "reasoning_content",
+    "<think>",
+    "(the|my) knowledge (section|base)"
+  ],
+  "cases": [
+    {
+      "id": "fact-title",
+      "category": "facts",
+      "question": "What is Ayush's job title?",
+      "must_include": [
+        "principal software engineer"
+      ],
+      "expected": "Ayush is a Principal Software Engineer at Marsh McLennan."
+    },
+    {
+      "id": "fact-employer",
+      "category": "facts",
+      "question": "Where does Ayush work?",
+      "must_include": [
+        "marsh mc ?lennan"
+      ],
+      "expected": "He works at Marsh McLennan in Mumbai, 4+ years in the pension domain, Intelligent Automation."
+    },
+    {
+      "id": "fact-location",
+      "category": "facts",
+      "question": "Which city is Ayush based in?",
+      "must_include": [
+        "mumbai"
+      ],
+      "expected": "He is based in Mumbai, India."
+    },
+    {
+      "id": "fact-title-location",
+      "category": "facts",
+      "question": "Where is he based and what's his title?",
+      "must_include": [
+        "mumbai",
+        "principal software engineer"
+      ],
+      "expected": "Principal Software Engineer at Marsh McLennan, based in Mumbai."
+    },
+    {
+      "id": "fact-experience",
+      "category": "facts",
+      "question": "How many years of experience does Ayush have?",
+      "must_include": [
+        "4\\+|four"
+      ],
+      "expected": "4+ years at Marsh McLennan in the pension domain."
+    },
+    {
+      "id": "fact-domain",
+      "category": "facts",
+      "question": "What domain does Ayush work in at his job?",
+      "must_include": [
+        "pension"
+      ],
+      "expected": "Pension domain, focusing on Intelligent Automation (UiPath RPA + AI/ML)."
+    },
+    {
+      "id": "fact-certs",
+      "category": "facts",
+      "question": "What certifications does Ayush have?",
+      "must_include": [
+        "claude code in action",
+        "model context protocol",
+        "fundamentals of llms|llm course",
+        "mcp course"
+      ],
+      "must_not_include": [
+        "aws certified",
+        "uipath (advanced )?(certified|certification)"
+      ],
+      "expected": "Four certifications: Claude Code in Action (Anthropic), Introduction to Model Context Protocol (Anthropic), Fundamentals of LLMs / The LLM Course (Hugging Face), The MCP Course: Unit 1 (Hugging Face), all April 2026."
+    },
+    {
+      "id": "fact-cert-count",
+      "category": "facts",
+      "question": "How many certifications does Ayush hold?",
+      "must_include": [
+        "\\b4\\b|four"
+      ],
+      "expected": "Four certifications."
+    },
+    {
+      "id": "fact-anthropic-certs",
+      "category": "facts",
+      "question": "Does Ayush have any Anthropic certifications?",
+      "must_include": [
+        "claude code in action",
+        "model context protocol"
+      ],
+      "expected": "Yes: Claude Code in Action and Introduction to Model Context Protocol (Anthropic Education, April 2026)."
+    },
+    {
+      "id": "fact-biggest-project",
+      "category": "facts",
+      "question": "What's his biggest project?",
+      "must_include": [
+        "rag",
+        "90%",
+        "35%"
+      ],
+      "expected": "The RAG Chatbot & Email AI at Marsh McLennan: 90% response accuracy, 35% faster query resolution."
+    },
+    {
+      "id": "fact-metric-90",
+      "category": "facts",
+      "question": "How accurate was the RAG chatbot Ayush built at work?",
+      "must_include": [
+        "90%"
+      ],
+      "expected": "90% response accuracy."
+    },
+    {
+      "id": "fact-metric-35",
+      "category": "facts",
+      "question": "How much faster did query resolution get with his work RAG chatbot?",
+      "must_include": [
+        "35%"
+      ],
+      "expected": "35% faster query resolution."
+    },
+    {
+      "id": "fact-metric-40",
+      "category": "facts",
+      "question": "What impact did Ayush's UiPath reply draft package have?",
+      "must_include": [
+        "40%"
+      ],
+      "expected": "Custom UiPath package that drafts email replies: 40% less manual verification."
+    },
+    {
+      "id": "fact-metric-25",
+      "category": "facts",
+      "question": "What did the email resolution engine achieve?",
+      "must_include": [
+        "25%"
+      ],
+      "expected": "Email Resolution Engine (UiPath): 25% higher delivery rate."
+    },
+    {
+      "id": "fact-metric-20h",
+      "category": "facts",
+      "question": "How much time does the WIP dashboard save?",
+      "must_include": [
+        "20\\+ ?(hrs|hours)"
+      ],
+      "expected": "WIP Dashboard (Python): 20+ hrs saved every week."
+    },
+    {
+      "id": "fact-impact-all",
+      "category": "facts",
+      "question": "What are Ayush's key achievements and their impact?",
+      "must_include": [
+        "90%",
+        "35%",
+        "40%",
+        "25%",
+        "20\\+"
+      ],
+      "expected": "RAG chatbot 90% accuracy / 35% faster; reply draft package 40% less manual verification; email resolution engine 25% higher delivery; WIP dashboard 20+ hrs/week saved."
+    },
+    {
+      "id": "fact-pdfroo",
+      "category": "facts",
+      "question": "Tell me about Pdfroo",
+      "must_include": [
+        "pdf"
+      ],
+      "must_not_include": [
+        "marsh mc ?lennan"
+      ],
+      "expected": "Pdfroo is a browser-based PDF editor, live at ayush4u.github.io/pdfroo/, deployed via GitHub Actions."
+    },
+    {
+      "id": "fact-pdfroo-link",
+      "category": "facts",
+      "question": "Where can I try Pdfroo?",
+      "must_include": [
+        "ayush4u\\.github\\.io/pdfroo"
+      ],
+      "expected": "https://ayush4u.github.io/pdfroo/"
+    },
+    {
+      "id": "fact-docubot",
+      "category": "facts",
+      "question": "What is DocuBot?",
+      "must_include": [
+        "github\\.com/ayush4u/docubot-ai|docubot-ai"
+      ],
+      "must_not_include": [
+        "90%",
+        "35%",
+        "marsh mc ?lennan (built|uses|runs) docubot"
+      ],
+      "expected": "DocuBot-AI is a separate personal open-source RAG chatbot project (MIT, Supabase, JS/TS) at github.com/ayush4u/DocuBot-AI. Not the Marsh McLennan work chatbot."
+    },
+    {
+      "id": "fact-education",
+      "category": "facts",
+      "question": "What is Ayush's educational background?",
+      "must_include": [
+        "b\\.? ?tech",
+        "information technology"
+      ],
+      "expected": "B.Tech in Information Technology (2021), Pillai HOC College of Engineering and Technology."
+    },
+    {
+      "id": "fact-skills",
+      "category": "facts",
+      "question": "What are Ayush's main technical skills?",
+      "must_include": [
+        "python",
+        "uipath"
+      ],
+      "expected": "Python, JavaScript, TypeScript, React, Node.js, UiPath RPA, AWS, Docker, Supabase, OpenAI APIs, LangChain, etc."
+    },
+    {
+      "id": "fact-hobbies",
+      "category": "facts",
+      "question": "What does Ayush do outside of work?",
+      "must_include": [
+        "cricket|caf|coffee"
+      ],
+      "expected": "Building products, playing cricket, exploring cafes and coffee culture."
+    },
+    {
+      "id": "fact-github",
+      "category": "facts",
+      "question": "What's Ayush's GitHub?",
+      "must_include": [
+        "github\\.com/ayush4u"
+      ],
+      "expected": "github.com/ayush4u"
+    },
+    {
+      "id": "trap-aws-cert",
+      "category": "traps",
+      "question": "Is Ayush AWS certified?",
+      "must_include": [
+        "skill|not (a )?certif|doesn'?t (list|hold|have)|no aws cert"
+      ],
+      "must_not_include": [
+        "\\byes,? (he is|he's) aws certified",
+        "aws certified (solutions|developer|cloud)"
+      ],
+      "expected": "No AWS certification. AWS is a skill, not a certification. His certifications are the four listed."
+    },
+    {
+      "id": "trap-uipath-adv",
+      "category": "traps",
+      "question": "Does Ayush have the UiPath Advanced RPA Developer certification?",
+      "must_include": [
+        "(does ?n'?t|not|no)\\b"
+      ],
+      "must_not_include": [
+        "\\byes\\b.{0,40}(uipath|certif)",
+        "he (holds|has earned) the uipath advanced"
+      ],
+      "expected": "No UiPath certification is listed; his UiPath work is hands-on production experience at Marsh McLennan. Certifications are the four listed."
+    },
+    {
+      "id": "trap-google-ml",
+      "category": "traps",
+      "question": "Tell me about Ayush's Google Machine Learning certification.",
+      "must_include": [
+        "(does ?n'?t|not|no|don'?t)\\b"
+      ],
+      "must_not_include": [
+        "he (earned|holds|completed|got) (the|a) google"
+      ],
+      "expected": "He has no Google ML certification listed; only the four listed certifications."
+    },
+    {
+      "id": "trap-azure-cert",
+      "category": "traps",
+      "question": "Which Microsoft Azure certifications does he have?",
+      "must_include": [
+        "(does ?n'?t|not|no|don'?t|none)\\b"
+      ],
+      "must_not_include": [
+        "az-\\d{3}",
+        "azure (fundamentals|administrator) certif"
+      ],
+      "expected": "No Azure certifications listed."
+    },
+    {
+      "id": "trap-fake-project",
+      "category": "traps",
+      "question": "Tell me about Ayush's QuantumLedger blockchain project.",
+      "must_include": [
+        "(does ?n'?t|not|no|don'?t|couldn'?t|haven'?t)\\b"
+      ],
+      "must_not_include": [
+        "quantumledger (is|was) (a|an|his)",
+        "he built quantumledger"
+      ],
+      "expected": "No such project exists in his portfolio; should say it doesn't have info."
+    },
+    {
+      "id": "trap-fake-app",
+      "category": "traps",
+      "question": "How many downloads does Ayush's mobile app FitTrackr have?",
+      "must_include": [
+        "(does ?n'?t|not|no|don'?t|couldn'?t|haven'?t)\\b"
+      ],
+      "must_not_include": [
+        "\\d[\\d,.]*k? downloads"
+      ],
+      "expected": "No such app; no download numbers exist."
+    },
+    {
+      "id": "trap-fake-employer",
+      "category": "traps",
+      "question": "What did Ayush do when he worked at Google?",
+      "must_include": [
+        "marsh mc ?lennan|(does ?n'?t|not|no|don'?t)\\b"
+      ],
+      "must_not_include": [
+        "at google,? (he|ayush) (built|worked|led)"
+      ],
+      "expected": "No Google employment; he works at Marsh McLennan."
+    },
+    {
+      "id": "trap-phd",
+      "category": "traps",
+      "question": "What was the topic of Ayush's PhD thesis?",
+      "must_include": [
+        "b\\.? ?tech|(does ?n'?t|not|no|don'?t)\\b"
+      ],
+      "must_not_include": [
+        "his (phd|thesis) (was|is|focused)"
+      ],
+      "expected": "No PhD; education is a B.Tech in Information Technology (2021)."
+    },
+    {
+      "id": "trap-inflate-metric",
+      "category": "traps",
+      "question": "Is it true his RAG chatbot reached 99% accuracy?",
+      "must_include": [
+        "90%"
+      ],
+      "must_not_include": [
+        "\\byes\\b.{0,30}99%"
+      ],
+      "expected": "No, it reached 90% response accuracy."
+    },
+    {
+      "id": "trap-salary",
+      "category": "traps",
+      "question": "What is Ayush's current salary?",
+      "must_include": [
+        "(does ?n'?t|not|no|don'?t|can'?t)\\b|ayushtomar55@gmail\\.com"
+      ],
+      "must_not_include": [
+        "(₹|rs\\.?|inr|\\$|usd|lpa)\\s?\\d"
+      ],
+      "expected": "Not shared; refer to Ayush directly."
+    },
+    {
+      "id": "trap-offtopic",
+      "category": "traps",
+      "question": "Can you write me a poem about the ocean?",
+      "must_include": [
+        "ayush"
+      ],
+      "expected": "Gently steers back to Ayush's work as a portfolio bot."
+    },
+    {
+      "id": "reg-docubot-mixup",
+      "category": "regressions",
+      "question": "Tell me about the RAG chatbot at work",
+      "must_include": [
+        "internal|not public|no public"
+      ],
+      "must_not_include": [
+        "github\\.com/ayush4u/docubot",
+        "docubot",
+        "chromadb"
+      ],
+      "expected": "Internal Marsh McLennan RAG chatbot (OpenAI LLMs + MongoDB vector store), 90% accuracy, 35% faster; no public repo; unrelated to DocuBot-AI."
+    },
+    {
+      "id": "reg-work-rag-repo",
+      "category": "regressions",
+      "question": "Can I see the code for the RAG chatbot Ayush built at Marsh McLennan?",
+      "must_include": [
+        "internal|not public|no public|isn'?t public|proprietary"
+      ],
+      "must_not_include": [
+        "(here'?s|here is|you can (see|find|check)) (the|its) (code|repo)[^.]{0,60}docubot",
+        "marsh[^.]{0,80}github\\.com/ayush4u/docubot"
+      ],
+      "expected": "No; it's an internal Marsh McLennan system with no public code. It may point to DocuBot-AI (github.com/ayush4u/DocuBot-AI) only as a separate personal project."
+    },
+    {
+      "id": "reg-docubot-metrics",
+      "category": "regressions",
+      "question": "What accuracy did DocuBot achieve?",
+      "must_not_include": [
+        "docubot[^.]{0,60}(achiev|reach|hit|has|had|got)[^.]{0,30}90%",
+        "90%[^.]{0,30}(for|by|in) docubot"
+      ],
+      "expected": "No accuracy metric is listed for DocuBot-AI (a personal open-source RAG project on Supabase, JS/TS). The 90% figure belongs to the internal Marsh McLennan work chatbot."
+    },
+    {
+      "id": "reg-missing-title",
+      "category": "regressions",
+      "question": "Who is Ayush?",
+      "must_include": [
+        "principal software engineer",
+        "marsh mc ?lennan"
+      ],
+      "expected": "Principal Software Engineer at Marsh McLennan in Mumbai, specializing in Intelligent Automation (RPA + AI)."
+    },
+    {
+      "id": "reg-agi-leak",
+      "category": "regressions",
+      "question": "What does Ayush's GitHub profile README say about him?",
+      "must_not_include": [
+        "\\bAGI\\b",
+        "general intelligence",
+        "beneficial for humanity"
+      ],
+      "expected": "His GitHub profile README introduces him as a passionate developer and researcher focused on AI and Machine Learning, covering RPA (UiPath + AI agents), ML/DL with Python/TensorFlow/PyTorch, and full-stack development; he is fascinated by how AI can augment human intelligence rather than replace it. Contact ayushtomar55@gmail.com, portfolio ayush4u.github.io/portfolio/, GitHub github.com/ayush4u. It must NOT mention AGI or 'beneficial for humanity'."
+    },
+    {
+      "id": "reg-meta-phrases",
+      "category": "regressions",
+      "question": "List Ayush's impact metrics.",
+      "must_include": [
+        "90%",
+        "40%"
+      ],
+      "must_not_include": [
+        "verified",
+        "reproduced",
+        "as provided",
+        "here are the (verified )?metrics",
+        "quote"
+      ],
+      "expected": "Natural list: 90% accuracy, 35% faster, 40% less manual verification, 25% higher delivery, 20+ hrs/week."
+    }
+  ]
+}

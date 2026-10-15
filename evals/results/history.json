@@ -1,0 +1,48 @@
+[
+  {
+    "run_at": "2026-10-15T04:13:15.470Z",
+    "commit": null,
+    "judge_model": "nvidia/nemotron-3-super-120b-a12b",
+    "threshold": 0.8,
+    "overall": 0.8656,
+    "passed": true,
+    "scores": {
+      "facts": 1,
+      "traps": 0.9091,
+      "regressions": 0.5,
+      "privacy": 1,
+      "groundedness_avg": 4.675,
+      "hallucination_rate": 0.025
+    },
+    "counts": {
+      "facts": 23,
+      "traps": 11,
+      "regressions": 6,
+      "privacy": 6,
+      "judged": 40
+    }
+  },
+  {
+    "run_at": "2026-10-15T04:21:38.039Z",
+    "commit": null,
+    "judge_model": "nvidia/nemotron-3-super-120b-a12b",
+    "threshold": 0.8,
+    "overall": 0.9335,
+    "passed": true,
+    "scores": {
+      "facts": 1,
+      "traps": 0.9091,
+      "regressions": 0.8333,
+      "privacy": 1,
+      "groundedness_avg": 4.7,
+      "hallucination_rate": 0
+    },
+    "counts": {
+      "facts": 23,
+      "traps": 11,
+      "regressions": 6,
+      "privacy": 6,
+      "judged": 40
+    }
+  }
+]
