@@ -23,7 +23,7 @@ function jello(mood) {
   const mouth = mood === 'worried'
     ? '<path class="sb-mouth" d="M27 44 q5 -5 10 0"/>'
     : '<path class="sb-mouth" d="M26 41 q6 6 12 0"/>';
-  const brows = mood === 'worried' ? '<path class="sb-mouth" d="M19 25 l6 2 M45 25 l-6 2"/>' : '';
+  const brows = mood === 'worried' ? '<path class="sb-mouth" d="M19 27 l6 -3 M45 27 l-6 -3"/>' : '';
   const sweat = mood === 'worried' ? '<path d="M52 20 q3 5 0 7 q-3 -2 0 -7z" fill="#bfe3ff" stroke="var(--ink)" stroke-width="1.5"/>' : '';
   const medal = mood === 'proud'
     ? '<g class="sb-medal"><path d="M26 54 l-4 10 M38 54 l4 10" stroke="#d0587a" stroke-width="3"/><circle cx="32" cy="66" r="7" fill="var(--butter)" stroke="var(--ink)" stroke-width="2"/><path d="M29.5 66 l2 2 l3.5 -4" stroke="var(--ink)" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>'
