@@ -10,7 +10,7 @@ const BARS = [
   { key: 'groundedness_avg', label: 'sticks to sources', color: 'var(--peach)', max: 5 },
 ];
 
-const pct = (v) => `${Math.round(v * 100)}%`;
+const pct = (v) => `${(Math.floor(v * 1000) / 10).toFixed(1).replace(/\.0$/, "")}%`;
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 function when(iso) {
