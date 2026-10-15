@@ -187,3 +187,6 @@ body.chat-is-open .fab{opacity:1;visibility:visible;pointer-events:auto}
 @media(min-width:700px){.arrow{left:292px;top:-18px;width:110px}.arrow .note{left:104px;top:-14px}}
 @media(max-width:699px){.btns{margin-bottom:46px}.arrow{left:auto;right:4px;top:auto;bottom:-52px;width:96px}.arrow svg{transform:scaleY(-1)}.arrow .note{left:-84px;top:auto;bottom:2px}}
 @media(max-width:699px){.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-right:80px;padding-bottom:88px}.metrics div{padding:8px 8px}.metrics b{font-size:18px}.metrics span{font-size:10px;line-height:1.2;display:block}}
+
+/* connector arrows only make sense with every card showing */
+.grid.filtered .doodle{display:none}

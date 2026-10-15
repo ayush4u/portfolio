@@ -112,7 +112,7 @@ export function mount({container=document.body,chatPanel=null,reducedMotion=null
   document.addEventListener('pointerover',onOver,{passive:true});
   // stars
   const stars=[...document.querySelectorAll('.jello-star')];let got=0;
-  const upd=()=>{cnt.hidden=!stars.length;cnt.textContent=`★ ${got}/${stars.length}`};upd();
+  const upd=()=>{cnt.hidden=!stars.length||!got;cnt.textContent=`★ ${got}/${stars.length}`};upd();
   stars.forEach(s=>{s.setAttribute('role','button');s.tabIndex=0;const f=()=>{if(s.classList.contains('collected'))return;s.classList.add('collected');got++;upd();flash('hop',600);
     if(got===stars.length){el.classList.add('party');say('Party time! 🎉',2500);el.dispatchEvent(new CustomEvent('jello:party',{bubbles:true}))}else say('a star! ✨')};
     s.addEventListener('click',f);s.addEventListener('keydown',e=>(e.key==='Enter'||e.key===' ')&&f())});

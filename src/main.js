@@ -39,6 +39,7 @@ function initFilters() {
   chips.forEach((chip) => chip.addEventListener('click', () => {
     chips.forEach((c) => c.classList.toggle('on', c === chip));
     const f = chip.dataset.f;
+    document.querySelector('#projects .grid')?.classList.toggle('filtered', f !== 'all');
     document.querySelectorAll('.sticker').forEach((s) =>
       s.classList.toggle('hide', f !== 'all' && !s.dataset.cat.split(' ').includes(f)));
   }));
