@@ -1,0 +1,64 @@
+name: Chatbot Eval
+
+on:
+  schedule:
+    - cron: '17 2 * * *'   # nightly, 02:17 UTC (07:47 IST)
+  workflow_dispatch:
+    inputs:
+      threshold:
+        description: 'Minimum overall score (0-1)'
+        required: false
+        default: '0.8'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chatbot-eval
+  cancel-in-progress: false
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run eval against the deployed chat function
+        id: run
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          EVAL_PRIVATE_CASES: ${{ secrets.EVAL_PRIVATE_CASES }}
+          EVAL_THRESHOLD: ${{ github.event.inputs.threshold || '0.8' }}
+        run: |
+          set +e
+          node evals/run.mjs
+          code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evals/results/latest.json evals/results/history.json
+          if git diff --cached --quiet; then echo "No result changes"; exit 0; fi
+          # [skip ci] keeps deploy.yml (push to main, no path filter) from running.
+          # Pushes made with GITHUB_TOKEN don't trigger workflows anyway; this is belt and braces.
+          git commit -m "chore(evals): results $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Fail if score is below threshold
+        if: steps.run.outputs.code != '0'
+        run: |
+          echo "::error title=Chatbot eval failed::Overall score below threshold or runner error (exit ${{ steps.run.outputs.code }}). See the job summary."
+          exit 1
