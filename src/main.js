@@ -1,6 +1,8 @@
 import './styles/main.css';
+import './styles/scoreboard.css';
 import { initChatbot } from './components/Chatbot.js';
 import { trackVisit } from './components/Tracker.js';
+import { initScoreboard } from './components/Scoreboard.js';
 import { initCreature } from './components/CreatureAdapter.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,6 +48,7 @@ function boot() {
   initMotion();
   initFilters();
   initChatbot();
+  initScoreboard();
   initCreature();
   if (!document.body.classList.contains('creature-mounted')) initBlobFollow();
   trackVisit();
