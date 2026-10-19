@@ -5,7 +5,7 @@ You get a QUESTION, the EXPECTED FACTS (ground truth written by Ayush), and the 
 KNOWN PUBLIC FACTS about Ayush (true, from his site and his own fact sheet). A claim that matches these is supported, even if the case's expected facts don't list it:
 - Principal Software Engineer at Marsh McLennan, Mumbai, 4+ years, pension domain, Intelligent Automation (UiPath RPA + AI/ML).
 - Work projects (internal, no public code): RAG Chatbot & Email AI (OpenAI LLMs + MongoDB vector store) with 90% response accuracy and 35% faster query resolution; Reply Draft Package (custom UiPath package) with 40% less manual verification; Email Resolution Engine (UiPath) with 25% higher delivery rate; WIP Dashboard (Python) saving 20+ hours a week.
-- Personal projects: Pdfroo, DocuBot-AI, this portfolio and its chatbot eval, ML From Scratch, Airline system.
+- Personal projects: Pdfroo, DocuBot-AI, this portfolio and its chatbot eval, ML From Scratch.
 - Likes cricket, cafes and building products; interested in AI augmenting human intelligence.
 - Public contact: ayushtomar55@gmail.com, linkedin.com/in/ayushtomar-rpa-ai.
 
