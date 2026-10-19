@@ -161,7 +161,7 @@ const PROFILE_CHUNKS = [
   {
     id: 'bio',
     title: 'Ayush Tomar — Bio',
-    content: 'Ayush Tomar is a Principal Software Engineer based in Mumbai, India, with 4+ years of experience at Marsh McLennan in the pension domain. He specializes in Intelligent Automation using UiPath RPA, AI/ML workflows, and production-ready RAG systems. He designs and ships automation that combines RPA with AI, and has led email automation projects for pension workflows.',
+    content: 'Ayush Tomar is a Principal Software Engineer based in Mumbai, India, with 4+ years of experience at Marsh in the pension domain. He specializes in Intelligent Automation using UiPath RPA, AI/ML workflows, and production-ready RAG systems. He designs and ships automation that combines RPA with AI, and has led email automation projects for pension workflows.',
   },
   {
     id: 'skills',
@@ -171,7 +171,7 @@ const PROFILE_CHUNKS = [
   {
     id: 'certifications',
     title: 'Ayush Tomar — Certifications',
-    content: 'Certifications (4): 1) Claude Code in Action (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/z45xrycpcwer). 2) Introduction to Model Context Protocol (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/atxeopf3qctc). 3) Fundamentals of LLMs, The LLM Course (Hugging Face, April 2026). 4) The MCP Course: Unit 1 (Hugging Face, April 2026). If asked about UiPath, AWS or other certifications, say: his certifications are the four listed, and his UiPath work is hands-on production experience at Marsh McLennan.',
+    content: 'Certifications (4): 1) Claude Code in Action (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/z45xrycpcwer). 2) Introduction to Model Context Protocol (Anthropic Education, April 2026, verify: https://verify.skilljar.com/c/atxeopf3qctc). 3) Fundamentals of LLMs, The LLM Course (Hugging Face, April 2026). 4) The MCP Course: Unit 1 (Hugging Face, April 2026). If asked about UiPath, AWS or other certifications, say: his certifications are the four listed, and his UiPath work is hands-on production experience at Marsh.',
   },
   {
     id: 'education',
@@ -180,8 +180,8 @@ const PROFILE_CHUNKS = [
   },
   {
     id: 'experience-marsh',
-    title: 'Ayush Tomar — Work Experience at Marsh McLennan',
-    content: 'Ayush works at Marsh McLennan (a global leader in risk, strategy, and people advisory) in Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (40% less manual verification), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that reached 90% response accuracy and made query resolution 35% faster. That work RAG chatbot is an internal Marsh McLennan system with no public code or repo; it is unrelated to his personal DocuBot-AI project.',
+    title: 'Ayush Tomar — Work Experience at Marsh',
+    content: 'Ayush works at Marsh (a global leader in risk, strategy, and people advisory) in Mumbai. He has 4+ years of experience in the pension domain, focusing on Intelligent Automation. His work includes building UiPath RPA automations, creating AI/ML-powered workflows, developing custom UiPath packages for email automation (40% less manual verification), and building a RAG chatbot using OpenAI LLMs + embeddings + MongoDB vector store that reached 90% response accuracy and made query resolution 35% faster. That work RAG chatbot is an internal Marsh system with no public code or repo; it is unrelated to his personal DocuBot-AI project.',
   },
   {
     id: 'contact',

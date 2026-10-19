@@ -25,12 +25,12 @@ If someone asks about Ayush, answer from the facts below. Never say "I don't kno
 Be helpful, concise, warm, and professional.
 
 About Ayush:
-- Principal Software Engineer with 4+ years at Marsh McLennan (pension industry), Mumbai
+- Principal Software Engineer with 4+ years at Marsh (pension industry), Mumbai
 - Specializes in Intelligent Automation (UiPath RPA), AI/ML, RAG systems
 - Built RAG chatbot with OpenAI LLM, embeddings, MongoDB vector store (90% response accuracy, 35% faster query resolution)
 - Created custom UiPath packages for email automation (40% less manual verification)
 - Skills: Python, React, Node.js, TypeScript, Three.js, GLSL, Supabase, UiPath RPA, RAG, MCP. Cloud and DevOps: AWS, Docker, Kubernetes, GitHub Actions CI/CD (his portfolio and Pdfroo deploy through GitHub Actions)
-- Certifications (only these four): Anthropic — Claude Code in Action (verify: https://verify.skilljar.com/c/z45xrycpcwer), Anthropic — Introduction to Model Context Protocol (verify: https://verify.skilljar.com/c/atxeopf3qctc), Hugging Face — Fundamentals of LLMs (The LLM Course), Hugging Face — The MCP Course: Unit 1. If asked about other certifications (UiPath, AWS, etc.), say: his certifications are the four listed, and his UiPath work is hands-on production experience at Marsh McLennan. Never claim any other certification.
+- Certifications (only these four): Anthropic — Claude Code in Action (verify: https://verify.skilljar.com/c/z45xrycpcwer), Anthropic — Introduction to Model Context Protocol (verify: https://verify.skilljar.com/c/atxeopf3qctc), Hugging Face — Fundamentals of LLMs (The LLM Course), Hugging Face — The MCP Course: Unit 1. If asked about other certifications (UiPath, AWS, etc.), say: his certifications are the four listed, and his UiPath work is hands-on production experience at Marsh. Never claim any other certification.
 - Education: B.Tech IT (2021) from Pillai HOC College of Engineering
 - Projects: India Monitor (real-time India dashboard), DocuBot-AI (RAG chatbot), RAG Without Vectors (10 alternative RAG architectures), NeonBrew & Florescence (Three.js creative), ML From Scratch (core ML algorithms built from first principles), Pdfroo (browser-based PDF editor: https://ayush4u.github.io/pdfroo/)
 - Contact: ayushtomar55@gmail.com, LinkedIn: ayushtomar-rpa-ai, GitHub: ayush4u
@@ -316,9 +316,9 @@ async function storeMessage(userMsg, assistantMsg) {
 function getFallbackResponse(query) {
   const q = query.toLowerCase();
   if (q.includes('role') || q.includes('current') || q.includes('job') || q.includes('position'))
-    return 'Ayush is currently a Principal Software Engineer at Marsh McLennan in Mumbai, working on intelligent automation for the pension industry — building RPA bots, AI pipelines, and RAG systems.';
+    return 'Ayush is currently a Principal Software Engineer at Marsh in Mumbai, working on intelligent automation for the pension industry — building RPA bots, AI pipelines, and RAG systems.';
   if (q.includes('experience') || q.includes('work') || q.includes('company'))
-    return 'Ayush has 4+ years at Marsh McLennan, building intelligent automation solutions for the pension industry — from custom UiPath packages to RAG chatbots with OpenAI.';
+    return 'Ayush has 4+ years at Marsh, building intelligent automation solutions for the pension industry — from custom UiPath packages to RAG chatbots with OpenAI.';
   if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('tool'))
     return 'His core skills include UiPath RPA, Python, OpenAI/RAG systems, React, Node.js, TypeScript, AWS, Docker, and Supabase.';
   if (q.includes('project'))

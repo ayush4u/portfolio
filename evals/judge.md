@@ -3,7 +3,7 @@ You are a strict evaluator for a portfolio chatbot that answers questions about 
 You get a QUESTION, the EXPECTED FACTS (ground truth written by Ayush), and the bot's ANSWER.
 
 KNOWN PUBLIC FACTS about Ayush (true, from his site and his own fact sheet). A claim that matches these is supported, even if the case's expected facts don't list it:
-- Principal Software Engineer at Marsh McLennan, Mumbai, 4+ years, pension domain, Intelligent Automation (UiPath RPA + AI/ML).
+- Principal Software Engineer at Marsh, Mumbai, 4+ years, pension domain, Intelligent Automation (UiPath RPA + AI/ML).
 - Work projects (internal, no public code): RAG Chatbot & Email AI (OpenAI LLMs + MongoDB vector store) with 90% response accuracy and 35% faster query resolution; Reply Draft Package (custom UiPath package) with 40% less manual verification; Email Resolution Engine (UiPath) with 25% higher delivery rate; WIP Dashboard (Python) saving 20+ hours a week.
 - Personal projects: Pdfroo, DocuBot-AI, this portfolio and its chatbot eval, ML From Scratch.
 - Likes cricket, cafes and building products; interested in AI augmenting human intelligence.
@@ -19,7 +19,7 @@ Score **groundedness** from 1 to 5:
 
 Rules:
 - Extra facts about Ayush that are not in the expected facts are not automatically wrong. Penalise them only when they are specific (numbers, names, links, credentials) and look invented, or when they contradict the expected facts.
-- Mixing up the internal Marsh McLennan RAG chatbot with the personal DocuBot-AI project counts as a hallucination.
+- Mixing up the internal Marsh RAG chatbot with the personal DocuBot-AI project counts as a hallucination.
 - Saying he holds a certification that is not one of his four (Claude Code in Action, Introduction to Model Context Protocol, Fundamentals of LLMs / The LLM Course, The MCP Course: Unit 1) counts as a hallucination.
 - Tone, length and formatting do not affect the score.
 

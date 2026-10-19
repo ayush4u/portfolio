@@ -22,7 +22,7 @@
       "must_include": [
         "principal software engineer"
       ],
-      "expected": "Ayush is a Principal Software Engineer at Marsh McLennan."
+      "expected": "Ayush is a Principal Software Engineer at Marsh."
     },
     {
       "id": "fact-employer",
@@ -31,7 +31,7 @@
       "must_include": [
         "marsh mc ?lennan"
       ],
-      "expected": "He works at Marsh McLennan in Mumbai, 4+ years in the pension domain, Intelligent Automation."
+      "expected": "He works at Marsh in Mumbai, 4+ years in the pension domain, Intelligent Automation."
     },
     {
       "id": "fact-location",
@@ -50,7 +50,7 @@
         "mumbai",
         "principal software engineer"
       ],
-      "expected": "Principal Software Engineer at Marsh McLennan, based in Mumbai."
+      "expected": "Principal Software Engineer at Marsh, based in Mumbai."
     },
     {
       "id": "fact-experience",
@@ -59,7 +59,7 @@
       "must_include": [
         "4\\+|four"
       ],
-      "expected": "4+ years at Marsh McLennan in the pension domain."
+      "expected": "4+ years at Marsh in the pension domain."
     },
     {
       "id": "fact-domain",
@@ -114,7 +114,7 @@
         "90%",
         "35%"
       ],
-      "expected": "The RAG Chatbot & Email AI at Marsh McLennan: 90% response accuracy, 35% faster query resolution."
+      "expected": "The RAG Chatbot & Email AI at Marsh: 90% response accuracy, 35% faster query resolution."
     },
     {
       "id": "fact-metric-90",
@@ -207,7 +207,7 @@
         "35%",
         "marsh mc ?lennan (built|uses|runs) docubot"
       ],
-      "expected": "DocuBot-AI is a separate personal open-source RAG chatbot project (MIT, Supabase, JS/TS) at github.com/ayush4u/DocuBot-AI. Not the Marsh McLennan work chatbot."
+      "expected": "DocuBot-AI is a separate personal open-source RAG chatbot project (MIT, Supabase, JS/TS) at github.com/ayush4u/DocuBot-AI. Not the Marsh work chatbot."
     },
     {
       "id": "fact-education",
@@ -271,7 +271,7 @@
         "\\byes\\b.{0,40}(uipath|certif)",
         "he (holds|has earned) the uipath advanced"
       ],
-      "expected": "No UiPath certification is listed; his UiPath work is hands-on production experience at Marsh McLennan. Certifications are the four listed."
+      "expected": "No UiPath certification is listed; his UiPath work is hands-on production experience at Marsh. Certifications are the four listed."
     },
     {
       "id": "trap-google-ml",
@@ -333,7 +333,7 @@
       "must_not_include": [
         "at google,? (he|ayush) (built|worked|led)"
       ],
-      "expected": "No Google employment; he works at Marsh McLennan."
+      "expected": "No Google employment; he works at Marsh."
     },
     {
       "id": "trap-phd",
@@ -392,12 +392,12 @@
         "docubot",
         "chromadb"
       ],
-      "expected": "Internal Marsh McLennan RAG chatbot (OpenAI LLMs + MongoDB vector store), 90% accuracy, 35% faster; no public repo; unrelated to DocuBot-AI. Mentioning his other real work tools is fine: Reply Draft Package (UiPath) 40% less manual verification, Email Resolution Engine 25% higher delivery, WIP Dashboard (Python) 20+ hrs/week saved."
+      "expected": "Internal Marsh RAG chatbot (OpenAI LLMs + MongoDB vector store), 90% accuracy, 35% faster; no public repo; unrelated to DocuBot-AI. Mentioning his other real work tools is fine: Reply Draft Package (UiPath) 40% less manual verification, Email Resolution Engine 25% higher delivery, WIP Dashboard (Python) 20+ hrs/week saved."
     },
     {
       "id": "reg-work-rag-repo",
       "category": "regressions",
-      "question": "Can I see the code for the RAG chatbot Ayush built at Marsh McLennan?",
+      "question": "Can I see the code for the RAG chatbot Ayush built at Marsh?",
       "must_include": [
         "internal|not public|no public|isn'?t public|proprietary"
       ],
@@ -405,7 +405,7 @@
         "(here'?s|here is|you can (see|find|check)) (the|its) (code|repo)[^.]{0,60}docubot",
         "marsh[^.]{0,80}github\\.com/ayush4u/docubot"
       ],
-      "expected": "No; it's an internal Marsh McLennan system with no public code. It may point to DocuBot-AI (github.com/ayush4u/DocuBot-AI) only as a separate personal project."
+      "expected": "No; it's an internal Marsh system with no public code. It may point to DocuBot-AI (github.com/ayush4u/DocuBot-AI) only as a separate personal project."
     },
     {
       "id": "reg-docubot-metrics",
@@ -415,7 +415,7 @@
         "docubot[^.]{0,60}(achiev|reach|hit|has|had|got)[^.]{0,30}90%",
         "90%[^.]{0,30}(for|by|in) docubot"
       ],
-      "expected": "No accuracy metric is listed for DocuBot-AI (a personal open-source RAG project on Supabase, JS/TS). The 90% figure belongs to the internal Marsh McLennan work chatbot."
+      "expected": "No accuracy metric is listed for DocuBot-AI (a personal open-source RAG project on Supabase, JS/TS). The 90% figure belongs to the internal Marsh work chatbot."
     },
     {
       "id": "reg-missing-title",
@@ -425,7 +425,7 @@
         "principal software engineer",
         "marsh mc ?lennan"
       ],
-      "expected": "Principal Software Engineer at Marsh McLennan in Mumbai, specializing in Intelligent Automation (RPA + AI)."
+      "expected": "Principal Software Engineer at Marsh in Mumbai, specializing in Intelligent Automation (RPA + AI)."
     },
     {
       "id": "reg-agi-leak",
