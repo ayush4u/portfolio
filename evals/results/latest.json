@@ -1,6 +1,6 @@
 {
-  "run_at": "2026-10-21T07:36:58.671Z",
-  "commit": "ce2c4da28f14fbac8079c0bccfde2f858b7fae27",
+  "run_at": "2026-10-22T07:32:38.871Z",
+  "commit": "694b42bd67111efa7847d1c5e3b7e33d2299d997",
   "judge_model": "nvidia/nemotron-3-super-120b-a12b",
   "threshold": 0.8,
   "overall": 0.0833,
@@ -32,7 +32,7 @@
       "failures": [
         "missing /principal software engineer/"
       ],
-      "latency_ms": 3931,
+      "latency_ms": 6627,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -46,7 +46,7 @@
       "failures": [
         "missing /marsh mc ?lennan/"
       ],
-      "latency_ms": 1978,
+      "latency_ms": 2683,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -60,7 +60,7 @@
       "failures": [
         "missing /mumbai/"
       ],
-      "latency_ms": 1702,
+      "latency_ms": 2613,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -75,7 +75,7 @@
         "missing /mumbai/",
         "missing /principal software engineer/"
       ],
-      "latency_ms": 2859,
+      "latency_ms": 3405,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -89,7 +89,7 @@
       "failures": [
         "missing /4\\+|four/"
       ],
-      "latency_ms": 2366,
+      "latency_ms": 2137,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -103,7 +103,7 @@
       "failures": [
         "missing /pension/"
       ],
-      "latency_ms": 1678,
+      "latency_ms": 1680,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -120,7 +120,7 @@
         "missing /fundamentals of llms|llm course/",
         "missing /mcp course/"
       ],
-      "latency_ms": 2176,
+      "latency_ms": 1627,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -134,7 +134,7 @@
       "failures": [
         "missing /\\b4\\b|four/"
       ],
-      "latency_ms": 1617,
+      "latency_ms": 2100,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -149,7 +149,7 @@
         "missing /claude code in action/",
         "missing /model context protocol/"
       ],
-      "latency_ms": 2833,
+      "latency_ms": 5923,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -165,7 +165,7 @@
         "missing /90%/",
         "missing /35%/"
       ],
-      "latency_ms": 2764,
+      "latency_ms": 2173,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -179,7 +179,7 @@
       "failures": [
         "missing /90%/"
       ],
-      "latency_ms": 1205,
+      "latency_ms": 1535,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -193,7 +193,7 @@
       "failures": [
         "missing /35%/"
       ],
-      "latency_ms": 2070,
+      "latency_ms": 1637,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -207,7 +207,7 @@
       "failures": [
         "missing /40%/"
       ],
-      "latency_ms": 1521,
+      "latency_ms": 2065,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -221,7 +221,7 @@
       "failures": [
         "missing /25%/"
       ],
-      "latency_ms": 1577,
+      "latency_ms": 2116,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -235,7 +235,7 @@
       "failures": [
         "missing /20\\+ ?(hrs|hours)/"
       ],
-      "latency_ms": 3168,
+      "latency_ms": 2839,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -253,7 +253,7 @@
         "missing /25%/",
         "missing /20\\+/"
       ],
-      "latency_ms": 1986,
+      "latency_ms": 2103,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -267,7 +267,7 @@
       "failures": [
         "missing /pdf/"
       ],
-      "latency_ms": 2063,
+      "latency_ms": 1576,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -281,7 +281,7 @@
       "failures": [
         "missing /ayush4u\\.github\\.io/pdfroo/"
       ],
-      "latency_ms": 2727,
+      "latency_ms": 1606,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -295,7 +295,7 @@
       "failures": [
         "missing /github\\.com/ayush4u/docubot-ai|docubot-ai/"
       ],
-      "latency_ms": 2458,
+      "latency_ms": 2062,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -310,7 +310,7 @@
         "missing /b\\.? ?tech/",
         "missing /information technology/"
       ],
-      "latency_ms": 1907,
+      "latency_ms": 2016,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -325,7 +325,7 @@
         "missing /python/",
         "missing /uipath/"
       ],
-      "latency_ms": 1553,
+      "latency_ms": 1618,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -339,7 +339,7 @@
       "failures": [
         "missing /cricket|caf|coffee/"
       ],
-      "latency_ms": 2849,
+      "latency_ms": 1053,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -353,7 +353,7 @@
       "failures": [
         "missing /github\\.com/ayush4u/"
       ],
-      "latency_ms": 1900,
+      "latency_ms": 2346,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -367,7 +367,7 @@
       "failures": [
         "missing /skill|not (a )?certif|doesn'?t (list|hold|have)|no aws cert/"
       ],
-      "latency_ms": 1533,
+      "latency_ms": 1586,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -381,7 +381,7 @@
       "failures": [
         "missing /(does ?n'?t|not|no)\\b/"
       ],
-      "latency_ms": 1978,
+      "latency_ms": 1218,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -395,7 +395,7 @@
       "failures": [
         "missing /(does ?n'?t|not|no|don'?t)\\b/"
       ],
-      "latency_ms": 1984,
+      "latency_ms": 1620,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -409,7 +409,7 @@
       "failures": [
         "missing /(does ?n'?t|not|no|don'?t|none)\\b/"
       ],
-      "latency_ms": 1534,
+      "latency_ms": 1963,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -423,7 +423,7 @@
       "failures": [
         "missing /(does ?n'?t|not|no|don'?t|couldn'?t|haven'?t)\\b/"
       ],
-      "latency_ms": 1375,
+      "latency_ms": 2314,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -437,7 +437,7 @@
       "failures": [
         "missing /(does ?n'?t|not|no|don'?t|couldn'?t|haven'?t)\\b/"
       ],
-      "latency_ms": 3681,
+      "latency_ms": 2102,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -451,7 +451,7 @@
       "failures": [
         "missing /marsh mc ?lennan|(does ?n'?t|not|no|don'?t)\\b/"
       ],
-      "latency_ms": 3527,
+      "latency_ms": 1243,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -465,7 +465,7 @@
       "failures": [
         "missing /b\\.? ?tech|(does ?n'?t|not|no|don'?t)\\b/"
       ],
-      "latency_ms": 1221,
+      "latency_ms": 1988,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -479,7 +479,7 @@
       "failures": [
         "missing /90%/"
       ],
-      "latency_ms": 2342,
+      "latency_ms": 1771,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -493,7 +493,7 @@
       "failures": [
         "missing /(does ?n'?t|not|no|don'?t|can'?t)\\b|ayushtomar55@gmail\\.com/"
       ],
-      "latency_ms": 2312,
+      "latency_ms": 2066,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -507,7 +507,7 @@
       "failures": [
         "missing /ayush/"
       ],
-      "latency_ms": 2979,
+      "latency_ms": 2981,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -521,7 +521,7 @@
       "failures": [
         "missing /internal|not public|no public/"
       ],
-      "latency_ms": 1993,
+      "latency_ms": 2648,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -535,7 +535,7 @@
       "failures": [
         "missing /internal|not public|no public|isn'?t public|proprietary/"
       ],
-      "latency_ms": 1887,
+      "latency_ms": 1980,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -547,7 +547,7 @@
       "hallucination": null,
       "judge_reason": "judge HTTP 404",
       "failures": [],
-      "latency_ms": 2364,
+      "latency_ms": 2073,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -562,7 +562,7 @@
         "missing /principal software engineer/",
         "missing /marsh mc ?lennan/"
       ],
-      "latency_ms": 2086,
+      "latency_ms": 1969,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -574,7 +574,7 @@
       "hallucination": null,
       "judge_reason": "judge HTTP 404",
       "failures": [],
-      "latency_ms": 1373,
+      "latency_ms": 1842,
       "answer": "AI service is temporarily unavailable. Please try again."
     },
     {
@@ -589,7 +589,7 @@
         "missing /90%/",
         "missing /40%/"
       ],
-      "latency_ms": 2070,
+      "latency_ms": 1635,
       "answer": "AI service is temporarily unavailable. Please try again."
     }
   ]
