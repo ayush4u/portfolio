@@ -23,8 +23,8 @@ The site can read `https://raw.githubusercontent.com/ayush4u/portfolio/main/eval
 
 ## Model health (self-healing LLM selection)
 
-NVIDIA NIM retires models without notice. `supabase/functions/chat/index.ts` and
-`evals/nim-models.mjs` share a ranked `PREFERRED_MODELS` list (keep them in sync).
+NVIDIA NIM retires models without notice. The ranked model list lives in one file, `supabase/functions/_shared/models.json`
+(key `preferred`), read by both the chat function and `evals/nim-models.mjs`.
 At runtime the chat function filters it by the live `GET /v1/models` list (cached 6h),
 and on 404/410 marks a model bad and tries the next (max 3 attempts), then an optional
 OpenAI-compatible provider (`FALLBACK_LLM_URL`, `FALLBACK_LLM_KEY`, `FALLBACK_LLM_MODEL`
