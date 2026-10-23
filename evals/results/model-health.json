@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-23T08:36:04.470Z",
+  "primary": "nvidia/nemotron-3-ultra-550b-a55b",
+  "fallback": "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "previous": {
+    "primary": null,
+    "fallback": null
+  },
+  "changed": true,
+  "top2_down": false,
+  "probes": [
+    {
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "ok": true,
+      "status": 200,
+      "ms": 17856
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "ok": true,
+      "status": 200,
+      "ms": 190
+    },
+    {
+      "model": "z-ai/glm-5.3",
+      "ok": true,
+      "status": 200,
+      "ms": 2332
+    },
+    {
+      "model": "minimaxai/minimax-m3.1-flash",
+      "ok": true,
+      "status": 200,
+      "ms": 222
+    },
+    {
+      "model": "openai/gpt-oss-20b",
+      "ok": true,
+      "status": 200,
+      "ms": 472
+    },
+    {
+      "model": "meta/muse-glimmer-30b",
+      "ok": true,
+      "status": 200,
+      "ms": 716
+    }
+  ]
+}
