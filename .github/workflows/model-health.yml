@@ -42,7 +42,7 @@ jobs:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
           SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
         run: |
-          ref="${SUPABASE_URL#https://}"; ref="${ref%%.*}"
+          ref="$(echo "$SUPABASE_URL" | tr -d '[:space:]')"; ref="${ref#https://}"; ref="${ref%%.*}"
           supabase secrets set --project-ref "$ref" \
             NIM_MODEL="${{ steps.probe.outputs.primary }}" \
             NIM_FALLBACK_MODEL="${{ steps.probe.outputs.fallback }}"
@@ -53,6 +53,7 @@ jobs:
           ANON: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: |
           url="$(echo "$SUPABASE_URL" | tr -d '[:space:]')"; url="${url%/}"
+          ANON="$(echo "$ANON" | tr -d '[:space:]')"   # secret has stray whitespace/newline
           for i in 1 2 3; do
             out=$(curl -s -m 90 "$url/functions/v1/chat" -H "Authorization: Bearer $ANON" -H "apikey: $ANON" \
               -H 'Content-Type: application/json' \
