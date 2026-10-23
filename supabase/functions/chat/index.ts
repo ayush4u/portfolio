@@ -9,6 +9,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
 const CHAT_MODEL = Deno.env.get('NIM_MODEL') ?? 'nvidia/nemotron-3-ultra-550b-a55b';
+const FALLBACK_MODEL = Deno.env.get('NIM_FALLBACK_MODEL') ?? 'nvidia/nemotron-3.5-lightning-30b-a3b';
+const NAP_REPLY = "I'm having a quick nap right now. Meanwhile, have a look at Ayush's projects above or reach him through the contact links on this page.";
 const EMBEDDING_MODEL = 'nvidia/nemotron-3-embed-1b';
 const EMBEDDING_API_DIMS = 2048; // nemotron-3-embed-1b only serves 2048 dims
 const EMBEDDING_DB_DIMS = 1024;  // documents.embedding is vector(1024)
@@ -475,15 +477,15 @@ Deno.serve(async (req: Request) => {
 
     const sanitized = buildGroundedMessages(raw, retrievedDocs);
 
-    // Call NVIDIA NIM with streaming using instruct model
-    const response = await fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
+    // Call NVIDIA NIM with streaming; on 404/5xx/network error retry once with the fallback model
+    const callNim = (model: string) => fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${nvidiaKey}`,
       },
       body: JSON.stringify({
-        model: CHAT_MODEL,
+        model,
         messages: sanitized,
         temperature: 0.2,
         top_p: 0.7,
@@ -491,12 +493,16 @@ Deno.serve(async (req: Request) => {
         stream: true,
         chat_template_kwargs: { enable_thinking: false },
       }),
-    });
+    }).catch((e) => { console.error('NVIDIA fetch error:', model, e); return null; });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error('NVIDIA API error:', response.status, errText);
-      return jsonResponse({ reply: 'AI service is temporarily unavailable. Please try again.' });
+    let response = await callNim(CHAT_MODEL);
+    if (!response || !response.ok) {
+      if (response) console.error('NVIDIA API error:', CHAT_MODEL, response.status, await response.text());
+      response = await callNim(FALLBACK_MODEL);
+    }
+    if (!response || !response.ok) {
+      if (response) console.error('NVIDIA API error:', FALLBACK_MODEL, response.status, await response.text());
+      return jsonResponse({ reply: NAP_REPLY });
     }
 
     // Stream response to client — filter out reasoning_content, forward only content
