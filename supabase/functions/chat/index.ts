@@ -8,7 +8,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
-const CHAT_MODEL = 'nvidia/nemotron-3-super-120b-a12b';
+const CHAT_MODEL = Deno.env.get('NIM_MODEL') ?? 'nvidia/nemotron-3-ultra-550b-a55b';
 const EMBEDDING_MODEL = 'nvidia/nemotron-3-embed-1b';
 const EMBEDDING_API_DIMS = 2048; // nemotron-3-embed-1b only serves 2048 dims
 const EMBEDDING_DB_DIMS = 1024;  // documents.embedding is vector(1024)

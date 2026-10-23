@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RESULTS_DIR = join(HERE, 'results');
-const JUDGE_MODEL = 'nvidia/nemotron-3-super-120b-a12b';
+const JUDGE_MODEL = process.env.NIM_MODEL || 'nvidia/nemotron-3-ultra-550b-a55b';
 const NIM_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
 
 const SUPABASE_URL = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');

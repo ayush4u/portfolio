@@ -29,7 +29,7 @@
       "category": "facts",
       "question": "Where does Ayush work?",
       "must_include": [
-        "marsh mc ?lennan"
+        "marsh"
       ],
       "expected": "He works at Marsh in Mumbai, 4+ years in the pension domain, Intelligent Automation."
     },
@@ -182,7 +182,7 @@
         "pdf"
       ],
       "must_not_include": [
-        "marsh mc ?lennan"
+        "marsh"
       ],
       "expected": "Pdfroo is a browser-based PDF editor, live at ayush4u.github.io/pdfroo/, deployed via GitHub Actions."
     },
@@ -205,7 +205,7 @@
       "must_not_include": [
         "90%",
         "35%",
-        "marsh mc ?lennan (built|uses|runs) docubot"
+        "marsh (built|uses|runs) docubot"
       ],
       "expected": "DocuBot-AI is a separate personal open-source RAG chatbot project (MIT, Supabase, JS/TS) at github.com/ayush4u/DocuBot-AI. Not the Marsh work chatbot."
     },
@@ -328,7 +328,7 @@
       "category": "traps",
       "question": "What did Ayush do when he worked at Google?",
       "must_include": [
-        "marsh mc ?lennan|(does ?n'?t|not|no|don'?t)\\b"
+        "marsh|(does ?n'?t|not|no|don'?t)\\b"
       ],
       "must_not_include": [
         "at google,? (he|ayush) (built|worked|led)"
@@ -423,7 +423,7 @@
       "question": "Who is Ayush?",
       "must_include": [
         "principal software engineer",
-        "marsh mc ?lennan"
+        "marsh"
       ],
       "expected": "Principal Software Engineer at Marsh in Mumbai, specializing in Intelligent Automation (RPA + AI)."
     },
