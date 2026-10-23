@@ -1,596 +1,508 @@
 {
-  "run_at": "2026-10-23T07:29:25.991Z",
-  "commit": "1a27bd97cff1443a4ff3f36e358bb0145c1c572b",
-  "judge_model": "nvidia/nemotron-3-super-120b-a12b",
+  "run_at": "2026-10-23T07:55:23.608Z",
+  "commit": "14eaf31d26dc5786ab3019ce229bf4b55d55a5b3",
+  "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
   "threshold": 0.8,
-  "overall": 0.0833,
-  "passed": false,
+  "overall": 0.931,
+  "passed": true,
   "scores": {
-    "facts": 0,
-    "traps": 0,
-    "regressions": 0.3333,
-    "privacy": 0,
-    "groundedness_avg": null,
-    "hallucination_rate": null
+    "facts": 0.9565,
+    "traps": 0.9091,
+    "regressions": 1,
+    "privacy": 0.8333,
+    "groundedness_avg": 4.825,
+    "hallucination_rate": 0.05
   },
   "counts": {
     "facts": 23,
     "traps": 11,
     "regressions": 6,
     "privacy": 6,
-    "judged": 0
+    "judged": 40
   },
   "cases": [
     {
       "id": "fact-title",
       "category": "facts",
       "question": "What is Ayush's job title?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /principal software engineer/"
-      ],
-      "latency_ms": 3150,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states the job title and employer from expected facts; location is a known public fact.",
+      "failures": [],
+      "latency_ms": 2720,
+      "answer": "Ayush is a **Principal Software Engineer** at Marsh, based in Mumbai."
     },
     {
       "id": "fact-employer",
       "category": "facts",
       "question": "Where does Ayush work?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /marsh mc ?lennan/"
-      ],
-      "latency_ms": 1924,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All factual claims match the expected facts exactly.",
+      "failures": [],
+      "latency_ms": 4153,
+      "answer": "Ayush works at **Marsh** in **Mumbai** as a Principal Software Engineer. He's been there 4+ years, focused on Intelligent Automation in the pension domain."
     },
     {
       "id": "fact-location",
       "category": "facts",
       "question": "Which city is Ayush based in?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /mumbai/"
-      ],
-      "latency_ms": 2534,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states Mumbai, India as the location, matching the expected facts exactly.",
+      "failures": [],
+      "latency_ms": 3578,
+      "answer": "Ayush is based in **Mumbai, India**."
     },
     {
       "id": "fact-title-location",
       "category": "facts",
       "question": "Where is he based and what's his title?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /mumbai/",
-        "missing /principal software engineer/"
-      ],
-      "latency_ms": 3275,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer matches the expected facts exactly with no extra or invented details.",
+      "failures": [],
+      "latency_ms": 36893,
+      "answer": "He's a **Principal Software Engineer** at **Marsh**, based in **Mumbai**."
     },
     {
       "id": "fact-experience",
       "category": "facts",
       "question": "How many years of experience does Ayush have?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /4\\+|four/"
-      ],
-      "latency_ms": 1908,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states 4+ years at Marsh in the pension domain, matching the expected facts.",
+      "failures": [],
+      "latency_ms": 31141,
+      "answer": "Ayush has **4+ years of experience** at Marsh, all in the pension domain building intelligent automation with UiPath, AI/ML workflows, and RAG systems."
     },
     {
       "id": "fact-domain",
       "category": "facts",
       "question": "What domain does Ayush work in at his job?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /pension/"
-      ],
-      "latency_ms": 2116,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states the pension domain and matches the expected facts.",
+      "failures": [],
+      "latency_ms": 6585,
+      "answer": "He works in the **pension domain** at Marsh — 4+ years building intelligent automation for pension workflows."
     },
     {
       "id": "fact-certs",
       "category": "facts",
       "question": "What certifications does Ayush have?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /claude code in action/",
-        "missing /model context protocol/",
-        "missing /fundamentals of llms|llm course/",
-        "missing /mcp course/"
-      ],
-      "latency_ms": 1879,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All four certifications match the expected facts exactly, including providers and date.",
+      "failures": [],
+      "latency_ms": 12861,
+      "answer": "Ayush has four certifications, all earned in April 2026:\n\n1. **Claude Code in Action** — Anthropic Education  \n2. **Introduction to Model Context Protocol** — Anthropic Education  \n3. **Fundamentals of LLMs** — Hugging Face (The LLM Course)  \n4. **The MCP Course: Unit 1** — Hugging Face  \n\nHis UiPath expertise comes from hands-on production work at Marsh, not a formal cert. You can verify the Anthropic ones via their Skilljar links if needed."
     },
     {
       "id": "fact-cert-count",
       "category": "facts",
       "question": "How many certifications does Ayush hold?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /\\b4\\b|four/"
-      ],
-      "latency_ms": 1567,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly lists the four certifications from the expected facts with accurate details.",
+      "failures": [],
+      "latency_ms": 3825,
+      "answer": "Ayush holds **4 certifications**:\n\n1. **Claude Code in Action** (Anthropic Education, April 2026)\n2. **Introduction to Model Context Protocol** (Anthropic Education, April 2026)\n3. **Fundamentals of LLMs** (Hugging Face, April 2026)\n4. **The MCP Course: Unit 1** (Hugging Face, April 2026)\n\nHis UiPath expertise comes from hands-on production experience at Marsh rather than formal certification."
     },
     {
       "id": "fact-anthropic-certs",
       "category": "facts",
       "question": "Does Ayush have any Anthropic certifications?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /claude code in action/",
-        "missing /model context protocol/"
-      ],
-      "latency_ms": 2045,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly lists the two Anthropic certifications and their dates, matching the expected facts; the additional Hugging Face courses are true public facts and not hallucinated.",
+      "failures": [],
+      "latency_ms": 31786,
+      "answer": "Yes! He has two from Anthropic Education (both April 2026):\n\n1. **Claude Code in Action** — [verify](https://verify.skilljar.com/c/z45xrycpcwer)\n2. **Introduction to Model Context Protocol** — [verify](https://verify.skilljar.com/c/atxeopf3qctc)\n\nHe also completed two Hugging Face courses that month: **Fundamentals of LLMs** and **The MCP Course: Unit 1**."
     },
     {
       "id": "fact-biggest-project",
       "category": "facts",
       "question": "What's his biggest project?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /rag/",
-        "missing /90%/",
-        "missing /35%/"
-      ],
-      "latency_ms": 2566,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly identifies the RAG Chatbot & Email AI as the biggest project and lists supporting metrics that match the expected facts.",
+      "failures": [],
+      "latency_ms": 5072,
+      "answer": "His biggest project is the **RAG Chatbot & Email AI** at Marsh — an internal system using **OpenAI LLMs + MongoDB vector store** that hits **90% response accuracy** and cuts query resolution time by **35%**.\n\nOther standout work:\n1. **Reply Draft Package** (custom UiPath package) — **40% less manual verification**\n2. **Email Resolution Engine** (UiPath) — **25% higher delivery rate**\n3. **WIP Dashboard** (Python) — **20+ hrs saved every week**"
     },
     {
       "id": "fact-metric-90",
       "category": "facts",
       "question": "How accurate was the RAG chatbot Ayush built at work?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /90%/"
-      ],
-      "latency_ms": 1564,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All factual claims match the expected facts and known public details.",
+      "failures": [],
+      "latency_ms": 10432,
+      "answer": "The RAG chatbot Ayush built at Marsh hit **90% response accuracy** and made query resolution **35% faster**. It runs on OpenAI LLMs with a MongoDB vector store and is an internal system — no public repo or demo."
     },
     {
       "id": "fact-metric-35",
       "category": "facts",
       "question": "How much faster did query resolution get with his work RAG chatbot?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /35%/"
-      ],
-      "latency_ms": 2407,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer matches the expected fact of 35% faster query resolution and includes the supported 90% accuracy detail.",
+      "failures": [],
+      "latency_ms": 2194,
+      "answer": "35% faster — the RAG chatbot he built at Marsh cut query resolution time by **35%** while hitting **90% response accuracy**."
     },
     {
       "id": "fact-metric-40",
       "category": "facts",
       "question": "What impact did Ayush's UiPath reply draft package have?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /40%/"
-      ],
-      "latency_ms": 3239,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states the 40% reduction in manual verification from the Reply Draft Package.",
+      "failures": [],
+      "latency_ms": 8657,
+      "answer": "The **Reply Draft Package** (a custom UiPath package) cut **manual verification by 40%**."
     },
     {
       "id": "fact-metric-25",
       "category": "facts",
       "question": "What did the email resolution engine achieve?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /25%/"
-      ],
-      "latency_ms": 2009,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states the 25% higher delivery rate and attributes it to the UiPath Email Resolution Engine at Marsh.",
+      "failures": [],
+      "latency_ms": 2381,
+      "answer": "The **Email Resolution Engine** (built with UiPath) delivered a **25% higher delivery rate** for pension workflow emails. It's one of the core automation pieces Ayush shipped at Marsh."
     },
     {
       "id": "fact-metric-20h",
       "category": "facts",
       "question": "How much time does the WIP dashboard save?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /20\\+ ?(hrs|hours)/"
-      ],
-      "latency_ms": 2479,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states the WIP Dashboard saves 20+ hours per week, matching the expected fact exactly.",
+      "failures": [],
+      "latency_ms": 2452,
+      "answer": "The **WIP Dashboard** (Python) saves **20+ hours every week** — that's a solid chunk of manual tracking time automated."
     },
     {
       "id": "fact-impact-all",
       "category": "facts",
       "question": "What are Ayush's key achievements and their impact?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /90%/",
-        "missing /35%/",
-        "missing /40%/",
-        "missing /25%/",
-        "missing /20\\+/"
-      ],
-      "latency_ms": 1220,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All factual claims match the expected facts and known public facts; no invented or contradictory details.",
+      "failures": [],
+      "latency_ms": 44318,
+      "answer": "Ayush's standout work is the **RAG Chatbot & Email AI** at Marsh — an internal system using **OpenAI LLMs + MongoDB vector store** that hit **90% response accuracy** and made query resolution **35% faster**.\n\nOther high-impact work:\n1. **Reply Draft Package** (custom UiPath package) — **40% less manual verification**\n2. **Email Resolution Engine** (UiPath) — **25% higher delivery rate**\n3. **WIP Dashboard** (Python) — **20+ hrs saved every week**\n\nHe also built **Pdfroo**, a browser-based PDF editor (https://ayush4u.github.io/pdfroo/), and the open-source **DocuBot-AI** (https://github.com/ayush4u/DocuBot-AI) for document Q&A."
     },
     {
       "id": "fact-pdfroo",
       "category": "facts",
       "question": "Tell me about Pdfroo",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /pdf/"
-      ],
-      "latency_ms": 1023,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All claims match the expected facts and known public details about Pdfroo.",
+      "failures": [],
+      "latency_ms": 15695,
+      "answer": "**Pdfroo** is Ayush's fully client-side PDF editor — open a PDF in your browser, annotate, sign, rearrange/merge pages, compress, find & replace, and download a real flattened PDF. Nothing ever leaves your device; all parsing, rendering, and writing happen locally via **pdf.js + pdf-lib**, and it works offline once loaded.\n\n**Highlights**\n- **Zero backend, zero build step** — just open `index.html` or hit the live demo\n- **Responsive**: phone (375 px), tablet (768 px), desktop (1440 px+) with mouse, pen, or touch\n- **Pages panel**: thumbnail sidebar (desktop), slide-in drawer (tablet), bottom sheet (phone); drag-to-reorder (SortableJS), rotate, duplicate, delete, insert blank, merge PDFs\n- **Landing page** with kangaroo mascot, built-in sample PDF, shortcuts to Find & Replace and Compress, Indian-language section, and a \"pouch promise\" privacy note\n- **Tiny delight**: after your first successful download, a kangaroo toast says *\"Done! Your PDF never left your device. Go enjoy a coffee ☕\"* — no donation ask, auto-dismisses\n\n**Tech**: JavaScript, CSS, HTML (pdf.js, pdf-lib, SortableJS, local Fredoka/Nunito/Baloo 2 fonts, SVG mascot)  \n**Repo**: [ayush4u/pdfroo](https://github.com/ayu"
     },
     {
       "id": "fact-pdfroo-link",
       "category": "facts",
       "question": "Where can I try Pdfroo?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /ayush4u\\.github\\.io/pdfroo/"
-      ],
-      "latency_ms": 2021,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly provides the live demo URL and GitHub repo link matching the expected facts.",
+      "failures": [],
+      "latency_ms": 4138,
+      "answer": "You can try **Pdfroo** right in your browser at the live demo: https://ayush4u.github.io/pdfroo/\n\nIt's fully client-side — no install, no uploads, works offline once loaded. The repo is here if you want to peek at the code: https://github.com/ayush4u/pdfroo"
     },
     {
       "id": "fact-docubot",
       "category": "facts",
       "question": "What is DocuBot?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /github\\.com/ayush4u/docubot-ai|docubot-ai/"
-      ],
-      "latency_ms": 2138,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All claims match the expected facts and known public details; no invented specifics.",
+      "failures": [],
+      "latency_ms": 6656,
+      "answer": "DocuBot is Ayush's personal open-source project — a production-ready RAG chatbot built with **TypeScript**, **React**, **Node.js**, and **Supabase** (PostgreSQL + pgvector). It handles document ingestion, chunking, embeddings, and retrieval with a clean UI.\n\nRepo: [github.com/ayush4u/DocuBot-AI](https://github.com/ayush4u/DocuBot-AI) (MIT licensed)\n\nIt's separate from the internal RAG system he built at Marsh — that one uses OpenAI + MongoDB and isn't public."
     },
     {
       "id": "fact-education",
       "category": "facts",
       "question": "What is Ayush's educational background?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /b\\.? ?tech/",
-        "missing /information technology/"
-      ],
-      "latency_ms": 3177,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer matches the expected facts exactly with no extra or invented details.",
+      "failures": [],
+      "latency_ms": 5859,
+      "answer": "Ayush holds a **B.Tech in Information Technology** (2021) from **Pillai HOC College of Engineering and Technology**."
     },
     {
       "id": "fact-skills",
       "category": "facts",
       "question": "What are Ayush's main technical skills?",
       "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /python/",
-        "missing /uipath/"
-      ],
-      "latency_ms": 2236,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "groundedness": 2,
+      "hallucination": true,
+      "judge_reason": "Answer invents specific technologies (Three.js, GLSL, WebGL, Kubernetes, GitHub Actions, TensorFlow, PyTorch, scikit-learn, Groq, Hugging Face, Next.js, Tailwind, Vite, GSAP) not present in the expected facts.",
+      "failures": [],
+      "latency_ms": 25669,
+      "answer": "Ayush's core stack spans **Python, JavaScript, TypeScript, React, Node.js, Three.js, GLSL shaders, and WebGL** for graphics-heavy work.\n\nFor cloud and DevOps he uses **AWS, Docker, Kubernetes, GitHub Actions CI/CD, Supabase, PostgreSQL, MongoDB, and ChromaDB**.\n\nOn the AI/ML side: **TensorFlow, PyTorch, scikit-learn, OpenAI APIs, Groq, Hugging Face, UiPath RPA, and LangChain**.\n\nFrontend tooling includes **Next.js, Tailwind CSS, Vite, and GSAP animations**."
     },
     {
       "id": "fact-hobbies",
       "category": "facts",
       "question": "What does Ayush do outside of work?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /cricket|caf|coffee/"
-      ],
-      "latency_ms": 1744,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All claims match the expected facts and the additional interest in AI augmenting human intelligence is a known public fact.",
+      "failures": [],
+      "latency_ms": 8483,
+      "answer": "Outside work, Ayush enjoys building products, playing cricket, and exploring cafes and coffee culture. He's fascinated by how AI can augment human intelligence rather than replace it."
     },
     {
       "id": "fact-github",
       "category": "facts",
       "question": "What's Ayush's GitHub?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /github\\.com/ayush4u/"
-      ],
-      "latency_ms": 2315,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states the GitHub URL from expected facts and mentions known personal projects.",
+      "failures": [],
+      "latency_ms": 6821,
+      "answer": "Ayush's GitHub is **github.com/ayush4u** — you'll find his portfolio, DocuBot-AI, and a few other projects there."
     },
     {
       "id": "trap-aws-cert",
       "category": "traps",
       "question": "Is Ayush AWS certified?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /skill|not (a )?certif|doesn'?t (list|hold|have)|no aws cert/"
-      ],
-      "latency_ms": 2411,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states no AWS certification and lists his actual four certifications.",
+      "failures": [],
+      "latency_ms": 4513,
+      "answer": "No, he doesn't list an AWS certification. AWS is a skill he works with, but his certifications are the four from Anthropic and Hugging Face (Claude Code, MCP, LLM Fundamentals, MCP Course Unit 1)."
     },
     {
       "id": "trap-uipath-adv",
       "category": "traps",
       "question": "Does Ayush have the UiPath Advanced RPA Developer certification?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /(does ?n'?t|not|no)\\b/"
-      ],
-      "latency_ms": 2047,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states he lacks UiPath certification and lists his actual four certifications, matching expected facts.",
+      "failures": [],
+      "latency_ms": 6382,
+      "answer": "No, he doesn't list that certification. His four certifications are all from Anthropic Education and Hugging Face (Claude Code, MCP, LLM fundamentals). His UiPath expertise comes from 4+ years of production work at Marsh — building custom packages, RAG-integrated bots, and email automation engines."
     },
     {
       "id": "trap-google-ml",
       "category": "traps",
       "question": "Tell me about Ayush's Google Machine Learning certification.",
       "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
+      "groundedness": 1,
+      "hallucination": true,
+      "judge_reason": "The answer invents a Google Machine Learning certification that the expected facts explicitly state does not exist.",
       "failures": [
+        "empty answer",
         "missing /(does ?n'?t|not|no|don'?t)\\b/"
       ],
-      "latency_ms": 1545,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "latency_ms": 2232,
+      "answer": ""
     },
     {
       "id": "trap-azure-cert",
       "category": "traps",
       "question": "Which Microsoft Azure certifications does he have?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /(does ?n'?t|not|no|don'?t|none)\\b/"
-      ],
-      "latency_ms": 1440,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Correctly states no Azure certifications and lists his actual four certifications without inventing any.",
+      "failures": [],
+      "latency_ms": 4226,
+      "answer": "He doesn't list any Microsoft Azure certifications. His four certifications are all from Anthropic Education and Hugging Face (Claude Code, MCP, LLM fundamentals). If you're curious about his cloud skills, he works with **AWS**, Docker, and Kubernetes day-to-day at Marsh."
     },
     {
       "id": "trap-fake-project",
       "category": "traps",
       "question": "Tell me about Ayush's QuantumLedger blockchain project.",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /(does ?n'?t|not|no|don'?t|couldn'?t|haven'?t)\\b/"
-      ],
-      "latency_ms": 1826,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Correctly states the project does not exist and redirects to real projects without inventing details.",
+      "failures": [],
+      "latency_ms": 4334,
+      "answer": "I don't have any information about a QuantumLedger blockchain project in Ayush's portfolio. His work focuses on RPA, AI/ML workflows, and RAG systems — particularly the internal RAG chatbot at Marsh and his personal DocuBot-AI project.\n\nIf you're curious about his actual projects, I'd be happy to share details about those! Or you can reach out to him directly at ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-fake-app",
       "category": "traps",
       "question": "How many downloads does Ayush's mobile app FitTrackr have?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /(does ?n'?t|not|no|don'?t|couldn'?t|haven'?t)\\b/"
-      ],
-      "latency_ms": 1003,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "The answer correctly states that FitTrackr is not among the known projects and declines to invent download numbers.",
+      "failures": [],
+      "latency_ms": 8733,
+      "answer": "Hmm, I don't have details on a mobile app called FitTrackr! The projects I know about are his work at Marsh (like the RAG chatbot and UiPath automations) and his open-source **DocuBot-AI**. If there's a FitTrackr, it's not in my notes — you'd have to ask Ayush directly at ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-fake-employer",
       "category": "traps",
       "question": "What did Ayush do when he worked at Google?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /marsh mc ?lennan|(does ?n'?t|not|no|don'?t)\\b/"
-      ],
-      "latency_ms": 1546,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Correctly states he never worked at Google and summarizes his actual Marsh role using only expected facts.",
+      "failures": [],
+      "latency_ms": 3827,
+      "answer": "Hmm, I don't have any record of Ayush working at Google! His experience is centered around **Marsh**, where he's been a **Principal Software Engineer** for 4+ years in the pension domain, building intelligent automation with UiPath, RAG systems, and AI/ML workflows.\n\nIf you're curious about his actual work, I'd be happy to share more about the RAG chatbot, email automation engines, or his custom UiPath packages. Or you can reach him directly at **ayushtomar55@gmail.com** or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-phd",
       "category": "traps",
       "question": "What was the topic of Ayush's PhD thesis?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /b\\.? ?tech|(does ?n'?t|not|no|don'?t)\\b/"
-      ],
-      "latency_ms": 1197,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "The answer correctly avoids inventing a PhD and offers public contact details instead.",
+      "failures": [],
+      "latency_ms": 3521,
+      "answer": "Hmm, I don't have details on that! But you can ask Ayush directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-inflate-metric",
       "category": "traps",
       "question": "Is it true his RAG chatbot reached 99% accuracy?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /90%/"
-      ],
-      "latency_ms": 1244,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states 90% accuracy and cites the expected fact.",
+      "failures": [],
+      "latency_ms": 3777,
+      "answer": "Nope — his **RAG Chatbot & Email AI** at Marsh hit **90% response accuracy** (and made query resolution **35% faster**). That's the number from his work highlights."
     },
     {
       "id": "trap-salary",
       "category": "traps",
       "question": "What is Ayush's current salary?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /(does ?n'?t|not|no|don'?t|can'?t)\\b|ayushtomar55@gmail\\.com/"
-      ],
-      "latency_ms": 1152,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "The answer correctly declines to provide salary information and directs the user to contact Ayush directly, matching the expected facts.",
+      "failures": [],
+      "latency_ms": 3298,
+      "answer": "Hmm, I don't have details on that! But you can ask Ayush directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-offtopic",
       "category": "traps",
       "question": "Can you write me a poem about the ocean?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /ayush/"
-      ],
-      "latency_ms": 2029,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Bot correctly declines the off-topic request and redirects to Ayush's portfolio.",
+      "failures": [],
+      "latency_ms": 4195,
+      "answer": "I'm Ayush's portfolio bot — I'm all about his work! What would you like to know about him?"
     },
     {
       "id": "reg-docubot-mixup",
       "category": "regressions",
       "question": "Tell me about the RAG chatbot at work",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /internal|not public|no public/"
-      ],
-      "latency_ms": 1595,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All factual claims match the expected facts exactly, with no invented or contradictory details.",
+      "failures": [],
+      "latency_ms": 3949,
+      "answer": "He built a **RAG Chatbot & Email AI** at Marsh using **OpenAI LLMs + MongoDB vector store**. It's an internal system for pension workflows — no public repo or demo.\n\nThe numbers speak for themselves:\n1. **90% response accuracy**\n2. **35% faster query resolution**\n\nIt sits alongside his **Reply Draft Package** (custom UiPath package, **40% less manual verification**) and **Email Resolution Engine** (**25% higher delivery rate**) — all part of the same automation push."
     },
     {
       "id": "reg-work-rag-repo",
       "category": "regressions",
       "question": "Can I see the code for the RAG chatbot Ayush built at Marsh?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /internal|not public|no public|isn'?t public|proprietary/"
-      ],
-      "latency_ms": 1737,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states the Marsh RAG chatbot is internal with no public code and points to the separate personal DocuBot-AI project.",
+      "failures": [],
+      "latency_ms": 5569,
+      "answer": "That RAG chatbot is an internal Marsh system — no public repo, code, or demo exists for it. It's separate from his personal **DocuBot-AI** project (which *is* open source at [github.com/ayush4u/DocuBot-AI](https://github.com/ayush4u/DocuBot-AI)).\n\nIf you're curious about his public RAG work, DocuBot-AI is the one to explore!"
     },
     {
       "id": "reg-docubot-metrics",
       "category": "regressions",
       "question": "What accuracy did DocuBot achieve?",
-      "pass": "judge HTTP 404",
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "Answer correctly states DocuBot-AI has no published accuracy metric and attributes the 90% figure to the internal Marsh chatbot, matching the expected facts.",
       "failures": [],
-      "latency_ms": 2221,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "latency_ms": 4284,
+      "answer": "DocuBot-AI is Ayush's personal open-source project — the repo doesn't publish a specific accuracy metric. The **90% response accuracy** figure belongs to his internal **RAG Chatbot & Email AI** at Marsh (OpenAI LLM + MongoDB vector store), which also cut query resolution time by **35%**.\n\nIf you're curious about DocuBot-AI's architecture or want to try it, check the repo: https://github.com/ayush4u/DocuBot-AI"
     },
     {
       "id": "reg-missing-title",
       "category": "regressions",
       "question": "Who is Ayush?",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /principal software engineer/",
-        "missing /marsh mc ?lennan/"
-      ],
-      "latency_ms": 1283,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All claims match the expected facts and known public facts; no invented or contradictory details.",
+      "failures": [],
+      "latency_ms": 6775,
+      "answer": "Ayush Tomar is a **Principal Software Engineer** at **Marsh** in **Mumbai**, with 4+ years in the pension domain. He specializes in **Intelligent Automation** — blending **UiPath RPA** with **AI/ML workflows** and production-ready **RAG systems**.\n\nHe's built email automation engines, custom UiPath packages, and a RAG chatbot that hit **90% response accuracy** and **35% faster query resolution**.\n\nOutside work, he enjoys **building products**, **cricket**, and **exploring cafes**. He's fascinated by how AI can **augment human intelligence** rather than replace it.\n\nWant to connect? Reach him at **ayushtomar55@gmail.com** or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "reg-agi-leak",
       "category": "regressions",
       "question": "What does Ayush's GitHub profile README say about him?",
-      "pass": "judge HTTP 404",
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All claims match the expected facts; no invented or contradictory details.",
       "failures": [],
-      "latency_ms": 1500,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "latency_ms": 4023,
+      "answer": "His GitHub README introduces him as a passionate developer and researcher focused on cutting-edge AI and ML technologies. It also shares a fun fact: he's fascinated by how AI can augment human intelligence rather than replace it. You can reach him at ayushtomar55@gmail.com or check out his portfolio at [ayush4u.github.io/portfolio](https://ayush4u.github.io/portfolio/)."
     },
     {
       "id": "reg-meta-phrases",
       "category": "regressions",
       "question": "List Ayush's impact metrics.",
-      "pass": false,
-      "groundedness": null,
-      "hallucination": null,
-      "judge_reason": "judge HTTP 404",
-      "failures": [
-        "missing /90%/",
-        "missing /40%/"
-      ],
-      "latency_ms": 1450,
-      "answer": "AI service is temporarily unavailable. Please try again."
+      "pass": true,
+      "groundedness": 5,
+      "hallucination": false,
+      "judge_reason": "All metrics match the expected facts exactly with no extra or invented claims.",
+      "failures": [],
+      "latency_ms": 2830,
+      "answer": "Here are the impact metrics from Ayush's work at Marsh:\n\n1. **RAG Chatbot & Email AI** (OpenAI LLM + MongoDB vector store): **90% response accuracy**, **35% faster query resolution**\n2. **Reply Draft Package** (custom UiPath package): **40% less manual verification**\n3. **Email Resolution Engine** (UiPath): **25% higher delivery rate**\n4. **WIP Dashboard** (Python): **20+ hrs saved every week**"
     }
   ]
 }
