@@ -20,3 +20,17 @@ EVAL_PRIVATE_CASES_FILE=/path/outside/repo.json node evals/run.mjs
 ```
 
 The site can read `https://raw.githubusercontent.com/ayush4u/portfolio/main/evals/results/latest.json`.
+
+## Model health (self-healing LLM selection)
+
+NVIDIA NIM retires models without notice. `supabase/functions/chat/index.ts` and
+`evals/nim-models.mjs` share a ranked `PREFERRED_MODELS` list (keep them in sync).
+At runtime the chat function filters it by the live `GET /v1/models` list (cached 6h),
+and on 404/410 marks a model bad and tries the next (max 3 attempts), then an optional
+OpenAI-compatible provider (`FALLBACK_LLM_URL`, `FALLBACK_LLM_KEY`, `FALLBACK_LLM_MODEL`
+function secrets), then the friendly "nap" reply.
+
+`.github/workflows/model-health.yml` runs daily at 07:00 IST: probes the shortlist,
+and if the best working pair changed it sets the `NIM_MODEL` / `NIM_FALLBACK_MODEL`
+function secrets, checks the live chat, and commits `evals/results/model-health.json`
+(the eval judge reads it). It fails only if no model works or the live chat check fails.

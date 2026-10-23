@@ -1,0 +1,76 @@
+name: model-health
+
+# Daily self-heal for the chat LLM: probe NIM models, re-point the chat function's
+# NIM_MODEL / NIM_FALLBACK_MODEL secrets if the best working pair changed, then confirm
+# the live chat answers. Fails (GitHub emails) only if no model works or the live check fails.
+on:
+  schedule:
+    - cron: '30 1 * * *'   # daily 01:30 UTC = 07:00 IST (after the 06:30 collector, before the 07:47 eval)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: model-health
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Probe NIM models
+        id: probe
+        env:
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+        run: node evals/model-health.mjs
+
+      - uses: supabase/setup-cli@v1
+        if: steps.probe.outputs.changed == 'true'
+        with:
+          version: latest
+
+      - name: Heal chat function secrets
+        if: steps.probe.outputs.changed == 'true'
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+        run: |
+          ref="${SUPABASE_URL#https://}"; ref="${ref%%.*}"
+          supabase secrets set --project-ref "$ref" \
+            NIM_MODEL="${{ steps.probe.outputs.primary }}" \
+            NIM_FALLBACK_MODEL="${{ steps.probe.outputs.fallback }}"
+
+      - name: Live chat check
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          ANON: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          url="$(echo "$SUPABASE_URL" | tr -d '[:space:]')"; url="${url%/}"
+          for i in 1 2 3; do
+            out=$(curl -s -m 90 "$url/functions/v1/chat" -H "Authorization: Bearer $ANON" -H "apikey: $ANON" \
+              -H 'Content-Type: application/json' \
+              -d '{"messages":[{"role":"user","content":"Where does Ayush work?"}],"session_id":"model-health"}')
+            if echo "$out" | grep -qi marsh; then echo "Live chat OK (attempt $i)"; exit 0; fi
+            echo "Attempt $i: no Marsh in reply: $(echo "$out" | head -c 300)"; sleep 20
+          done
+          echo "::error title=Chat down::Live chat did not answer correctly after healing"; exit 1
+
+      - name: Record result
+        if: always() && steps.probe.outcome != 'skipped'
+        run: |
+          healed=$([ "${{ steps.probe.outputs.changed }}" = "true" ] && echo yes || echo no)
+          echo "model-health $(date -u +%F): primary \`${{ steps.probe.outputs.primary || 'NONE' }}\`, fallback \`${{ steps.probe.outputs.fallback || 'NONE' }}\`, healed: $healed, top-2 preferred down: ${{ steps.probe.outputs.top2_down }}" >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evals/results/model-health.json
+          git diff --cached --quiet && exit 0
+          git commit -m "chore(model-health): $(date -u +%F) primary=${{ steps.probe.outputs.primary }} [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

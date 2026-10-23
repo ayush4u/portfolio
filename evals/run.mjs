@@ -18,11 +18,14 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { nimChat, healedModels } from './nim-models.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RESULTS_DIR = join(HERE, 'results');
-const JUDGE_MODEL = process.env.NIM_MODEL || 'nvidia/nemotron-3-ultra-550b-a55b';
-const NIM_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
+// Judge model is resolved at runtime (self-healing): NIM_MODEL override, then the daily
+// model-health choice, then the ranked list in nim-models.mjs, filtered by the live NIM list.
+const JUDGE_OVERRIDES = [process.env.NIM_MODEL, ...healedModels()];
+let JUDGE_MODEL = null; // set to the model that actually answered
 
 const SUPABASE_URL = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
 const ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
@@ -109,19 +112,11 @@ async function judge(judgePrompt, c, answer) {
   const user = `QUESTION:\n${c.question}\n\nEXPECTED FACTS:\n${c.expected}\n\nANSWER:\n${answer}`;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const res = await fetch(NIM_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${NVIDIA_KEY}` },
-        body: JSON.stringify({
-          model: JUDGE_MODEL,
-          messages: [{ role: 'system', content: judgePrompt }, { role: 'user', content: user }],
-          temperature: 0, max_tokens: 200, stream: false,
-          chat_template_kwargs: { enable_thinking: false },
-        }),
-        signal: AbortSignal.timeout(60_000),
-      });
-      if (!res.ok) throw new Error(`judge HTTP ${res.status}`);
-      const data = await res.json();
+      const { model, data } = await nimChat(NVIDIA_KEY, {
+        messages: [{ role: 'system', content: judgePrompt }, { role: 'user', content: user }],
+        temperature: 0, max_tokens: 200, stream: false,
+      }, { overrides: JUDGE_OVERRIDES });
+      JUDGE_MODEL = model;
       const raw = data.choices?.[0]?.message?.content || '';
       const m = raw.match(/\{[\s\S]*\}/);
       const j = JSON.parse(m ? m[0] : raw);

@@ -8,8 +8,117 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
-const CHAT_MODEL = Deno.env.get('NIM_MODEL') ?? 'nvidia/nemotron-3-ultra-550b-a55b';
-const FALLBACK_MODEL = Deno.env.get('NIM_FALLBACK_MODEL') ?? 'nvidia/nemotron-3.5-lightning-30b-a3b';
+// ---- Self-healing model selection -------------------------------------------------
+// NIM retires models without notice, and /v1/models has listed models that 404. So:
+// env overrides (healed daily by .github/workflows/model-health.yml) -> ranked list,
+// filtered by the live /v1/models list (cached 6h); on 404/410 mark the model bad and
+// try the next one (max 3 attempts); then an optional OpenAI-compatible provider.
+// Keep PREFERRED_MODELS in sync with evals/nim-models.mjs.
+const PREFERRED_MODELS = [
+  'nvidia/nemotron-3-ultra-550b-a55b',
+  'nvidia/nemotron-3.5-lightning-30b-a3b',
+  'z-ai/glm-5.3',
+  'minimaxai/minimax-m3.1-flash',
+  'openai/gpt-oss-20b',
+  'meta/muse-glimmer-30b',
+];
+const MODEL_OVERRIDES = [Deno.env.get('NIM_MODEL'), Deno.env.get('NIM_FALLBACK_MODEL')].filter(Boolean) as string[];
+const MODEL_LIST_TTL_MS = 6 * 60 * 60 * 1000;
+const BAD_404_TTL_MS = 6 * 60 * 60 * 1000;   // retired / not deployed for this account
+const BAD_SLOW_TTL_MS = 10 * 60 * 1000;      // timeouts / 5xx: skip briefly
+const MAX_NIM_ATTEMPTS = 3;
+const EXCLUDE_RE = /embed|rerank|retriever|vision|-vl|vlm|guard|safety|reward|code|starcoder|parse|clip|translate|detector|calibration|omni|deplot|kosmos|fuyu|neva|vila|diffusion|synthetic/i;
+const INCLUDE_RE = /instruct|nemotron|-it$|chat/i;
+
+let liveModels: { ids: Set<string>; at: number } | null = null;
+const badModels = new Map<string, number>(); // model -> skip until (ms)
+
+async function getLiveModels(nvidiaKey: string): Promise<Set<string> | null> {
+  if (liveModels && Date.now() - liveModels.at < MODEL_LIST_TTL_MS) return liveModels.ids;
+  try {
+    const r = await fetch(`${NVIDIA_BASE_URL}/models`, {
+      headers: { Authorization: `Bearer ${nvidiaKey}` },
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!r.ok) return liveModels?.ids ?? null;
+    const ids = new Set<string>(((await r.json()).data || []).map((m: any) => m.id));
+    if (ids.size) liveModels = { ids, at: Date.now() };
+    return liveModels?.ids ?? null;
+  } catch {
+    return liveModels?.ids ?? null; // list unavailable: fall back to the static ranking
+  }
+}
+
+const sizeOf = (id: string) => Math.max(0, ...[...id.matchAll(/(\d+(?:\.\d+)?)b\b/gi)].map((m) => Number(m[1])));
+
+async function candidateModels(nvidiaKey: string): Promise<string[]> {
+  const live = await getLiveModels(nvidiaKey);
+  const pref = [...new Set([...MODEL_OVERRIDES, ...PREFERRED_MODELS])];
+  let out = live ? pref.filter((m) => live.has(m)) : pref;
+  if (live && !out.length) {
+    out = [...live].filter((id) => INCLUDE_RE.test(id) && !EXCLUDE_RE.test(id)).sort((a, b) => sizeOf(b) - sizeOf(a));
+  }
+  const now = Date.now();
+  const usable = out.filter((m) => (badModels.get(m) ?? 0) < now);
+  return usable.length ? usable : out; // everything marked bad: retry anyway rather than give up
+}
+
+// Optional second provider (OpenAI-compatible), used only after NIM fails.
+function fallbackProvider() {
+  const url = Deno.env.get('FALLBACK_LLM_URL');
+  const key = Deno.env.get('FALLBACK_LLM_KEY');
+  const model = Deno.env.get('FALLBACK_LLM_MODEL');
+  if (!url || !key || !model) return null;
+  const base = url.replace(/\/+$/, '');
+  return { url: base.endsWith('/chat/completions') ? base : `${base}/chat/completions`, key, model };
+}
+
+// POST chat/completions with fall-through. Resolves to an OK Response (headers received;
+// body still streaming if stream:true) or null. The timeout only covers time-to-headers.
+async function chatCompletion(nvidiaKey: string, body: Record<string, unknown>): Promise<Response | null> {
+  const attempt = async (url: string, key: string, payload: unknown, timeoutMs: number) => {
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), timeoutMs);
+    try {
+      return await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
+        body: JSON.stringify(payload),
+        signal: ctl.signal,
+      });
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
+  const models = (await candidateModels(nvidiaKey)).slice(0, MAX_NIM_ATTEMPTS);
+  for (const [i, model] of models.entries()) {
+    try {
+      const res = await attempt(`${NVIDIA_BASE_URL}/chat/completions`, nvidiaKey,
+        { ...body, model, chat_template_kwargs: { enable_thinking: false } }, i === 0 ? 15000 : 10000);
+      if (res.ok) return res;
+      const detail = (await res.text()).slice(0, 200);
+      console.error('NIM error:', model, res.status, detail);
+      badModels.set(model, Date.now() + (res.status === 404 || res.status === 410 ? BAD_404_TTL_MS : BAD_SLOW_TTL_MS));
+    } catch (e) {
+      console.error('NIM fetch failed:', model, String(e));
+      badModels.set(model, Date.now() + BAD_SLOW_TTL_MS);
+    }
+  }
+
+  const fb = fallbackProvider();
+  if (fb) {
+    try {
+      const res = await attempt(fb.url, fb.key, { ...body, model: fb.model }, 15000);
+      if (res.ok) return res;
+      console.error('Fallback LLM error:', fb.model, res.status, (await res.text()).slice(0, 200));
+    } catch (e) {
+      console.error('Fallback LLM fetch failed:', String(e));
+    }
+  }
+  return null;
+}
+// -------------------------------------------------------------------------------------
 const NAP_REPLY = "I'm having a quick nap right now. Meanwhile, have a look at Ayush's projects above or reach him through the contact links on this page.";
 const EMBEDDING_MODEL = 'nvidia/nemotron-3-embed-1b';
 const EMBEDDING_API_DIMS = 2048; // nemotron-3-embed-1b only serves 2048 dims
@@ -326,23 +435,14 @@ If no lead info was shared, return: {"is_lead": false}
 Conversation:
 ${messages.filter(m => m.role !== 'system').map(m => `${m.role}: ${m.content}`).join('\n')}`;
 
-    const response = await fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${nvidiaKey}`,
-      },
-      body: JSON.stringify({
-        model: CHAT_MODEL,
-        messages: [{ role: 'user', content: extractPrompt }],
-        temperature: 0.1,
-        max_tokens: 256,
-        stream: false,
-        chat_template_kwargs: { enable_thinking: false },
-      }),
+    const response = await chatCompletion(nvidiaKey, {
+      messages: [{ role: 'user', content: extractPrompt }],
+      temperature: 0.1,
+      max_tokens: 256,
+      stream: false,
     });
 
-    if (!response.ok) return null;
+    if (!response) return null;
     const data = await response.json();
     const raw = data.choices?.[0]?.message?.content ?? '';
 
@@ -477,31 +577,15 @@ Deno.serve(async (req: Request) => {
 
     const sanitized = buildGroundedMessages(raw, retrievedDocs);
 
-    // Call NVIDIA NIM with streaming; on 404/5xx/network error retry once with the fallback model
-    const callNim = (model: string) => fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${nvidiaKey}`,
-      },
-      body: JSON.stringify({
-        model,
-        messages: sanitized,
-        temperature: 0.2,
-        top_p: 0.7,
-        max_tokens: 1024,
-        stream: true,
-        chat_template_kwargs: { enable_thinking: false },
-      }),
-    }).catch((e) => { console.error('NVIDIA fetch error:', model, e); return null; });
-
-    let response = await callNim(CHAT_MODEL);
-    if (!response || !response.ok) {
-      if (response) console.error('NVIDIA API error:', CHAT_MODEL, response.status, await response.text());
-      response = await callNim(FALLBACK_MODEL);
-    }
-    if (!response || !response.ok) {
-      if (response) console.error('NVIDIA API error:', FALLBACK_MODEL, response.status, await response.text());
+    // Self-healing: NIM candidates (404/410 -> next), then optional fallback provider
+    const response = await chatCompletion(nvidiaKey, {
+      messages: sanitized,
+      temperature: 0.2,
+      top_p: 0.7,
+      max_tokens: 1024,
+      stream: true,
+    });
+    if (!response) {
       return jsonResponse({ reply: NAP_REPLY });
     }
 
