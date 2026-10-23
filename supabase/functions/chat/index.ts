@@ -5,6 +5,7 @@
 // @ts-nocheck — Deno types unavailable in VS Code, runs fine on Supabase runtime
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import sharedModels from '../_shared/models.json' with { type: 'json' };
 
 const NVIDIA_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
@@ -13,15 +14,8 @@ const AYUSH_EMAIL = 'ayushtomar55@gmail.com';
 // env overrides (healed daily by .github/workflows/model-health.yml) -> ranked list,
 // filtered by the live /v1/models list (cached 6h); on 404/410 mark the model bad and
 // try the next one (max 3 attempts); then an optional OpenAI-compatible provider.
-// Keep PREFERRED_MODELS in sync with evals/nim-models.mjs.
-const PREFERRED_MODELS = [
-  'nvidia/nemotron-3-ultra-550b-a55b',
-  'nvidia/nemotron-3.5-lightning-30b-a3b',
-  'z-ai/glm-5.3',
-  'minimaxai/minimax-m3.1-flash',
-  'openai/gpt-oss-20b',
-  'meta/muse-glimmer-30b',
-];
+// Ranked list lives in ../_shared/models.json (shared with evals/nim-models.mjs).
+const PREFERRED_MODELS: string[] = sharedModels.preferred;
 const MODEL_OVERRIDES = [Deno.env.get('NIM_MODEL'), Deno.env.get('NIM_FALLBACK_MODEL')].filter(Boolean) as string[];
 const MODEL_LIST_TTL_MS = 6 * 60 * 60 * 1000;
 const BAD_404_TTL_MS = 6 * 60 * 60 * 1000;   // retired / not deployed for this account

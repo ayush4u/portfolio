@@ -1,0 +1,11 @@
+{
+  "_comment": "Single source of the ranked NVIDIA NIM chat models (verified 2026-10-23 with enable_thinking:false). Used by supabase/functions/chat/index.ts, evals/nim-models.mjs and the model-health workflow. Env NIM_MODEL / NIM_FALLBACK_MODEL still go first.",
+  "preferred": [
+    "nvidia/nemotron-3-ultra-550b-a55b",
+    "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "z-ai/glm-5.3",
+    "minimaxai/minimax-m3.1-flash",
+    "openai/gpt-oss-20b",
+    "meta/muse-glimmer-30b"
+  ]
+}

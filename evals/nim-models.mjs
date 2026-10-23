@@ -1,19 +1,14 @@
-// Self-healing NVIDIA NIM model selection (Node). Keep PREFERRED_MODELS in sync with
-// supabase/functions/chat/index.ts. NIM has retired models twice and /v1/models still
+// Self-healing NVIDIA NIM model selection (Node). PREFERRED_MODELS is shared with
+// supabase/functions/chat/index.ts via supabase/functions/_shared/models.json. NIM has retired models twice and /v1/models still
 // lists some that 404, so: live list + probe + mark-bad-on-404 + fall through.
 import { readFileSync } from 'node:fs';
 
 export const NIM_BASE = 'https://integrate.api.nvidia.com/v1';
 
-// Ranked: verified working 2026-10-23 with enable_thinking:false.
-export const PREFERRED_MODELS = [
-  'nvidia/nemotron-3-ultra-550b-a55b',
-  'nvidia/nemotron-3.5-lightning-30b-a3b',
-  'z-ai/glm-5.3',
-  'minimaxai/minimax-m3.1-flash',
-  'openai/gpt-oss-20b',
-  'meta/muse-glimmer-30b',
-];
+// Ranked list: single source in supabase/functions/_shared/models.json (also used by the chat edge function).
+export const PREFERRED_MODELS = JSON.parse(
+  readFileSync(new URL('../supabase/functions/_shared/models.json', import.meta.url), 'utf8'),
+).preferred;
 
 const EXCLUDE = /embed|rerank|retriever|vision|-vl|vlm|guard|safety|reward|code|starcoder|parse|clip|translate|detector|calibration|omni|deplot|kosmos|fuyu|neva|vila|diffusion|synthetic/i;
 const INCLUDE = /instruct|nemotron|-it$|chat/i;
