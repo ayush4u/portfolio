@@ -35,6 +35,7 @@ nav b{font-size:20px} nav span{font-family:'JetBrains Mono';font-size:13px}
 .tl{padding:10px 18px;border:2px solid var(--ink);border-radius:18px;font-weight:700}
 .tl small{display:block;font-family:'Caveat';font-weight:500;font-size:18px}
 .squig{width:60px}
+@media(max-width:699px){.timeline{flex-direction:column;align-items:flex-start;gap:0}.squig{width:44px;height:15px;transform:rotate(90deg);margin:16px 0 16px 40px}}
 /* work */
 .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:28px}
 .work .card{position:relative}
@@ -82,7 +83,7 @@ footer{text-align:center;padding:30px;font-family:'JetBrains Mono';font-size:12p
 .say-hello .note{font-size:22px;line-height:1;white-space:nowrap;margin-right:8px}
 .say-hello svg{display:block;margin-top:-4px;margin-right:-6px}
 body.chat-is-open .say-hello{display:none}
-@media(max-width:639px){.say-hello{display:none}}
+@media(max-width:639px){.say-hello{right:54px;bottom:58px}.say-hello .note{font-size:18px;margin-right:4px}.say-hello svg{width:62px;height:48px}}
 .fab{position:fixed;right:24px;bottom:24px;width:68px;height:68px;border-radius:50%;background:var(--pink);border:2.5px solid var(--ink);box-shadow:3px 4px 0 var(--ink);display:grid;place-items:center;z-index:20}
 .mini{width:40px;height:36px;background:linear-gradient(160deg,#ffc2d4,#c9b6ff);border:2px solid var(--ink);border-radius:58% 42% 47% 53%/55% 50% 50% 45%;position:relative}
 .mini::before,.mini::after{content:"";position:absolute;top:13px;width:5px;height:7px;background:var(--ink);border-radius:50%}
@@ -104,7 +105,9 @@ body.chat-is-open .say-hello{display:none}
 @media(min-width:1100px){.chat{right:24px;bottom:104px;width:380px;height:560px;border-radius:24px;overflow:hidden}.scrim{background:transparent}}
 @media(min-width:700px) and (max-width:1099px){.chat{right:0;top:0;bottom:0;width:400px;border-radius:24px 0 0 24px;overflow:hidden}
  .hero{grid-template-columns:1fr}.blobbox{order:-1}.grid{grid-template-columns:repeat(2,1fr)}.certs{grid-template-columns:repeat(3,1fr)}.doodle{display:none}}
-@media(max-width:699px){.chat{left:0;right:0;bottom:0;height:74vh;border-radius:26px 26px 0 0;box-shadow:none}
+@media(max-width:699px){.chat{left:0;right:0;bottom:var(--kb,0px);height:min(74vh,calc(var(--vvh,100vh) - 24px));border-radius:26px 26px 0 0;box-shadow:none;overflow:hidden}
+ .chat.chat-max{height:var(--vvh,100vh);border-radius:0;border-top-width:0}.chat.chat-max header::before{display:none}
+ .chat header{position:relative}
  .chat header::before{content:"";position:absolute;top:6px;left:50%;margin-left:-22px;width:44px;height:5px;border-radius:9px;background:var(--ink)}
  section{padding:48px 0}h2{font-size:32px}.hero{grid-template-columns:1fr;gap:16px;padding-top:0}.blobbox{order:-1}.blob{transform:scale(.7);margin:-40px 0}
  nav span{display:none}.hero h1{font-size:40px}.arrow{left:auto;right:-10px;top:-70px;width:110px}.arrow .note{left:-90px;top:-6px}
@@ -156,6 +159,8 @@ nav a{text-decoration:none;margin-left:14px}
 #chat-input{flex:1;border:2px solid var(--ink);border-radius:999px;padding:10px 14px;background:#fff;font:inherit;font-size:14px}
 #chat-form button{width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--cream);border:0;font-size:18px;cursor:pointer}
 .chat header button{margin-left:auto;background:none;border:0;font-size:20px;cursor:pointer}
+.chat header #chat-max{display:none;width:32px;height:32px;place-items:center;padding:0}.chat header #chat-max + button{margin-left:4px}
+@media(max-width:699px){.chat header #chat-max{display:grid}body:has(.chat.chat-max) .jello{opacity:0;pointer-events:none}}
 .fab{cursor:pointer}
 /* phone: compact chat fab + hero safe space */
 @media(max-width:639px){
@@ -185,7 +190,7 @@ body.chat-is-open .fab{opacity:1;visibility:visible;pointer-events:auto}
 /* start-here arrow: curl from top-right down into the About me button */
 .arrow,.arrow svg{transform:none}
 @media(min-width:700px){.arrow{left:292px;top:-18px;width:110px}.arrow .note{left:104px;top:-14px}}
-@media(max-width:699px){.btns{margin-bottom:46px}.arrow{left:auto;right:4px;top:auto;bottom:-52px;width:96px}.arrow svg{transform:scaleY(-1)}.arrow .note{left:-84px;top:auto;bottom:2px}}
+@media(max-width:699px){.btns{margin-bottom:58px}.arrow{left:auto;right:96px;top:100%;width:64px}.arrow svg{transform:rotate(90deg)}.arrow .note{left:50px;top:20px}}
 @media(max-width:699px){.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-right:80px;padding-bottom:88px}.metrics div{padding:8px 8px}.metrics b{font-size:18px}.metrics span{font-size:10px;line-height:1.2;display:block}}
 
 /* connector arrows only make sense with every card showing */

@@ -73,6 +73,32 @@ export function initChatbot() {
     window.dispatchEvent(new CustomEvent('chat:open', { detail: open }));
     if (open) setTimeout(() => input.focus(), 50);
   };
+  // Phone sheet: track the visual viewport so the on-screen keyboard never covers or shrinks it
+  const vv = window.visualViewport;
+  const syncViewport = () => {
+    if (!vv) return;
+    panel.style.setProperty('--vvh', `${vv.height}px`);
+    panel.style.setProperty('--kb', `${Math.max(0, window.innerHeight - vv.height - vv.offsetTop)}px`);
+  };
+  if (vv) {
+    vv.addEventListener('resize', syncViewport);
+    vv.addEventListener('scroll', syncViewport);
+    syncViewport();
+  }
+
+  // Maximise toggle (phone only) — full-height sheet for typing with the keyboard up
+  const max = document.getElementById('chat-max');
+  const maxIcons = {
+    expand: 'M12 3h5v5M8 17H3v-5M17 3l-5.5 5.5M3 17l5.5-5.5',
+    shrink: 'M16 8h-4V4M4 12h4v4M12 8l5-5M8 12l-5 5',
+  };
+  if (max) max.addEventListener('click', () => {
+    const on = panel.classList.toggle('chat-max');
+    max.setAttribute('aria-pressed', String(on));
+    max.setAttribute('aria-label', on ? 'Restore chat size' : 'Maximise chat');
+    max.querySelector('path').setAttribute('d', on ? maxIcons.shrink : maxIcons.expand);
+  });
+
   toggle.addEventListener('click', () => setOpen(!panel.classList.contains('chat-open')));
   close.addEventListener('click', () => setOpen(false));
   if (scrim) scrim.addEventListener('click', () => setOpen(false));
