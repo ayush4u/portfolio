@@ -35,7 +35,7 @@ nav b{font-size:20px} nav span{font-family:'JetBrains Mono';font-size:13px}
 .tl{padding:10px 18px;border:2px solid var(--ink);border-radius:18px;font-weight:700}
 .tl small{display:block;font-family:'Caveat';font-weight:500;font-size:18px}
 .squig{width:60px}
-@media(max-width:699px){.timeline{flex-direction:column;align-items:flex-start;gap:0}.squig{width:44px;height:15px;transform:rotate(90deg);margin:16px 0 16px 40px}}
+@media(max-width:699px){.timeline{flex-direction:column;align-items:center;gap:0}.squig{width:44px;height:15px;transform:rotate(90deg);margin:16px 0}}
 /* work */
 .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:28px}
 .work .card{position:relative}
