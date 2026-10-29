@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ayush4u.github.io/portfolio/sitemap.xml
