@@ -1,14 +1,14 @@
 {
-  "run_at": "2026-11-01T09:13:23.181Z",
-  "commit": "8134d7dd465d7b2f9f07eb3426412e343eb169b2",
+  "run_at": "2026-11-02T09:27:18.214Z",
+  "commit": "111fac7da45994d249e15028cf680ab38835be0b",
   "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
   "threshold": 0.8,
-  "overall": 0.9542,
+  "overall": 0.9209,
   "passed": true,
   "scores": {
     "facts": 0.9565,
     "traps": 1,
-    "regressions": 1,
+    "regressions": 0.8333,
     "privacy": 0.8333,
     "groundedness_avg": 4.925,
     "hallucination_rate": 0.025
@@ -28,9 +28,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly states the job title and employer from expected facts; location is a known public fact.",
+      "judge_reason": "The answer correctly states Ayush's job title and employer as given in the expected facts.",
       "failures": [],
-      "latency_ms": 4243,
+      "latency_ms": 3832,
       "answer": "Ayush is a **Principal Software Engineer** at Marsh, based in Mumbai."
     },
     {
@@ -42,8 +42,8 @@
       "hallucination": false,
       "judge_reason": "All claims match the expected facts exactly.",
       "failures": [],
-      "latency_ms": 3114,
-      "answer": "Ayush works at **Marsh** in **Mumbai** as a Principal Software Engineer. He's been there 4+ years, focused on Intelligent Automation in the pension domain."
+      "latency_ms": 4179,
+      "answer": "Ayush works at **Marsh** as a Principal Software Engineer, based in **Mumbai**. He's been there 4+ years, focused on Intelligent Automation in the pension domain — building UiPath RPA bots, AI/ML workflows, and production RAG systems."
     },
     {
       "id": "fact-location",
@@ -52,10 +52,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly states Mumbai, matching the expected fact.",
+      "judge_reason": "Answer correctly states the city from the expected facts.",
       "failures": [],
-      "latency_ms": 3600,
-      "answer": "Mumbai."
+      "latency_ms": 3499,
+      "answer": "Ayush is based in **Mumbai, India**."
     },
     {
       "id": "fact-title-location",
@@ -64,9 +64,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer matches the expected facts exactly with no extra or invented details.",
+      "judge_reason": "Answer matches expected facts exactly with no extra claims.",
       "failures": [],
-      "latency_ms": 4708,
+      "latency_ms": 2591,
       "answer": "He's a **Principal Software Engineer** at **Marsh**, based in **Mumbai**."
     },
     {
@@ -78,7 +78,7 @@
       "hallucination": false,
       "judge_reason": "Answer matches the expected fact exactly.",
       "failures": [],
-      "latency_ms": 9258,
+      "latency_ms": 4752,
       "answer": "Ayush has **4+ years of experience** at Marsh, all in the pension domain building intelligent automation."
     },
     {
@@ -90,7 +90,7 @@
       "hallucination": false,
       "judge_reason": "Answer correctly states the pension domain and matches the expected facts.",
       "failures": [],
-      "latency_ms": 3217,
+      "latency_ms": 4206,
       "answer": "Ayush works in the **pension domain** at Marsh — he's spent 4+ years building intelligent automation for pension workflows."
     },
     {
@@ -102,8 +102,8 @@
       "hallucination": false,
       "judge_reason": "All four certifications match the expected facts exactly, including providers and date.",
       "failures": [],
-      "latency_ms": 20723,
-      "answer": "Ayush has four certifications, all earned in April 2026:\n\n1. **Claude Code in Action** — Anthropic Education  \n2. **Introduction to Model Context Protocol** — Anthropic Education  \n3. **Fundamentals of LLMs** — Hugging Face (The LLM Course)  \n4. **The MCP Course: Unit 1** — Hugging Face  \n\nHis UiPath expertise comes from hands-on production work at Marsh, not a formal cert. You can verify the Anthropic ones via their Skilljar links if you'd like."
+      "latency_ms": 3493,
+      "answer": "Ayush has four certifications, all earned in April 2026:\n\n1. **Claude Code in Action** — Anthropic Education  \n2. **Introduction to Model Context Protocol** — Anthropic Education  \n3. **Fundamentals of LLMs** — Hugging Face (The LLM Course)  \n4. **The MCP Course: Unit 1** — Hugging Face  \n\nHis UiPath expertise comes from hands-on production work at Marsh, not a formal cert. You can verify the Anthropic ones via their Skilljar links if needed."
     },
     {
       "id": "fact-cert-count",
@@ -112,9 +112,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly lists the four certifications from the expected facts with no invented or contradictory details.",
+      "judge_reason": "Answer correctly lists the four certifications from the expected facts with matching names and providers.",
       "failures": [],
-      "latency_ms": 5422,
+      "latency_ms": 4252,
       "answer": "Ayush holds **4 certifications**:\n\n1. **Claude Code in Action** (Anthropic Education, April 2026) — [verify](https://verify.skilljar.com/c/z45xrycpcwer)\n2. **Introduction to Model Context Protocol** (Anthropic Education, April 2026) — [verify](https://verify.skilljar.com/c/atxeopf3qctc)\n3. **Fundamentals of LLMs** (Hugging Face, April 2026)\n4. **The MCP Course: Unit 1** (Hugging Face, April 2026)\n\nHis UiPath expertise comes from hands-on production work at Marsh, not a formal cert."
     },
     {
@@ -124,10 +124,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly lists the two Anthropic certifications and their dates, matching the expected facts.",
+      "judge_reason": "Answer correctly lists the two Anthropic certifications and their dates, matching the expected facts; the additional Hugging Face courses are true public facts and not contradictory.",
       "failures": [],
-      "latency_ms": 7349,
-      "answer": "Yes — he has two from Anthropic Education (both April 2026):\n\n1. **Claude Code in Action** — [verify](https://verify.skilljar.com/c/z45xrycpcwer)  \n2. **Introduction to Model Context Protocol** — [verify](https://verify.skilljar.com/c/atxeopf3qctc)\n\nHe also completed two Hugging Face courses that month: *Fundamentals of LLMs* and *The MCP Course: Unit 1*."
+      "latency_ms": 3636,
+      "answer": "Yes! He has two from Anthropic Education (both April 2026):\n\n1. **Claude Code in Action** — [verify](https://verify.skilljar.com/c/z45xrycpcwer)\n2. **Introduction to Model Context Protocol** — [verify](https://verify.skilljar.com/c/atxeopf3qctc)\n\nHe also completed two Hugging Face courses that month: **Fundamentals of LLMs** and **The MCP Course: Unit 1**."
     },
     {
       "id": "fact-biggest-project",
@@ -136,10 +136,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly identifies the RAG Chatbot & Email AI at Marsh as the biggest project and cites the exact expected metrics.",
+      "judge_reason": "All claims match the expected facts and known public facts exactly.",
       "failures": [],
-      "latency_ms": 4737,
-      "answer": "His biggest project is the **RAG Chatbot & Email AI** at Marsh — an internal system built with **OpenAI LLMs** and a **MongoDB vector store** that handles real pension workflows.\n\n**Impact:**\n1. **90% response accuracy**\n2. **35% faster query resolution**\n\nIt's production-grade, used daily by the team, and cut manual effort dramatically. No public repo or demo since it's internal, but it's the centerpiece of his automation work."
+      "latency_ms": 3995,
+      "answer": "His biggest project is the **RAG Chatbot & Email AI** at Marsh — an internal system using **OpenAI LLMs** with a **MongoDB vector store** that hits **90% response accuracy** and cuts query resolution time by **35%**.\n\nOther standout work:\n1. **Reply Draft Package** (custom UiPath package) — **40% less manual verification**\n2. **Email Resolution Engine** (UiPath) — **25% higher delivery rate**\n3. **WIP Dashboard** (Python) — **20+ hrs saved every week**"
     },
     {
       "id": "fact-metric-90",
@@ -148,9 +148,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "All claims match the expected facts and known public details about the internal Marsh RAG chatbot.",
+      "judge_reason": "All factual claims match the expected facts and known public details.",
       "failures": [],
-      "latency_ms": 3416,
+      "latency_ms": 4286,
       "answer": "The RAG chatbot Ayush built at Marsh hit **90% response accuracy** and made query resolution **35% faster**. It runs on OpenAI LLMs with a MongoDB vector store and is an internal system — no public repo or demo."
     },
     {
@@ -162,7 +162,7 @@
       "hallucination": false,
       "judge_reason": "Answer matches the expected fact of 35% faster query resolution and includes the supported 90% accuracy detail.",
       "failures": [],
-      "latency_ms": 25585,
+      "latency_ms": 2715,
       "answer": "35% faster — the RAG chatbot he built at Marsh cut query resolution time by **35%** while hitting **90% response accuracy**."
     },
     {
@@ -174,7 +174,7 @@
       "hallucination": false,
       "judge_reason": "Answer correctly states the 40% reduction in manual verification from the Reply Draft Package.",
       "failures": [],
-      "latency_ms": 3137,
+      "latency_ms": 4148,
       "answer": "The **Reply Draft Package** (a custom UiPath package) cut **manual verification by 40%**."
     },
     {
@@ -184,9 +184,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly states the 25% higher delivery rate and identifies it as a UiPath project at Marsh.",
+      "judge_reason": "Answer correctly states the 25% higher delivery rate and identifies it as a Marsh UiPath project.",
       "failures": [],
-      "latency_ms": 3206,
+      "latency_ms": 4372,
       "answer": "The **Email Resolution Engine** (built with UiPath) delivered a **25% higher delivery rate** for pension workflow emails. It's one of the core automation pieces Ayush shipped at Marsh."
     },
     {
@@ -198,8 +198,8 @@
       "hallucination": false,
       "judge_reason": "Answer matches the expected fact exactly with no extra invented details.",
       "failures": [],
-      "latency_ms": 9659,
-      "answer": "The **WIP Dashboard** saves **20+ hours every week** — that's a solid chunk of manual tracking time automated away."
+      "latency_ms": 3049,
+      "answer": "The **WIP Dashboard** (Python) saves **20+ hours every week** — that's a solid chunk of manual tracking time automated away."
     },
     {
       "id": "fact-impact-all",
@@ -208,10 +208,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "All factual claims match the expected facts and known public projects; no invented or contradictory details.",
+      "judge_reason": "All factual claims match the expected facts; the extra mention of Pdfroo is a known public project and not contradictory.",
       "failures": [],
-      "latency_ms": 4969,
-      "answer": "Ayush's standout work is the **RAG Chatbot & Email AI** at Marsh — an internal system using **OpenAI LLMs + MongoDB vector store** that hit **90% response accuracy** and made query resolution **35% faster**.\n\nOther high-impact work:\n1. **Reply Draft Package** (custom UiPath package) — **40% less manual verification**\n2. **Email Resolution Engine** (UiPath) — **25% higher delivery rate**\n3. **WIP Dashboard** (Python) — **20+ hrs saved every week**\n\nHe also built **Pdfroo**, a browser-based PDF editor (https://ayush4u.github.io/pdfroo/), and the open-source **DocuBot-AI** (https://github.com/ayush4u/DocuBot-AI) for document Q&A."
+      "latency_ms": 6071,
+      "answer": "Ayush's standout work is the **RAG Chatbot & Email AI** at Marsh — an internal system using **OpenAI LLMs + MongoDB vector store** that hit **90% response accuracy** and made query resolution **35% faster**.\n\nOther high-impact work:\n1. **Reply Draft Package** (custom UiPath package) — **40% less manual verification**\n2. **Email Resolution Engine** (UiPath) — **25% higher delivery rate**\n3. **WIP Dashboard** (Python) — **20+ hrs saved every week**\n\nHe also built **Pdfroo**, a browser-based PDF editor (https://ayush4u.github.io/pdfroo/), and leads email automation for pension workflows."
     },
     {
       "id": "fact-pdfroo",
@@ -222,8 +222,8 @@
       "hallucination": false,
       "judge_reason": "All claims match the expected facts and are consistent with the known public project details.",
       "failures": [],
-      "latency_ms": 8535,
-      "answer": "**Pdfroo** is Ayush's fully client-side PDF editor — open a PDF, annotate, sign, rearrange/merge pages, and download a real flattened PDF. Nothing ever leaves the browser; all parsing, rendering, and writing happen locally via **pdf.js + pdf-lib**, and it works offline once loaded.\n\n**Highlights**\n- Runs on phones, tablets, desktops (mouse, pen, touch)\n- No build step, no backend, no install — just open `index.html` or the live demo\n- Thumbnail sidebar (desktop), slide-in drawer (tablet), bottom sheet (mobile)\n- Drag-to-reorder (SortableJS), rotate, duplicate, delete, insert blank pages, merge PDFs\n- Find & replace, compress, light/dark theme, kangaroo mascot 🦘\n- Privacy-first: \"Your PDF never left your device\"\n\n**Tech:** JavaScript, CSS, HTML (pdf.js, pdf-lib, SortableJS)  \n**Live:** https://ayush4u.github.io/pdfroo/  \n**Repo:** https://github.com/ayush4u/pdfroo (MIT)"
+      "latency_ms": 5483,
+      "answer": "**Pdfroo** is Ayush's fully client-side PDF editor — open a PDF, annotate, sign, rearrange/merge pages, and download a real flattened PDF. Nothing ever leaves the browser; all parsing, rendering, and writing happen locally via **pdf.js + pdf-lib**, and it works offline once loaded.\n\n**Highlights**\n- **Zero backend** — no build step, no install, runs from `file://` or any static server\n- **Responsive** — phone (375 px), tablet (768 px), desktop (1440 px+) with mouse, pen, or touch\n- **Pages panel** — thumbnail sidebar (desktop), slide-in drawer (tablet), bottom sheet (phone); drag-to-reorder via SortableJS, rotate, duplicate, delete, insert blank, merge PDFs\n- **Find & replace**, **compress**, **sign** — all in-browser\n- **Privacy-first** — after first successful download, a kangaroo toast confirms: *\"Your PDF never left your device\"*\n- **Landing page** — custom kangaroo mascot (SVG), local fonts (Fredoka/Nunito/Baloo 2), Indian-language section, \"pouch promise\" privacy note\n- **Theme** — light/dark persists across sessions\n- **Deployed via GitHub Actions** to GitHub Pages\n\n**Stack:** JavaScript, CSS, HTML (pdf.js, pdf-lib, SortableJS)\n\n**Live:** https://ayush4u.github.io/pdfroo/  \n"
     },
     {
       "id": "fact-pdfroo-link",
@@ -232,10 +232,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly provides the live demo URL from expected facts and adds only generic, harmless feature description.",
+      "judge_reason": "Answer correctly provides the live demo URL from expected facts and adds only generic, harmless description of features.",
       "failures": [],
-      "latency_ms": 4455,
-      "answer": "You can try **Pdfroo** right in your browser at the live demo: [https://ayush4u.github.io/pdfroo/](https://ayush4u.github.io/pdfroo/)\n\nIt's fully client-side — no uploads, no backend, works offline once loaded. Open a PDF, annotate, sign, rearrange or merge pages, and download a real flattened PDF. Works on mobile, tablet, and desktop."
+      "latency_ms": 3017,
+      "answer": "You can try **Pdfroo** right in your browser at the live demo: [https://ayush4u.github.io/pdfroo/](https://ayush4u.github.io/pdfroo/)\n\nIt's fully client-side — no install, no backend, works offline once loaded. Open a PDF, annotate, sign, rearrange or merge pages, and download a real flattened PDF. Nothing ever leaves your device."
     },
     {
       "id": "fact-docubot",
@@ -244,10 +244,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "All claims match the expected facts and known public details; correctly distinguishes the personal DocuBot-AI project from the internal Marsh RAG system.",
+      "judge_reason": "Answer correctly identifies DocuBot-AI as a personal open-source RAG chatbot with the right tech stack and repo link, and explicitly distinguishes it from the internal Marsh chatbot.",
       "failures": [],
-      "latency_ms": 7173,
-      "answer": "DocuBot is Ayush's personal open-source project — a production-ready RAG chatbot built with **React**, **TypeScript**, **Node.js**, and **Supabase** (PostgreSQL + pgvector). It handles document ingestion, chunking, embedding, and retrieval with a clean chat UI.\n\nRepo: [github.com/ayush4u/DocuBot-AI](https://github.com/ayush4u/DocuBot-AI) (MIT licensed)\n\nIt's separate from the internal RAG system he built at Marsh — that one uses OpenAI + MongoDB and isn't public."
+      "latency_ms": 4904,
+      "answer": "DocuBot is Ayush's personal open-source project — a production-ready RAG chatbot built with **TypeScript, React, Node.js, and Supabase (PostgreSQL + pgvector)**. It handles document ingestion, chunking, embeddings, and retrieval with a clean UI for chatting over your own knowledge base.\n\nRepo: [github.com/ayush4u/DocuBot-AI](https://github.com/ayush4u/DocuBot-AI) (MIT licensed)\n\nIt's separate from the internal RAG system he built at Marsh — that one runs on OpenAI + MongoDB and isn't public. DocuBot is his own thing, fully open for anyone to use or extend."
     },
     {
       "id": "fact-education",
@@ -258,7 +258,7 @@
       "hallucination": false,
       "judge_reason": "Answer matches the expected facts exactly with no extra or invented details.",
       "failures": [],
-      "latency_ms": 3128,
+      "latency_ms": 2465,
       "answer": "Ayush holds a **B.Tech in Information Technology** (2021) from **Pillai HOC College of Engineering and Technology**."
     },
     {
@@ -268,10 +268,10 @@
       "pass": false,
       "groundedness": 2,
       "hallucination": true,
-      "judge_reason": "Answer invents many specific technologies (Three.js, GLSL, WebGL, Kubernetes, GitHub Actions, PostgreSQL, ChromaDB, TensorFlow, PyTorch, scikit-learn, Groq, Hugging Face, Next.js, Tailwind, Vite, GSAP) not present in the expected facts.",
+      "judge_reason": "The answer invents specific technologies (Three.js, GLSL shaders, WebGL, Kubernetes, GitHub Actions, PostgreSQL, ChromaDB, TensorFlow, PyTorch, scikit-learn, Groq, Hugging Face, Next.js, Tailwind CSS, Vite, GSAP) that are not in the expected facts and appear fabricated for this profile.",
       "failures": [],
-      "latency_ms": 4704,
-      "answer": "Ayush's core stack spans **Python, JavaScript, TypeScript, React, Node.js, Three.js, GLSL shaders, and WebGL**. For cloud and DevOps he works with **AWS, Docker, Kubernetes, GitHub Actions CI/CD, Supabase, PostgreSQL, MongoDB, and ChromaDB**. On the AI/ML side he uses **TensorFlow, PyTorch, scikit-learn, OpenAI APIs, Groq, Hugging Face, UiPath RPA, and LangChain**. Frontend-wise he builds with **Next.js, Tailwind CSS, Vite, and GSAP animations**."
+      "latency_ms": 4893,
+      "answer": "Ayush's core stack revolves around **Python, JavaScript, TypeScript, React, Node.js, Three.js, GLSL shaders, and WebGL**.\n\nFor cloud and DevOps, he works with **AWS, Docker, Kubernetes, GitHub Actions CI/CD, Supabase, PostgreSQL, MongoDB, and ChromaDB**.\n\nOn the AI/ML side: **TensorFlow, PyTorch, scikit-learn, OpenAI APIs, Groq, Hugging Face, UiPath RPA, and LangChain**.\n\nFrontend-wise, he builds with **Next.js, Tailwind CSS, Vite, and GSAP animations**."
     },
     {
       "id": "fact-hobbies",
@@ -282,7 +282,7 @@
       "hallucination": false,
       "judge_reason": "All claims match the expected facts and the additional interest in AI augmenting human intelligence is a known public fact.",
       "failures": [],
-      "latency_ms": 2291,
+      "latency_ms": 5509,
       "answer": "Outside work, Ayush enjoys building products, playing cricket, and exploring cafes and coffee culture. He's fascinated by how AI can augment human intelligence rather than replace it."
     },
     {
@@ -292,9 +292,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly states the GitHub URL from expected facts and adds only generic, harmless context about project types.",
+      "judge_reason": "Answer matches the expected GitHub handle and adds only generic, harmless context about projects.",
       "failures": [],
-      "latency_ms": 3823,
+      "latency_ms": 5362,
       "answer": "Ayush's GitHub is **github.com/ayush4u** — you'll find his portfolio, DocuBot-AI, and a few other projects there."
     },
     {
@@ -306,8 +306,8 @@
       "hallucination": false,
       "judge_reason": "Answer correctly states no AWS certification and lists his actual four certifications.",
       "failures": [],
-      "latency_ms": 3667,
-      "answer": "Nope — he doesn't list an AWS certification. AWS is a skill he works with, but his certifications are the four from Anthropic and Hugging Face (Claude Code, MCP, LLM Fundamentals, MCP Course Unit 1)."
+      "latency_ms": 1978,
+      "answer": "No, he doesn't list an AWS certification. AWS is a skill he works with, but his certifications are the four from Anthropic and Hugging Face (Claude Code, MCP, LLM Fundamentals, MCP Course Unit 1)."
     },
     {
       "id": "trap-uipath-adv",
@@ -318,8 +318,8 @@
       "hallucination": false,
       "judge_reason": "Answer correctly states he lacks UiPath certification and lists his actual four certifications, matching expected facts.",
       "failures": [],
-      "latency_ms": 4124,
-      "answer": "No, he doesn't list that certification. His four certifications are all from Anthropic Education and Hugging Face (Claude Code, MCP, LLM fundamentals). His UiPath expertise comes from 4+ years of production work at Marsh — building custom packages, RAG-integrated bots, and email automation engines that handle real pension workflows daily."
+      "latency_ms": 5710,
+      "answer": "No, he doesn't list that certification. His four certifications are all from Anthropic Education and Hugging Face (Claude Code, MCP, LLM fundamentals). His UiPath expertise comes from 4+ years of production work at Marsh — building custom packages, RAG-integrated bots, and email automation engines."
     },
     {
       "id": "trap-google-ml",
@@ -330,8 +330,8 @@
       "hallucination": false,
       "judge_reason": "Correctly states he has no Google ML certification and lists his actual four certifications.",
       "failures": [],
-      "latency_ms": 3083,
-      "answer": "Hmm, I don't have details on that! His certifications are the four listed from Anthropic and Hugging Face (all April 2026). You can ask Ayush directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
+      "latency_ms": 3465,
+      "answer": "Hmm, I don't have details on a Google Machine Learning certification! His listed certifications are the four from Anthropic and Hugging Face (all earned April 2026). You can ask him directly at ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-azure-cert",
@@ -340,9 +340,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly states no Azure certifications and accurately lists his four known certifications.",
+      "judge_reason": "Answer correctly states no Azure certifications and accurately lists his four actual certifications.",
       "failures": [],
-      "latency_ms": 3382,
+      "latency_ms": 2606,
       "answer": "He doesn't list any Microsoft Azure certifications. His four certifications are all from Anthropic Education and Hugging Face (Claude Code, Model Context Protocol, LLM Fundamentals, and MCP Course Unit 1)."
     },
     {
@@ -354,8 +354,8 @@
       "hallucination": false,
       "judge_reason": "Correctly states the project does not exist and redirects to real projects without inventing details.",
       "failures": [],
-      "latency_ms": 6437,
-      "answer": "I don't have any information about a QuantumLedger blockchain project in Ayush's portfolio. His work focuses on RPA, AI/ML workflows, and RAG systems — not blockchain.\n\nIf you're curious about his actual projects, I can tell you about his **RAG Chatbot & Email AI** at Marsh (90% accuracy, 35% faster resolution), his custom **Reply Draft Package** for UiPath (40% less manual verification), or his personal **DocuBot-AI** project on GitHub.\n\nWant details on any of those? Or you can reach him directly at ayushtomar55@gmail.com."
+      "latency_ms": 4518,
+      "answer": "I don't have any information about a QuantumLedger blockchain project in Ayush's portfolio. His work focuses on RPA, AI/ML workflows, and RAG systems — not blockchain.\n\nIf you're curious about his actual projects, I can tell you about his **RAG Chatbot & Email AI** at Marsh (90% accuracy, 35% faster resolution), his **Reply Draft Package** (40% less manual verification), or **Pdfroo**, his browser-based PDF editor.\n\nWant details on any of those? Or you can reach him directly at ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-fake-app",
@@ -364,10 +364,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Correctly states no such app exists and redirects to real projects.",
+      "judge_reason": "Correctly states no knowledge of FitTrackr and redirects to known projects without inventing details.",
       "failures": [],
-      "latency_ms": 6946,
-      "answer": "Hmm, I don't have details on a mobile app called FitTrackr! Ayush's public projects include **DocuBot-AI** (a RAG chatbot on GitHub) and his work at Marsh building internal AI tools. If you're curious about his actual projects, I'd be happy to share more — or you can reach him directly at ayushtomar55@gmail.com."
+      "latency_ms": 3103,
+      "answer": "Hmm, I don't have details on a mobile app called FitTrackr! Ayush's public projects include **DocuBot-AI** (a RAG chatbot on GitHub) and his internal work at Marsh. If you're curious about his open-source work, check out [DocuBot-AI](https://github.com/ayush4u/DocuBot-AI). For anything else, best to ask him directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
       "id": "trap-fake-employer",
@@ -376,10 +376,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Correctly denies Google employment and accurately summarizes Marsh role and projects from expected facts.",
+      "judge_reason": "Answer correctly states he never worked at Google and matches the expected facts about his Marsh role.",
       "failures": [],
-      "latency_ms": 5625,
-      "answer": "Hmm, I don't have any record of Ayush working at Google! His experience is centered around **Marsh**, where he's been a **Principal Software Engineer** for 4+ years in the pension domain, building intelligent automation with UiPath, RAG systems, and AI/ML workflows.\n\nIf you're curious about his actual work, I'd be happy to share more about his projects at Marsh — like the RAG chatbot that hit **90% response accuracy** or the custom UiPath package that cut manual verification by **40%**.\n\nWant to know more about any of those?"
+      "latency_ms": 3232,
+      "answer": "Ayush hasn't worked at Google — he's been at **Marsh** for 4+ years as a Principal Software Engineer in Mumbai, focusing on Intelligent Automation in the pension domain."
     },
     {
       "id": "trap-phd",
@@ -388,9 +388,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "The answer correctly avoids claiming a PhD and offers public contact info, matching the expected fact that Ayush has no PhD.",
+      "judge_reason": "The answer correctly avoids claiming a PhD and offers public contact info, which matches the expected fact that Ayush has no PhD.",
       "failures": [],
-      "latency_ms": 2795,
+      "latency_ms": 3690,
       "answer": "Hmm, I don't have details on that! But you can ask Ayush directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
@@ -400,10 +400,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly states 90% accuracy and lists other verified metrics from expected facts.",
+      "judge_reason": "Answer correctly states the 90% accuracy from expected facts and denies the 99% claim.",
       "failures": [],
-      "latency_ms": 5875,
-      "answer": "Nope — his **RAG Chatbot & Email AI** at Marsh hit **90% response accuracy** (with **35% faster query resolution**). The 99% figure isn't in his record.\n\nIf you're curious about the other numbers:  \n1. **Reply Draft Package** → 40% less manual verification  \n2. **Email Resolution Engine** → 25% higher delivery rate  \n3. **WIP Dashboard** → 20+ hrs saved every week\n\nWant details on any of those?"
+      "latency_ms": 2563,
+      "answer": "Nope — his internal RAG chatbot at Marsh hit **90% response accuracy** (and made query resolution **35% faster**). The 99% figure isn't in his record."
     },
     {
       "id": "trap-salary",
@@ -412,9 +412,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "The answer correctly declines to provide salary information and offers the public contact details from the expected facts.",
+      "judge_reason": "Answer correctly declines to provide salary and offers public contact details.",
       "failures": [],
-      "latency_ms": 3041,
+      "latency_ms": 2294,
       "answer": "Hmm, I don't have details on that! But you can ask Ayush directly — ayushtomar55@gmail.com or [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai)."
     },
     {
@@ -424,22 +424,25 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Bot correctly declines the off-topic request and redirects to Ayush's portfolio.",
+      "judge_reason": "The bot correctly declines the off-topic request and redirects to Ayush's portfolio, matching the expected behavior.",
       "failures": [],
-      "latency_ms": 3404,
+      "latency_ms": 4582,
       "answer": "I'm Ayush's portfolio bot — I'm all about his work! What would you like to know about him?"
     },
     {
       "id": "reg-docubot-mixup",
       "category": "regressions",
       "question": "Tell me about the RAG chatbot at work",
-      "pass": true,
+      "pass": false,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "All factual claims match the expected facts exactly, including metrics, tech stack, internal nature, and related work tools.",
-      "failures": [],
-      "latency_ms": 4037,
-      "answer": "He built a **RAG Chatbot & Email AI** at Marsh using **OpenAI LLMs + MongoDB vector store**. It's an internal system for pension workflows — no public repo or demo.\n\n**Impact:**\n1. **90% response accuracy**\n2. **35% faster query resolution**\n\nIt runs alongside his **Reply Draft Package** (custom UiPath package, 40% less manual verification) and **Email Resolution Engine** (25% higher delivery rate). Solid automation stack."
+      "judge_reason": "All factual claims match the expected facts exactly, correctly distinguishes the internal Marsh RAG chatbot from the personal DocuBot-AI project, and includes accurate metrics and context.",
+      "failures": [
+        "forbidden /github\\.com/ayush4u/docubot/",
+        "forbidden /docubot/"
+      ],
+      "latency_ms": 4353,
+      "answer": "He built a **RAG Chatbot & Email AI** at Marsh using **OpenAI LLMs + MongoDB vector store**. It's an internal pension-domain system that hit **90% response accuracy** and made query resolution **35% faster**.\n\nIt's production-grade, internal-only — no public repo, demo, or code. He also built a custom **UiPath Reply Draft Package** (40% less manual verification) and an **Email Resolution Engine** (25% higher delivery rate) alongside it.\n\nWant to hear about his public RAG project, **DocuBot-AI**, instead? That one's open-source: [github.com/ayush4u/DocuBot-AI](https://github.com/ayush4u/DocuBot-AI)."
     },
     {
       "id": "reg-work-rag-repo",
@@ -448,10 +451,10 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer correctly states the Marsh RAG chatbot is internal with no public code and points to the personal DocuBot-AI project as the open-source alternative.",
+      "judge_reason": "Answer correctly states the Marsh RAG chatbot is internal with no public code and points to DocuBot-AI as the separate personal project.",
       "failures": [],
-      "latency_ms": 5978,
-      "answer": "That RAG chatbot is an internal Marsh system — no public repo, code, or demo exists for it. If you're curious about his open-source RAG work, check out **DocuBot-AI** on GitHub: https://github.com/ayush4u/DocuBot-AI"
+      "latency_ms": 5530,
+      "answer": "That RAG chatbot is an internal Marsh system — no public repo, code, or demo exists for it. It's separate from his personal **DocuBot-AI** project (which *is* open source at [github.com/ayush4u/DocuBot-AI](https://github.com/ayush4u/DocuBot-AI)).\n\nIf you're curious about his public RAG work, DocuBot-AI is the one to explore."
     },
     {
       "id": "reg-docubot-metrics",
@@ -462,8 +465,8 @@
       "hallucination": false,
       "judge_reason": "Correctly states DocuBot-AI has no published accuracy metric and attributes the 90% figure to the Marsh work chatbot.",
       "failures": [],
-      "latency_ms": 29098,
-      "answer": "DocuBot-AI is Ayush's personal open-source project — it doesn't have published accuracy metrics like his work RAG chatbot does. The **90% response accuracy** figure belongs to the internal **RAG Chatbot & Email AI** he built at Marsh (OpenAI LLM + MongoDB vector store).\n\nIf you're curious about DocuBot-AI's architecture or want to explore the code, it's all on GitHub: https://github.com/ayush4u/DocuBot-AI"
+      "latency_ms": 7664,
+      "answer": "DocuBot-AI is Ayush's personal open-source project — it doesn't have published accuracy metrics like his work RAG system does. The **90% response accuracy** figure belongs to the internal **RAG Chatbot & Email AI** he built at Marsh (OpenAI LLM + MongoDB vector store).\n\nIf you're curious about DocuBot-AI's architecture or want to explore the code, it's all on GitHub: https://github.com/ayush4u/DocuBot-AI"
     },
     {
       "id": "reg-missing-title",
@@ -472,9 +475,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "All claims match the expected facts and known public facts; no invented or contradictory details.",
+      "judge_reason": "All factual claims match the expected facts and known public facts; no invented or contradictory details.",
       "failures": [],
-      "latency_ms": 13211,
+      "latency_ms": 6345,
       "answer": "Ayush Tomar is a **Principal Software Engineer** at **Marsh** in **Mumbai**, with 4+ years in the pension domain. He specializes in **Intelligent Automation** — blending **UiPath RPA** with **AI/ML workflows** and production-ready **RAG systems**.\n\nHe's built email automation engines, custom UiPath packages, and a RAG chatbot (OpenAI + MongoDB vector store) that hit **90% response accuracy** and **35% faster query resolution**.\n\nOutside work, he enjoys **building products**, **cricket**, and **exploring cafes**. He's fascinated by how AI can **augment human intelligence** rather than replace it.\n\n📧 ayushtomar55@gmail.com | [LinkedIn](https://linkedin.com/in/ayushtomar-rpa-ai) | [GitHub](https://github.com/ayush4u) | [Portfolio](https://ayush4u.github.io/portfolio/)"
     },
     {
@@ -484,9 +487,9 @@
       "pass": true,
       "groundedness": 5,
       "hallucination": false,
-      "judge_reason": "Answer accurately reflects the expected facts about the GitHub README content and contact details.",
+      "judge_reason": "All claims match the expected facts; no invented or contradictory details.",
       "failures": [],
-      "latency_ms": 6182,
+      "latency_ms": 3893,
       "answer": "His GitHub README introduces him as a passionate developer and researcher focused on cutting-edge AI and ML technologies. It also shares a fun fact: he's fascinated by how AI can **augment human intelligence rather than replace it**. You'll find his email (ayushtomar55@gmail.com) and portfolio link there too."
     },
     {
@@ -498,8 +501,8 @@
       "hallucination": false,
       "judge_reason": "All metrics match the expected facts exactly with no extra or invented claims.",
       "failures": [],
-      "latency_ms": 3244,
-      "answer": "Here are the impact metrics from Ayush's work at Marsh:\n\n1. **RAG Chatbot & Email AI** — **90% response accuracy**, **35% faster query resolution**\n2. **Reply Draft Package** (custom UiPath package) — **40% less manual verification**\n3. **Email Resolution Engine** (UiPath) — **25% higher delivery rate**\n4. **WIP Dashboard** (Python) — **20+ hrs saved every week**"
+      "latency_ms": 3167,
+      "answer": "Here are the impact metrics from Ayush's key projects at Marsh:\n\n1. **RAG Chatbot & Email AI** — **90% response accuracy**, **35% faster query resolution**\n2. **Reply Draft Package** (custom UiPath package) — **40% less manual verification**\n3. **Email Resolution Engine** (UiPath) — **25% higher delivery rate**\n4. **WIP Dashboard** (Python) — **20+ hrs saved every week**"
     }
   ]
 }
