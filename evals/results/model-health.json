@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-03T08:19:10.248Z",
+  "checked_at": "2026-11-04T07:47:47.015Z",
   "primary": "nvidia/nemotron-3-ultra-550b-a55b",
   "fallback": "nvidia/nemotron-3.5-lightning-30b-a3b",
   "previous": {
@@ -13,31 +13,31 @@
       "model": "nvidia/nemotron-3-ultra-550b-a55b",
       "ok": true,
       "status": 200,
-      "ms": 525
+      "ms": 747
     },
     {
       "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
       "ok": true,
       "status": 200,
-      "ms": 11619
+      "ms": 1735
     },
     {
       "model": "minimaxai/minimax-m3.1-flash",
       "ok": true,
       "status": 200,
-      "ms": 885
+      "ms": 274
     },
     {
       "model": "openai/gpt-oss-20b",
       "ok": false,
       "status": "TimeoutError",
-      "ms": 29999
+      "ms": 30000
     },
     {
       "model": "meta/muse-glimmer-30b",
       "ok": true,
       "status": 200,
-      "ms": 1466
+      "ms": 1859
     }
   ]
 }
