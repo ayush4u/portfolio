@@ -895,5 +895,28 @@
       "privacy": 6,
       "judged": 40
     }
+  },
+  {
+    "run_at": "2026-11-17T10:41:19.532Z",
+    "commit": "57a09abea5f075d7b1685f6352b50d88d6cbcfe3",
+    "judge_model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "threshold": 0.8,
+    "overall": 0.8924,
+    "passed": true,
+    "scores": {
+      "facts": 0.8261,
+      "traps": 0.9091,
+      "regressions": 1,
+      "privacy": 0.8333,
+      "groundedness_avg": 4.575,
+      "hallucination_rate": 0.125
+    },
+    "counts": {
+      "facts": 23,
+      "traps": 11,
+      "regressions": 6,
+      "privacy": 6,
+      "judged": 40
+    }
   }
 ]
