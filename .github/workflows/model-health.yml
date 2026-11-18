@@ -43,7 +43,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
         run: |
           ref="$(echo "$SUPABASE_URL" | tr -d '[:space:]')"; ref="${ref#https://}"; ref="${ref%%.*}"
-          supabase secrets set --project-ref "$ref" \
+          supabase secrets set --yes --project-ref "$ref" \
             NIM_MODEL="${{ steps.probe.outputs.primary }}" \
             NIM_FALLBACK_MODEL="${{ steps.probe.outputs.fallback }}"
 
