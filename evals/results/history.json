@@ -1102,5 +1102,28 @@
       "privacy": 6,
       "judged": 40
     }
+  },
+  {
+    "run_at": "2026-11-25T18:29:32.998Z",
+    "commit": "a62f18e64ee72fc6dd575e9a2814f36001fc84b0",
+    "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+    "threshold": 0.8,
+    "overall": 0.8813,
+    "passed": true,
+    "scores": {
+      "facts": 0.9565,
+      "traps": 1,
+      "regressions": 0.6667,
+      "privacy": 0.8333,
+      "groundedness_avg": 4.8,
+      "hallucination_rate": 0.075
+    },
+    "counts": {
+      "facts": 23,
+      "traps": 11,
+      "regressions": 6,
+      "privacy": 6,
+      "judged": 40
+    }
   }
 ]
