@@ -54,4 +54,4 @@ jobs:
       # migration history isn't in this repo. Apply portfolio schema changes manually.
 
       - name: Deploy Edge Functions
-        run: supabase functions deploy --project-ref "$SUPABASE_PROJECT_REF" --use-api
+        run: supabase functions deploy --project-ref "$SUPABASE_PROJECT_REF" --use-api --yes
