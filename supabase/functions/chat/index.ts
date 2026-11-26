@@ -172,7 +172,7 @@ F. For his GitHub profile README, summarize it from the core fact above. Never d
 G. Use the core facts only for what was asked. For a general "who is Ayush" question, give a short intro: his title, employer, location, experience and focus (Intelligent Automation: RPA + AI). Do not list certifications, education or the full skill list unless asked.
 
 WORK HIGHLIGHTS:
-1. **RAG Chatbot & Email AI** (OpenAI LLM + MongoDB vector store): **90% response accuracy**, **35% faster query resolution**
+1. **RAG Chatbot & Email AI** (Marsh internal chatbot only; OpenAI LLM + MongoDB vector store): **90% response accuracy**, **35% faster query resolution**. These two numbers belong ONLY to this Marsh chatbot; DocuBot-AI has no published metrics.
 2. **Reply Draft Package** (custom UiPath package): **40% less manual verification**
 3. **Email Resolution Engine** (UiPath): **25% higher delivery rate**
 4. **WIP Dashboard** (Python): **20+ hrs saved every week**
@@ -220,10 +220,72 @@ async function getVaultSecret(name: string): Promise<string> {
   return '';
 }
 
-function buildGroundedMessages(messages: Array<{ role: string; content: string }>, retrievedDocs: Array<{ content: string; title: string; source: string; similarity: number }>) {
+// ---- Topic scoping: keep Marsh work-chatbot metrics and DocuBot-AI apart -------------
+// The model kept volunteering the Marsh chatbot's 90% / 35% in DocuBot-AI answers and
+// offering DocuBot-AI in answers about the work chatbot. Rules alone didn't stop it, so the
+// prompt and retrieved facts are scoped to the topic of the question.
+const DOCUBOT_RE = /docu[\s-]?bot/i;
+const WORK_BOT_RE = /\b(rag|chat ?bot|email ai|assistant)\b/i;
+const WORK_CTX_RE = /\b(work|marsh|office|employer|company|internal|day job|at his job)\b/i;
+const PCT_RE = /\d+(?:\.\d+)?\s?%/;
+
+type Topic = 'docubot' | 'workbot' | 'general';
+
+function detectTopic(lastUserMessage: string): Topic {
+  if (DOCUBOT_RE.test(lastUserMessage)) return 'docubot';
+  if (WORK_BOT_RE.test(lastUserMessage) && WORK_CTX_RE.test(lastUserMessage)) return 'workbot';
+  return 'general';
+}
+
+const HIGHLIGHTS_RE = /WORK HIGHLIGHTS:\n[\s\S]*?\n\n/;
+const RULE10_RE = /^10\. .*$/m;
+const RULE11_RE = /^11\. .*$/m;
+const RULE12_RE = /^12\. .*$/m;
+const RULE_E_RE = /^E\. .*$/m;
+
+function scopedPrompt(topic: Topic): string {
+  if (topic === 'docubot') {
+    return SERVER_GROUNDING_PROMPT
+      .replace(HIGHLIGHTS_RE, '')
+      .replace(RULE10_RE, '10. This question is about DocuBot-AI. Talk only about DocuBot-AI.')
+      .replace(RULE11_RE, '11. **DocuBot-AI** is Ayush\'s personal open-source project (https://github.com/ayush4u/DocuBot-AI). Describe it only with facts from its own repo. DocuBot-AI has NO published accuracy, speed or other performance metrics: if asked for any, say no metric is published for DocuBot-AI. Do NOT mention Marsh, any work or internal chatbot, or any other project, and do not write any percentage.')
+      .replace(RULE_E_RE, 'E. Never write a percentage in this answer.');
+  }
+  if (topic === 'workbot') {
+    return SERVER_GROUNDING_PROMPT
+      .replace(RULE11_RE, '11. The work RAG chatbot (RAG Chatbot & Email AI at Marsh) is INTERNAL and has NO public repo, code, demo, or link. Answer only about this internal Marsh chatbot. Do not mention, suggest or offer any personal or open-source project, and do not offer to talk about other projects.')
+      .replace(RULE_E_RE, 'E. Talk only about Ayush\'s work at Marsh in this answer.')
+      .replace(RULE12_RE, '12. Answer only what was asked. Do not end by offering or suggesting other projects.')
+      .replace(' DocuBot-AI has no published metrics.', '');
+  }
+  return SERVER_GROUNDING_PROMPT;
+}
+
+function scopeDocs(topic: Topic, docs: Array<{ content: string; title: string; source: string; similarity: number }>) {
+  if (topic === 'docubot') {
+    // Keep DocuBot's own facts; drop anything else that carries a number (Marsh chatbot, other repos).
+    return docs.filter((d) => DOCUBOT_RE.test(d.title) || !PCT_RE.test(d.content));
+  }
+  if (topic === 'workbot') {
+    return docs
+      .filter((d) => !DOCUBOT_RE.test(d.title))
+      .map((d) => ({
+        ...d,
+        content: d.content.split(/(?<=[.!?])\s+/).filter((sent) => !DOCUBOT_RE.test(sent)).join(' '),
+      }))
+      .filter((d) => d.content.trim());
+  }
+  return docs;
+}
+// -------------------------------------------------------------------------------------
+
+function buildGroundedMessages(messages: Array<{ role: string; content: string }>, allDocs: Array<{ content: string; title: string; source: string; similarity: number }>) {
   const conversation = messages
     .filter((m) => ['user', 'assistant'].includes(m.role))
     .map((m) => ({ role: m.role, content: m.content }));
+  const lastUser = [...conversation].reverse().find((m) => m.role === 'user')?.content ?? '';
+  const topic = detectTopic(lastUser);
+  const retrievedDocs = scopeDocs(topic, allDocs);
 
   let contextBlock: string;
   if (retrievedDocs.length > 0) {
@@ -235,7 +297,7 @@ function buildGroundedMessages(messages: Array<{ role: string; content: string }
     contextBlock = '\n\n--- No further facts matched this question. Answer from the CORE FACTS above if they cover it; otherwise say it isn\'t listed and suggest contacting Ayush at ayushtomar55@gmail.com or linkedin.com/in/ayushtomar-rpa-ai ---';
   }
 
-  return [{ role: 'system', content: `${SERVER_GROUNDING_PROMPT}${contextBlock}` }, ...conversation];
+  return [{ role: 'system', content: `${scopedPrompt(topic)}${contextBlock}` }, ...conversation];
 }
 
 async function getEmbedding(text: string, nvidiaKey: string): Promise<number[] | null> {
